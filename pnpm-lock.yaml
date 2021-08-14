@@ -5,6 +5,7 @@ specifiers:
   math-fit: ^1.0.1
   minireset.css: ^0.0.7
   nanostores: ^0.4.3
+  typed-event-dispatcher: ^1.11.4
   typescript: ^4.3.2
   uhtml: ^2.7.6
   vite: ^2.4.4
@@ -14,6 +15,7 @@ dependencies:
   math-fit: 1.0.1
   minireset.css: 0.0.7
   nanostores: 0.4.3
+  typed-event-dispatcher: 1.11.4
   uhtml: 2.7.6
 
 devDependencies:
@@ -137,6 +139,10 @@ packages:
     resolution: {integrity: sha512-/3GptzWzu0+0MBQFrDKzw/DvvMTUORvgY6k6jd/VS6iCR4RDTKWH6v6WPwQoUO8667uQEf9Oe38DxAYWY5F/Ug==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /typed-event-dispatcher/1.11.4:
+    resolution: {integrity: sha512-cuoH6ZKQdDgJUvHZWgex8Qp1WLyXWVGagUlkpKkU+oGBI/zkaXXeGUbgvNYoEveus7ILfUH0+WxcU2OSm3hWYw==}
+    dev: false
 
   /typescript/4.3.5:
     resolution: {integrity: sha512-DqQgihaQ9cUrskJo9kIyW/+g0Vxsk8cDtZ52a3NGh0YNTfpUSArXSohyUGnvbPazEPLu398C0UxmKSOrPumUzA==}

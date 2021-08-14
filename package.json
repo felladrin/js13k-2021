@@ -16,6 +16,7 @@
     "math-fit": "^1.0.1",
     "minireset.css": "^0.0.7",
     "nanostores": "^0.4.3",
+    "typed-event-dispatcher": "^1.11.4",
     "uhtml": "^2.7.6"
   }
 }

@@ -2,23 +2,24 @@ import "minireset.css";
 import "./main.css";
 import { render, html } from "uhtml";
 import { createStore, createDerived } from "nanostores";
-import { init, Sprite, GameLoop, emit, on, degToRad } from "kontra";
-// @ts-ignore
-import fit from "math-fit";
+import { init, Sprite, GameLoop, degToRad } from "kontra";
+import { TypedEventDispatcher } from "typed-event-dispatcher";
+import { contain } from "math-fit";
+
+const { dispatch: dispatchGameLoopUpdated, getter: gameLoopUpdatedEvent } =
+  new TypedEventDispatcher();
+
+const { dispatch: dispatchGameLoopRendered, getter: gameLoopRenderedEvent } =
+  new TypedEventDispatcher();
 
 const hudHtmlElement = document.getElementById("hud") as HTMLDivElement;
-
-enum GlobalEvent {
-  GameLoopUpdated = "GameLoopUpdated",
-  GameLoopRendered = "GameLoopRendered",
-}
 
 let { canvas } = init("game");
 
 function handleWindowResize() {
   if (!canvas.parentElement) return;
 
-  const fittingProps = fit.contain(
+  const fittingProps = contain(
     { w: canvas.width, h: canvas.height },
     {
       w: canvas.parentElement.clientWidth,
@@ -34,12 +35,12 @@ function handleWindowResize() {
   };
 
   for (const declaration of Object.keys(style)) {
-    // @ts-ignore
-    canvas.style[declaration] = (style as Record<string, string>)[declaration];
-    // @ts-ignore
-    hudHtmlElement.style[declaration] = (style as Record<string, string>)[
+    canvas.style[declaration as any] = (style as Record<string, string>)[
       declaration
     ];
+    hudHtmlElement.style[declaration as any] = (
+      style as Record<string, string>
+    )[declaration];
   }
 
   window.scrollTo(1, 0);
@@ -80,12 +81,12 @@ const sprite = Sprite({
 
 sprite.dx = 2;
 
-on(GlobalEvent.GameLoopUpdated, () => sprite.update());
-on(GlobalEvent.GameLoopRendered, () => sprite.render());
+gameLoopUpdatedEvent.addListener(() => sprite.update());
+gameLoopRenderedEvent.addListener(() => sprite.render());
 
 let loop = GameLoop({
-  update: () => emit(GlobalEvent.GameLoopUpdated),
-  render: () => emit(GlobalEvent.GameLoopRendered),
+  update: () => dispatchGameLoopUpdated(),
+  render: () => dispatchGameLoopRendered(),
 });
 
 const currentTimeStore = createStore<number>(() => {
