@@ -1,0 +1,21 @@
+div.container {
+  background-color: #222426;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+}
+
+canvas#game,
+div#hud {
+  position: absolute;
+}
+
+canvas#game {
+  z-index: 1;
+  background-color: #1b1d1f;
+}
+
+div#hud {
+  z-index: 2;
+  color: white;
+}
