@@ -1,21 +1,21 @@
 lockfileVersion: 5.3
 
 specifiers:
+  create-pubsub: ^1.0.1
   kontra: ^7.1.3
   math-fit: ^1.0.1
   minireset.css: ^0.0.7
   nanostores: ^0.4.3
-  typed-event-dispatcher: ^1.11.4
   typescript: ^4.3.2
   uhtml: ^2.7.6
   vite: ^2.4.4
 
 dependencies:
+  create-pubsub: 1.0.1
   kontra: 7.1.3
   math-fit: 1.0.1
   minireset.css: 0.0.7
   nanostores: 0.4.3
-  typed-event-dispatcher: 1.11.4
   uhtml: 2.7.6
 
 devDependencies:
@@ -35,6 +35,10 @@ packages:
   /colorette/1.3.0:
     resolution: {integrity: sha512-ecORCqbSFP7Wm8Y6lyqMJjexBQqXSF7SSeaTyGGphogUjBlFP9m9o08wy86HL2uB7fMTxtOUzLMk7ogKcxMg1w==}
     dev: true
+
+  /create-pubsub/1.0.1:
+    resolution: {integrity: sha512-4NtYfguM5S9vxCCqDcw5ZOmnobFHMYZr/wAud2i2yKoWCkpYnzgUWbVouEG7d4WHZkln5um/jUNm62egWAgSFg==}
+    dev: false
 
   /esbuild/0.12.20:
     resolution: {integrity: sha512-u7+0qTo9Z64MD9PhooEngCmzyEYJ6ovFhPp8PLNh3UasR5Ihjv6HWVXqm8uHmasdQlpsAf0IsY4U0YVUfCpt4Q==}
@@ -139,10 +143,6 @@ packages:
     resolution: {integrity: sha512-/3GptzWzu0+0MBQFrDKzw/DvvMTUORvgY6k6jd/VS6iCR4RDTKWH6v6WPwQoUO8667uQEf9Oe38DxAYWY5F/Ug==}
     engines: {node: '>=0.10.0'}
     dev: true
-
-  /typed-event-dispatcher/1.11.4:
-    resolution: {integrity: sha512-cuoH6ZKQdDgJUvHZWgex8Qp1WLyXWVGagUlkpKkU+oGBI/zkaXXeGUbgvNYoEveus7ILfUH0+WxcU2OSm3hWYw==}
-    dev: false
 
   /typescript/4.3.5:
     resolution: {integrity: sha512-DqQgihaQ9cUrskJo9kIyW/+g0Vxsk8cDtZ52a3NGh0YNTfpUSArXSohyUGnvbPazEPLu398C0UxmKSOrPumUzA==}

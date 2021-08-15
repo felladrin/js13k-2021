@@ -3,17 +3,16 @@ import "./main.css";
 import { render, html } from "uhtml";
 import { createStore, createDerived } from "nanostores";
 import { init, Sprite, GameLoop, degToRad } from "kontra";
-import { TypedEventDispatcher } from "typed-event-dispatcher";
 import { contain } from "math-fit";
+import { createPubSub } from "create-pubsub";
 
-const { dispatch: dispatchMainScriptLoaded, getter: mainScriptLoadedEvent } =
-  new TypedEventDispatcher();
+const [broadcastMainScriptLoaded, listenMainScriptLoaded] = createPubSub();
 
-const { dispatch: dispatchGameLoopUpdated, getter: gameLoopUpdatedEvent } =
-  new TypedEventDispatcher();
+const [propagateGameLoopUpdate, listenGameLoopUpdate] = createPubSub<
+  number | undefined
+>();
 
-const { dispatch: dispatchGameLoopRendered, getter: gameLoopRenderedEvent } =
-  new TypedEventDispatcher();
+const [propagateGameLoopRender, listenGameLoopRender] = createPubSub();
 
 const hudHtmlElement = document.getElementById("hud") as HTMLDivElement;
 
@@ -79,17 +78,17 @@ const sprite = Sprite({
   },
 });
 
-gameLoopUpdatedEvent.addListener(() => {
+listenGameLoopUpdate(() => {
   sprite.update();
   sprite.rotation += degToRad(4);
   if (sprite.x > gameCanvasElement.width) sprite.x = -sprite.width;
 });
 
-gameLoopRenderedEvent.addListener(() => sprite.render());
+listenGameLoopRender(() => sprite.render());
 
 let gameLoop = GameLoop({
-  update: () => dispatchGameLoopUpdated(),
-  render: () => dispatchGameLoopRendered(),
+  update: propagateGameLoopUpdate,
+  render: propagateGameLoopRender,
 });
 
 const currentTimeStore = createStore<number>(() => {
@@ -117,9 +116,9 @@ const hudHtmlStore = createDerived(
   (timeInGame) => html`<p>Time: ${timeInGame}</p>`
 );
 
-mainScriptLoadedEvent.addListener(() => {
+listenMainScriptLoaded(() => {
   hudHtmlStore.subscribe((hudHtml) => render(hudHtmlElement, hudHtml));
   gameLoop.start();
 });
 
-dispatchMainScriptLoaded();
+broadcastMainScriptLoaded();
