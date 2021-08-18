@@ -1,7 +1,6 @@
 import "minireset.css";
 import "./main.css";
 import { render, html } from "uhtml";
-import { createStore, createDerived } from "nanostores";
 import { init, Sprite, GameLoop, degToRad } from "kontra";
 import { contain } from "math-fit";
 import { createPubSub } from "create-pubsub";
@@ -91,33 +90,31 @@ let gameLoop = GameLoop({
   render: propagateGameLoopRender,
 });
 
-const currentTimeStore = createStore<number>(() => {
-  currentTimeStore.set(Date.now());
-  const timerId = setInterval(() => {
-    currentTimeStore.set(Date.now());
-  }, 1000);
-  return () => {
-    clearInterval(timerId);
-  };
+const [setCurrentTime, onCurrentTimeUpdated] = createPubSub(Date.now());
+
+setInterval(() => {
+  setCurrentTime(Date.now());
+}, 1000);
+
+const gameStartedTime = Date.now();
+
+const [setTimeInGame, onTimeInGameChanged, getTimeInGame] = createPubSub(0);
+
+onCurrentTimeUpdated((currentTime) => {
+  setTimeInGame(Math.floor((currentTime - gameStartedTime) / 1000));
 });
 
-const gameStartedTimeStore = createStore<number>(() => {
-  gameStartedTimeStore.set(Date.now());
+const [setHudHtml, onHudHtmlChanged, getHutHtml] = createPubSub(
+  html`<p>Time: ${getTimeInGame()}</p>`
+);
+
+onTimeInGameChanged((timeInGame) => {
+  setHudHtml(html`<p>Time: ${timeInGame}</p>`);
 });
-
-const timeInGameStore = createDerived(
-  [gameStartedTimeStore, currentTimeStore],
-  (gameStartedTime, currentTime) =>
-    Math.floor((currentTime - gameStartedTime) / 1000)
-);
-
-const hudHtmlStore = createDerived(
-  [timeInGameStore],
-  (timeInGame) => html`<p>Time: ${timeInGame}</p>`
-);
 
 listenMainScriptLoaded(() => {
-  hudHtmlStore.subscribe((hudHtml) => render(hudHtmlElement, hudHtml));
+  render(hudHtmlElement, getHutHtml());
+  onHudHtmlChanged((hudHtml) => render(hudHtmlElement, hudHtml));
   gameLoop.start();
 });
 
