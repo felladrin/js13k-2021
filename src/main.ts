@@ -6,15 +6,13 @@ import { contain } from "math-fit";
 import { createPubSub, createPubSub as createStore } from "create-pubsub";
 
 //#region Constants
-const { canvas: gameCanvasElement } = init("game");
+const { canvas } = init("game");
 
-const hudHtmlElement = document.getElementById("hud") as HTMLDivElement;
+const hud = document.getElementById("hud") as HTMLDivElement;
 
 const [broadcastMainScriptLoaded, listenMainScriptLoaded] = createPubSub();
 
-const [propagateGameLoopUpdate, listenGameLoopUpdate] = createPubSub<
-  number | undefined
->();
+const [propagateGameLoopUpdate, listenGameLoopUpdate] = createPubSub<number>();
 
 const [propagateGameLoopRender, listenGameLoopRender] = createPubSub();
 
@@ -42,6 +40,11 @@ const sprite = Sprite({
     sprite.context.fill(weaponImage.path);
     sprite.context.closePath();
   },
+  update: () => {
+    sprite.advance();
+    sprite.rotation += degToRad(4);
+    if (sprite.x > canvas.width) sprite.x = -sprite.width;
+  },
 });
 
 let gameLoop = GameLoop({
@@ -60,13 +63,13 @@ const [setHudHtml, onHudHtmlChanged, getHutHtml] = createStore(
 
 //#region Functions
 function resizeGame() {
-  if (!gameCanvasElement.parentElement) return;
+  if (!canvas.parentElement) return;
 
   const fittingProps = contain(
-    { w: gameCanvasElement.width, h: gameCanvasElement.height },
+    { w: canvas.width, h: canvas.height },
     {
-      w: gameCanvasElement.parentElement.clientWidth,
-      h: gameCanvasElement.parentElement.clientHeight,
+      w: canvas.parentElement.clientWidth,
+      h: canvas.parentElement.clientHeight,
     }
   );
 
@@ -78,12 +81,12 @@ function resizeGame() {
   };
 
   for (const declaration of Object.keys(style)) {
-    gameCanvasElement.style[declaration as any] = (
-      style as Record<string, string>
-    )[declaration];
-    hudHtmlElement.style[declaration as any] = (
-      style as Record<string, string>
-    )[declaration];
+    canvas.style[declaration as any] = (style as Record<string, string>)[
+      declaration
+    ];
+    hud.style[declaration as any] = (style as Record<string, string>)[
+      declaration
+    ];
   }
 
   window.scrollTo(1, 0);
@@ -95,11 +98,11 @@ window.addEventListener("resize", resizeGame);
 
 listenGameLoopUpdate(() => {
   sprite.update();
-  sprite.rotation += degToRad(4);
-  if (sprite.x > gameCanvasElement.width) sprite.x = -sprite.width;
 });
 
-listenGameLoopRender(() => sprite.render());
+listenGameLoopRender(() => {
+  sprite.render();
+});
 
 setInterval(() => {
   setCurrentTime(Date.now());
@@ -116,11 +119,11 @@ onTimeInGameChanged((timeInGame) => {
 listenMainScriptLoaded(() => {
   initPointer();
   resizeGame();
-  render(hudHtmlElement, getHutHtml());
+  render(hud, getHutHtml());
   gameLoop.start();
 });
 
-onHudHtmlChanged((hudHtml) => render(hudHtmlElement, hudHtml));
+onHudHtmlChanged((hudHtml) => render(hud, hudHtml));
 //#endregion
 
 broadcastMainScriptLoaded();
