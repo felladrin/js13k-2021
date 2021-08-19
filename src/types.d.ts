@@ -1,3 +1,5 @@
+/// <reference types="vite/client" />
+
 declare module "math-fit" {
   function contain(
     targetSize: {
