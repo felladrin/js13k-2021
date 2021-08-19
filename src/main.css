@@ -18,4 +18,5 @@ canvas#game {
 div#hud {
   z-index: 2;
   color: white;
+  pointer-events: none;
 }
