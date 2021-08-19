@@ -1,9 +1,14 @@
 import "minireset.css";
 import "./main.css";
 import { render, html } from "uhtml";
-import { init, Sprite, GameLoop, degToRad } from "kontra";
+import { init, initPointer, Sprite, GameLoop, degToRad } from "kontra";
 import { contain } from "math-fit";
-import { createPubSub } from "create-pubsub";
+import { createPubSub, createPubSub as createStore } from "create-pubsub";
+
+//#region Constants
+const { canvas: gameCanvasElement } = init("game");
+
+const hudHtmlElement = document.getElementById("hud") as HTMLDivElement;
 
 const [broadcastMainScriptLoaded, listenMainScriptLoaded] = createPubSub();
 
@@ -13,10 +18,47 @@ const [propagateGameLoopUpdate, listenGameLoopUpdate] = createPubSub<
 
 const [propagateGameLoopRender, listenGameLoopRender] = createPubSub();
 
-const hudHtmlElement = document.getElementById("hud") as HTMLDivElement;
+const [setCurrentTime, onCurrentTimeUpdated] = createStore(Date.now());
 
-const gameCanvasElement = document.getElementById("game") as HTMLCanvasElement;
+const weaponImage = {
+  path: new Path2D("M19 3h-3v1h-1V3H9L4 4v1h5v2h2v14h2V7h2V6h1v1h3V4 3z"),
+  originalWidth: 24,
+  originalHeight: 24,
+  desiredWidth: 48,
+  desiredHeight: 48,
+};
 
+const sprite = Sprite({
+  y: weaponImage.desiredHeight * 2,
+  width: weaponImage.originalWidth,
+  height: weaponImage.originalHeight,
+  scaleX: weaponImage.desiredWidth / weaponImage.originalWidth,
+  scaleY: weaponImage.desiredHeight / weaponImage.originalHeight,
+  anchor: { x: 0.5, y: 0.5 },
+  dx: 2,
+  render: () => {
+    sprite.context.fillStyle = "gray";
+    sprite.context.beginPath();
+    sprite.context.fill(weaponImage.path);
+    sprite.context.closePath();
+  },
+});
+
+let gameLoop = GameLoop({
+  update: propagateGameLoopUpdate,
+  render: propagateGameLoopRender,
+});
+
+const gameStartedTime = Date.now();
+
+const [setTimeInGame, onTimeInGameChanged, getTimeInGame] = createStore(0);
+
+const [setHudHtml, onHudHtmlChanged, getHutHtml] = createStore(
+  html`<p>Time: ${getTimeInGame()}</p>`
+);
+//#endregion
+
+//#region Functions
 function resizeGame() {
   if (!gameCanvasElement.parentElement) return;
 
@@ -46,36 +88,10 @@ function resizeGame() {
 
   window.scrollTo(1, 0);
 }
+//#endregion
 
-init(gameCanvasElement);
-
-resizeGame();
-
+//#region Listeners
 window.addEventListener("resize", resizeGame);
-
-const weaponImage = {
-  path: new Path2D("M19 3h-3v1h-1V3H9L4 4v1h5v2h2v14h2V7h2V6h1v1h3V4 3z"),
-  originalWidth: 24,
-  originalHeight: 24,
-  desiredWidth: 48,
-  desiredHeight: 48,
-};
-
-const sprite = Sprite({
-  y: weaponImage.desiredHeight * 2,
-  width: weaponImage.originalWidth,
-  height: weaponImage.originalHeight,
-  scaleX: weaponImage.desiredWidth / weaponImage.originalWidth,
-  scaleY: weaponImage.desiredHeight / weaponImage.originalHeight,
-  anchor: { x: 0.5, y: 0.5 },
-  dx: 2,
-  render: () => {
-    sprite.context.fillStyle = "gray";
-    sprite.context.beginPath();
-    sprite.context.fill(weaponImage.path);
-    sprite.context.closePath();
-  },
-});
 
 listenGameLoopUpdate(() => {
   sprite.update();
@@ -85,37 +101,26 @@ listenGameLoopUpdate(() => {
 
 listenGameLoopRender(() => sprite.render());
 
-let gameLoop = GameLoop({
-  update: propagateGameLoopUpdate,
-  render: propagateGameLoopRender,
-});
-
-const [setCurrentTime, onCurrentTimeUpdated] = createPubSub(Date.now());
-
 setInterval(() => {
   setCurrentTime(Date.now());
 }, 1000);
 
-const gameStartedTime = Date.now();
-
-const [setTimeInGame, onTimeInGameChanged, getTimeInGame] = createPubSub(0);
-
 onCurrentTimeUpdated((currentTime) => {
   setTimeInGame(Math.floor((currentTime - gameStartedTime) / 1000));
 });
-
-const [setHudHtml, onHudHtmlChanged, getHutHtml] = createPubSub(
-  html`<p>Time: ${getTimeInGame()}</p>`
-);
 
 onTimeInGameChanged((timeInGame) => {
   setHudHtml(html`<p>Time: ${timeInGame}</p>`);
 });
 
 listenMainScriptLoaded(() => {
+  initPointer();
+  resizeGame();
   render(hudHtmlElement, getHutHtml());
-  onHudHtmlChanged((hudHtml) => render(hudHtmlElement, hudHtml));
   gameLoop.start();
 });
+
+onHudHtmlChanged((hudHtml) => render(hudHtmlElement, hudHtml));
+//#endregion
 
 broadcastMainScriptLoaded();
