@@ -16,6 +16,7 @@
     "kontra": "^7.2.0",
     "math-fit": "^1.0.1",
     "minireset.css": "^0.0.7",
-    "tinyfont": "^1.3.2"
+    "tinyfont": "^1.3.2",
+    "zzfx": "^1.1.8"
   }
 }

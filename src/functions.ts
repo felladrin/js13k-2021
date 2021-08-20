@@ -1,6 +1,7 @@
 import { GameObject } from "kontra";
 import { contain } from "math-fit";
 import { canvas } from "./constants";
+import { zzfx } from "zzfx";
 
 export function resizeGame() {
   if (!canvas.parentElement) return;
@@ -35,5 +36,30 @@ export function isOutOfCanvasBounds(gameObject: GameObject) {
     gameObject.y > canvas.height ||
     gameObject.x < 0 ||
     gameObject.y < 0
+  );
+}
+
+export function playShootSound() {
+  zzfx(
+    2.18,
+    0.05,
+    382,
+    0.04,
+    0.02,
+    0,
+    3,
+    0.11,
+    -7.2,
+    0.3,
+    0,
+    0,
+    0.06,
+    0,
+    0,
+    0,
+    0.08,
+    0.9,
+    0.04,
+    0.26
   );
 }

@@ -16,7 +16,7 @@ import {
   onSpawnerTimeUpdated,
   setSpawnerTime,
 } from "./constants";
-import { isOutOfCanvasBounds, resizeGame } from "./functions";
+import { isOutOfCanvasBounds, playShootSound, resizeGame } from "./functions";
 
 window.addEventListener("resize", resizeGame);
 
@@ -78,6 +78,8 @@ onSpawnerTimeUpdated((time) => {
       }
     },
   } as Partial<Sprite>) as Sprite;
+
+  playShootSound();
 
   setSpawnerTime(0);
 });
