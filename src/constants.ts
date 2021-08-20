@@ -13,13 +13,11 @@ export const [propagateGameLoopUpdate, onGameLoopUpdate] =
 
 export const [propagateGameLoopRender, onGameLoopRender] = createPubSub();
 
-export const [setCurrentTime, onCurrentTimeUpdated] = store(Date.now());
+export const [setSpawnerTime, onSpawnerTimeUpdated, getSpawnerTime] = store(0);
 
 export const [setGameObjectDragged, , getGameObjectDragged] = store<any>(null);
 
-export const gameStartedTime = Date.now();
-
-export const [setTimeInGame, onTimeInGameChanged] = store(0);
+export const [setTimeInGame, onTimeInGameChanged, getTimeInGame] = store(0);
 
 export const gameObject = GameObject({
   x: canvas.width / 2,

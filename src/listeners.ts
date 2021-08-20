@@ -2,41 +2,36 @@ import { collides, initPointer, Sprite, track } from "kontra";
 import {
   gameLoop,
   gameObject,
-  gameStartedTime,
   onGameLoopRender,
   onGameLoopUpdate,
   onScriptReady,
   objectsToAlwaysRender,
   objectsToAlwaysUpdate,
-  onCurrentTimeUpdated,
   onTimeInGameChanged,
   pool,
-  setCurrentTime,
   setTimeInGame,
   textObject,
+  getTimeInGame,
+  getSpawnerTime,
+  onSpawnerTimeUpdated,
+  setSpawnerTime,
 } from "./constants";
 import { isOutOfCanvasBounds, resizeGame } from "./functions";
 
 window.addEventListener("resize", resizeGame);
 
-onGameLoopUpdate(() => {
-  objectsToAlwaysUpdate.forEach((object) => object.update());
+onGameLoopUpdate((dt) => {
+  objectsToAlwaysUpdate.forEach((object) => object.update(dt));
+  setTimeInGame(getTimeInGame() + dt);
+  setSpawnerTime(getSpawnerTime() + dt);
 });
 
 onGameLoopRender(() => {
   objectsToAlwaysRender.forEach((object) => object.render());
 });
 
-setInterval(() => {
-  setCurrentTime(Date.now());
-}, 1000);
-
-onCurrentTimeUpdated((currentTime) => {
-  setTimeInGame(Math.floor((currentTime - gameStartedTime) / 1000));
-});
-
 onTimeInGameChanged((timeInGame) => {
-  textObject.props.text = `TIME: ${timeInGame}`;
+  textObject.props.text = `TIME: ${timeInGame.toFixed(1)}`;
 });
 
 onScriptReady(() => {
@@ -46,7 +41,9 @@ onScriptReady(() => {
   gameLoop.start();
 });
 
-setInterval(() => {
+onSpawnerTimeUpdated((time) => {
+  if (time < 0.1) return;
+
   const spawned = pool.get({
     x: textObject.x,
     y: textObject.y,
@@ -81,4 +78,6 @@ setInterval(() => {
       }
     },
   } as Partial<Sprite>) as Sprite;
-}, 100);
+
+  setSpawnerTime(0);
+});
