@@ -1,15 +1,10 @@
 import { createPubSub, createPubSub as store } from "create-pubsub";
-import {
-  GameLoop,
-  GameObject,
-  getPointer,
-  init,
-  Text,
-  Pool,
-  Sprite,
-} from "kontra";
+import { initFont, font } from "tinyfont";
+import { GameLoop, GameObject, getPointer, init, Pool, Sprite } from "kontra";
 
-export const { canvas } = init("game");
+export const { canvas, context } = init("game");
+
+export const renderText = initFont(font, context);
 
 export const [emitScriptReady, onScriptReady] = createPubSub();
 
@@ -94,14 +89,23 @@ export const gameObject = GameObject({
   },
 });
 
-export const textObject = Text({
-  text: "Time: 0",
-  font: "24px Arial",
-  color: "white",
+export const textObject = GameObject({
   x: 10,
   y: 10,
-  anchor: { x: 0, y: 0 },
-  textAlign: "center",
+  props: {
+    text: "TIME: 0",
+    color: "white",
+    size: 20,
+  },
+  render: () => {
+    renderText(
+      textObject.props.text as string,
+      textObject.x,
+      textObject.y,
+      textObject.props.size,
+      textObject.props.color
+    );
+  },
 });
 
 export const pool = Pool({
@@ -115,4 +119,4 @@ export const gameLoop = GameLoop({
 
 export const objectsToAlwaysUpdate = [gameObject, pool];
 
-export const objectsToAlwaysRender = [gameObject, textObject, pool];
+export const objectsToAlwaysRender = [gameObject, pool, textObject];

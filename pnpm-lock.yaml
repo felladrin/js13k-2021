@@ -5,6 +5,7 @@ specifiers:
   kontra: ^7.2.0
   math-fit: ^1.0.1
   minireset.css: ^0.0.7
+  tinyfont: ^1.3.2
   typescript: ^4.3.5
   vite: ^2.5.0
 
@@ -13,6 +14,7 @@ dependencies:
   kontra: 7.2.0
   math-fit: 1.0.1
   minireset.css: 0.0.7
+  tinyfont: 1.3.2
 
 devDependencies:
   typescript: 4.3.5
@@ -109,6 +111,10 @@ packages:
     resolution: {integrity: sha512-/3GptzWzu0+0MBQFrDKzw/DvvMTUORvgY6k6jd/VS6iCR4RDTKWH6v6WPwQoUO8667uQEf9Oe38DxAYWY5F/Ug==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /tinyfont/1.3.2:
+    resolution: {integrity: sha512-JrvEBuUyEu2fpnTkpwrPxmFFt+1IBE2XnZQUyZVjS+Z3W93o30BjmjiKMJtf7vUFIYMk8eL5YgN/ojFeOkyXtg==}
+    dev: false
 
   /typescript/4.3.5:
     resolution: {integrity: sha512-DqQgihaQ9cUrskJo9kIyW/+g0Vxsk8cDtZ52a3NGh0YNTfpUSArXSohyUGnvbPazEPLu398C0UxmKSOrPumUzA==}

@@ -36,7 +36,7 @@ onCurrentTimeUpdated((currentTime) => {
 });
 
 onTimeInGameChanged((timeInGame) => {
-  textObject.text = `Time: ${timeInGame}`;
+  textObject.props.text = `TIME: ${timeInGame}`;
 });
 
 onScriptReady(() => {
