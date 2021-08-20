@@ -1,9 +1,16 @@
-import "minireset.css";
-import "./main.css";
-import { render, html } from "uhtml";
-import { init, initPointer, Sprite, GameLoop, degToRad } from "kontra";
+import { createPubSub, createPubSub as store } from "create-pubsub";
+import {
+  GameLoop,
+  GameObject,
+  getPointer,
+  init,
+  initPointer,
+  track,
+} from "kontra";
 import { contain } from "math-fit";
-import { createPubSub, createPubSub as createStore } from "create-pubsub";
+import "minireset.css";
+import { html, render } from "uhtml";
+import "./main.css";
 
 //#region Constants
 const { canvas } = init("game");
@@ -16,34 +23,74 @@ const [propagateGameLoopUpdate, listenGameLoopUpdate] = createPubSub<number>();
 
 const [propagateGameLoopRender, listenGameLoopRender] = createPubSub();
 
-const [setCurrentTime, onCurrentTimeUpdated] = createStore(Date.now());
+const [setCurrentTime, onCurrentTimeUpdated] = store(Date.now());
 
-const weaponImage = {
-  path: new Path2D("M19 3h-3v1h-1V3H9L4 4v1h5v2h2v14h2V7h2V6h1v1h3V4 3z"),
-  originalWidth: 24,
-  originalHeight: 24,
-  desiredWidth: 48,
-  desiredHeight: 48,
-};
+const [setGameObjectDragged, , getGameObjectDragged] = store<any>(null);
 
-const sprite = Sprite({
-  y: weaponImage.desiredHeight * 2,
-  width: weaponImage.originalWidth,
-  height: weaponImage.originalHeight,
-  scaleX: weaponImage.desiredWidth / weaponImage.originalWidth,
-  scaleY: weaponImage.desiredHeight / weaponImage.originalHeight,
+const gameObject = GameObject({
+  x: canvas.width / 2,
+  y: canvas.height / 2,
+  width: 31,
+  height: 82,
+  scaleX: 2,
+  scaleY: 2,
   anchor: { x: 0.5, y: 0.5 },
-  dx: 2,
+  custom: {
+    color: "gray",
+  },
+  onOver: () => {
+    if (getGameObjectDragged() !== null) return;
+    gameObject.custom.color = "red";
+  },
+  onOut: () => {
+    if (getGameObjectDragged() !== null) return;
+    gameObject.custom.color = gameObject.custom.color;
+  },
+  onUp: () => {
+    if (getGameObjectDragged() === null) return;
+    setGameObjectDragged(null);
+    gameObject.custom.color = gameObject.custom.color;
+  },
+  onDown: () => {
+    if (getGameObjectDragged() !== null) return;
+    setGameObjectDragged(gameObject);
+    gameObject.custom.color = "green";
+  },
   render: () => {
-    sprite.context.fillStyle = "gray";
-    sprite.context.beginPath();
-    sprite.context.fill(weaponImage.path);
-    sprite.context.closePath();
+    const ctx = gameObject.context;
+    ctx.fillStyle = gameObject.custom.color;
+    ctx.strokeStyle = "white";
+    ctx.beginPath();
+    ctx.moveTo(15, 0);
+    ctx.bezierCurveTo(19.14, 0, 22.5, 3.35, 22.5, 7.5);
+    ctx.bezierCurveTo(22.5, 11.64, 19.14, 15, 15, 15);
+    ctx.bezierCurveTo(10.85, 15, 7.5, 11.64, 7.5, 7.5);
+    ctx.bezierCurveTo(7.5, 3.35, 10.85, 0, 15, 0);
+    ctx.moveTo(15, 15);
+    ctx.lineTo(15, 40);
+    ctx.moveTo(15, 20);
+    ctx.lineTo(0, 20);
+    ctx.moveTo(15, 20);
+    ctx.lineTo(30, 20);
+    ctx.moveTo(15, 40);
+    ctx.lineTo(0, 60);
+    ctx.moveTo(15, 40);
+    ctx.lineTo(30, 60);
+    ctx.fill();
+    ctx.stroke();
   },
   update: () => {
-    sprite.advance();
-    sprite.rotation += degToRad(4);
-    if (sprite.x > canvas.width) sprite.x = -sprite.width;
+    gameObject.advance();
+
+    if (getGameObjectDragged() === gameObject) {
+      gameObject.x = getPointer().x;
+      gameObject.y = getPointer().y;
+    } else if (gameObject.y + gameObject.height / 2 < canvas.height) {
+      gameObject.ddy = 0.5;
+    } else {
+      gameObject.dy = 0;
+      gameObject.ddy = 0;
+    }
   },
 });
 
@@ -54,9 +101,9 @@ let gameLoop = GameLoop({
 
 const gameStartedTime = Date.now();
 
-const [setTimeInGame, onTimeInGameChanged, getTimeInGame] = createStore(0);
+const [setTimeInGame, onTimeInGameChanged, getTimeInGame] = store(0);
 
-const [setHudHtml, onHudHtmlChanged, getHutHtml] = createStore(
+const [setHudHtml, onHudHtmlChanged, getHutHtml] = store(
   html`<p>Time: ${getTimeInGame()}</p>`
 );
 //#endregion
@@ -97,11 +144,11 @@ function resizeGame() {
 window.addEventListener("resize", resizeGame);
 
 listenGameLoopUpdate(() => {
-  sprite.update();
+  gameObject.update();
 });
 
 listenGameLoopRender(() => {
-  sprite.render();
+  gameObject.render();
 });
 
 setInterval(() => {
@@ -118,6 +165,7 @@ onTimeInGameChanged((timeInGame) => {
 
 listenMainScriptLoaded(() => {
   initPointer();
+  track(gameObject);
   resizeGame();
   render(hud, getHutHtml());
   gameLoop.start();
