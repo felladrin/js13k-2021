@@ -6,16 +6,14 @@ import {
   init,
   initPointer,
   track,
+  Text,
 } from "kontra";
 import { contain } from "math-fit";
 import "minireset.css";
-import { html, render } from "uhtml";
 import "./main.css";
 
 //#region Constants
 const { canvas } = init("game");
-
-const hud = document.getElementById("hud") as HTMLDivElement;
 
 const [broadcastMainScriptLoaded, listenMainScriptLoaded] = createPubSub();
 
@@ -26,6 +24,10 @@ const [propagateGameLoopRender, listenGameLoopRender] = createPubSub();
 const [setCurrentTime, onCurrentTimeUpdated] = store(Date.now());
 
 const [setGameObjectDragged, , getGameObjectDragged] = store<any>(null);
+
+const gameStartedTime = Date.now();
+
+const [setTimeInGame, onTimeInGameChanged] = store(0);
 
 const gameObject = GameObject({
   x: canvas.width / 2,
@@ -94,18 +96,20 @@ const gameObject = GameObject({
   },
 });
 
+let textObject = Text({
+  text: "Time: 0",
+  font: "24px Arial",
+  color: "white",
+  x: 10,
+  y: 10,
+  anchor: { x: 0, y: 0 },
+  textAlign: "center",
+});
+
 let gameLoop = GameLoop({
   update: propagateGameLoopUpdate,
   render: propagateGameLoopRender,
 });
-
-const gameStartedTime = Date.now();
-
-const [setTimeInGame, onTimeInGameChanged, getTimeInGame] = store(0);
-
-const [setHudHtml, onHudHtmlChanged, getHutHtml] = store(
-  html`<p>Time: ${getTimeInGame()}</p>`
-);
 //#endregion
 
 //#region Functions
@@ -131,9 +135,6 @@ function resizeGame() {
     canvas.style[declaration as any] = (style as Record<string, string>)[
       declaration
     ];
-    hud.style[declaration as any] = (style as Record<string, string>)[
-      declaration
-    ];
   }
 
   window.scrollTo(1, 0);
@@ -149,6 +150,7 @@ listenGameLoopUpdate(() => {
 
 listenGameLoopRender(() => {
   gameObject.render();
+  textObject.render();
 });
 
 setInterval(() => {
@@ -160,18 +162,15 @@ onCurrentTimeUpdated((currentTime) => {
 });
 
 onTimeInGameChanged((timeInGame) => {
-  setHudHtml(html`<p>Time: ${timeInGame}</p>`);
+  textObject.text = `Time: ${timeInGame}`;
 });
 
 listenMainScriptLoaded(() => {
   initPointer();
   track(gameObject);
   resizeGame();
-  render(hud, getHutHtml());
   gameLoop.start();
 });
-
-onHudHtmlChanged((hudHtml) => render(hud, hudHtml));
 //#endregion
 
 broadcastMainScriptLoaded();

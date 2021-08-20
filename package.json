@@ -15,7 +15,6 @@
     "create-pubsub": "^1.2.1",
     "kontra": "^7.2.0",
     "math-fit": "^1.0.1",
-    "minireset.css": "^0.0.7",
-    "uhtml": "^2.7.6"
+    "minireset.css": "^0.0.7"
   }
 }

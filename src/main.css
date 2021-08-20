@@ -5,18 +5,8 @@ div.container {
   height: 100vh;
 }
 
-canvas#game,
-div#hud {
-  position: absolute;
-}
-
 canvas#game {
+  position: absolute;
   z-index: 1;
   background-color: #1b1d1f;
-}
-
-div#hud {
-  z-index: 2;
-  color: white;
-  pointer-events: none;
 }
