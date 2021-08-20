@@ -7,6 +7,9 @@ import {
   initPointer,
   track,
   Text,
+  Pool,
+  Sprite,
+  collides,
 } from "kontra";
 import { contain } from "math-fit";
 import "minireset.css";
@@ -37,30 +40,31 @@ const gameObject = GameObject({
   scaleX: 2,
   scaleY: 2,
   anchor: { x: 0.5, y: 0.5 },
-  custom: {
+  props: {
+    defaultColor: "gray",
     color: "gray",
   },
   onOver: () => {
     if (getGameObjectDragged() !== null) return;
-    gameObject.custom.color = "red";
+    gameObject.props.color = "red";
   },
   onOut: () => {
     if (getGameObjectDragged() !== null) return;
-    gameObject.custom.color = gameObject.custom.color;
+    gameObject.props.color = gameObject.props.defaultColor;
   },
   onUp: () => {
     if (getGameObjectDragged() === null) return;
     setGameObjectDragged(null);
-    gameObject.custom.color = gameObject.custom.color;
+    gameObject.props.color = gameObject.props.defaultColor;
   },
   onDown: () => {
     if (getGameObjectDragged() !== null) return;
     setGameObjectDragged(gameObject);
-    gameObject.custom.color = "green";
+    gameObject.props.color = "green";
   },
   render: () => {
     const ctx = gameObject.context;
-    ctx.fillStyle = gameObject.custom.color;
+    ctx.fillStyle = gameObject.props.color;
     ctx.strokeStyle = "white";
     ctx.beginPath();
     ctx.moveTo(15, 0);
@@ -106,6 +110,47 @@ let textObject = Text({
   textAlign: "center",
 });
 
+let pool = Pool({
+  create: Sprite as any,
+});
+
+setInterval(() => {
+  const spawned = pool.get({
+    x: textObject.x,
+    y: textObject.y,
+    velocity: gameObject.position
+      .subtract(textObject.position)
+      .normalize()
+      .scale(5),
+    width: 4,
+    height: 4,
+    color: "red",
+    props: {
+      collided: false,
+    },
+    update: () => {
+      spawned.advance();
+
+      if (isOutOfCanvasBounds(spawned)) {
+        spawned.ttl = 0;
+      }
+
+      if (spawned.props.collided) {
+        spawned.scaleX -= 0.01;
+        spawned.scaleY -= 0.01;
+        if (spawned.scaleX < 0 || spawned.scaleY < 0) {
+          spawned.ttl = 0;
+        }
+      } else if (collides(spawned, gameObject)) {
+        spawned.props.collided = true;
+        spawned.dx = -spawned.dx * Math.random();
+        spawned.dy = -spawned.dy * Math.random();
+        spawned.ddy = 0.1;
+      }
+    },
+  } as Partial<Sprite>) as Sprite;
+}, 100);
+
 let gameLoop = GameLoop({
   update: propagateGameLoopUpdate,
   render: propagateGameLoopRender,
@@ -139,18 +184,29 @@ function resizeGame() {
 
   window.scrollTo(1, 0);
 }
+
+function isOutOfCanvasBounds(gameObject: GameObject) {
+  return (
+    gameObject.x > canvas.width ||
+    gameObject.y > canvas.height ||
+    gameObject.x < 0 ||
+    gameObject.y < 0
+  );
+}
+
+const objectsToAlwaysUpdate = [gameObject, pool];
+const objectsToAlwaysRender = [gameObject, textObject, pool];
 //#endregion
 
 //#region Listeners
 window.addEventListener("resize", resizeGame);
 
 listenGameLoopUpdate(() => {
-  gameObject.update();
+  objectsToAlwaysUpdate.forEach((object) => object.update());
 });
 
 listenGameLoopRender(() => {
-  gameObject.render();
-  textObject.render();
+  objectsToAlwaysRender.forEach((object) => object.render());
 });
 
 setInterval(() => {
