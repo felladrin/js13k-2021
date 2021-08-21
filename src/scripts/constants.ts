@@ -1,8 +1,8 @@
 import { createPubSub, createPubSub as store } from "create-pubsub";
 import { initFont, font } from "tinyfont";
 import { GameLoop, GameObject, getPointer, init, Pool, Sprite, SpriteSheet, loadImage } from "kontra";
-import catSpriteSheet from "./catSpriteSheet.webp";
-import greenPortalSpriteSheet from "./portalSpriteSheet.webp";
+import catSpriteSheet from "../images/catSpriteSheet.webp";
+import greenPortalSpriteSheet from "../images/portalSpriteSheet.webp";
 
 export const { canvas, context } = init("game");
 
