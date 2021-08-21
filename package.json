@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && ts-node .npm/scripts/zip.ts",
+    "build": "tsc && vite build --logLevel warn && ts-node .npm/scripts/zip.ts",
     "serve": "vite preview",
     "duplicate-code-analyzer": "jscpd src",
     "circular-dependencies-analyzer": "dpdm --tree false --warning false src/scripts/main.ts",
@@ -21,7 +21,8 @@
     "npm-check-updates": "^11.8.3",
     "ts-node": "^10.2.1",
     "typescript": "^4.3.5",
-    "vite": "^2.5.0"
+    "vite": "^2.5.0",
+    "zipstats": "^1.1.0"
   },
   "dependencies": {
     "create-pubsub": "^1.2.1",
