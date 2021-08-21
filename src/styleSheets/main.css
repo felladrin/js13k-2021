@@ -2,7 +2,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background-color: #222426;
+  background: radial-gradient(circle, #bed678 0%, #3b8d89 100%);
   overflow: hidden;
 }
 
