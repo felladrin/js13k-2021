@@ -15,8 +15,8 @@ export function resizeGame() {
   );
 
   const style: Partial<CSSStyleDeclaration> = {
-    top: `${fittingProps.top}px`,
-    left: `${fittingProps.left}px`,
+    marginTop: `${fittingProps.top}px`,
+    marginLeft: `${fittingProps.left}px`,
     width: `${fittingProps.width}px`,
     height: `${fittingProps.height}px`,
   };

@@ -1,13 +1,16 @@
-div.container {
+html,
+body {
+  margin: 0;
+  padding: 0;
   background-color: #222426;
   overflow: hidden;
+}
+
+div.container {
   width: 100vw;
   height: 100vh;
 }
 
-canvas#game {
-  position: absolute;
-  z-index: 1;
-  background-color: #1b1d1f;
+#game {
   image-rendering: pixelated;
 }
