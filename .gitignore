@@ -4,3 +4,4 @@ dist
 dist.zip
 *.local
 .pnpm-debug.log
+arkit.png
