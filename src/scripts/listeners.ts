@@ -14,9 +14,14 @@ import {
   getSpawnerTime,
   setSpawnerTime,
 } from "./constants";
-import { resizeGame } from "./functions";
+import { loadSounds, resizeGame } from "./functions";
 
 window.addEventListener("resize", resizeGame);
+
+window.addEventListener("click", function handleFirstInteraction() {
+  window.removeEventListener("click", handleFirstInteraction);
+  loadSounds();
+});
 
 onGameLoopUpdate((dt) => {
   objectsToAlwaysUpdate.forEach((object) => object.update(dt));

@@ -3,6 +3,7 @@ import { initFont, font } from "tinyfont";
 import { GameLoop, GameObject, getPointer, init, Pool, Sprite, SpriteSheet, loadImage } from "kontra";
 import catSpriteSheet from "../images/catSpriteSheet.webp";
 import greenPortalSpriteSheet from "../images/portalSpriteSheet.webp";
+import { playSound } from "./functions";
 
 export const { canvas, context } = init("game");
 
@@ -20,6 +21,14 @@ export const [setGameObjectDragged, , getGameObjectDragged] = store<any>(null);
 
 export const [setTimeInGame, onTimeInGameChanged, getTimeInGame] = store(0);
 
+export const [setFunctionToPlaySound, , getFunctionToPlaySound] = store<any>(null);
+
+export const sounds = {
+  pickup: [, , 1425, , , 0.3, 1, 0.45, , , 476, 0.07, , , , , , 0.99, 0.1],
+  jump: [1.01, , 123, 0.04, 0.03, 0.19, , 0.87, -5, -2, , , , , , , , 0.68, 0.07],
+  // shoot: [2.18, 0.05, 382, 0.04, 0.02, 0, 3, 0.11, -7.2, 0.3, 0, 0, 0.06, 0, 0, 0, 0.08, 0.9, 0.04, 0.26]
+};
+
 export const gameObject = Sprite({
   x: canvas.width / 2,
   y: canvas.height / 2,
@@ -35,6 +44,7 @@ export const gameObject = Sprite({
     if (getGameObjectDragged() !== null) return;
     setGameObjectDragged(gameObject);
     gameObject.playAnimation("dragged");
+    playSound(sounds.jump);
   },
   update: () => {
     gameObject.advance();
