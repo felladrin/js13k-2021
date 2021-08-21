@@ -1,4 +1,4 @@
-import { collides, initPointer, Sprite, track } from "kontra";
+import { initPointer, track } from "kontra";
 import {
   gameLoop,
   gameObject,
@@ -8,15 +8,13 @@ import {
   objectsToAlwaysRender,
   objectsToAlwaysUpdate,
   onTimeInGameChanged,
-  pool,
   setTimeInGame,
   textObject,
   getTimeInGame,
   getSpawnerTime,
-  onSpawnerTimeUpdated,
   setSpawnerTime,
 } from "./constants";
-import { isOutOfCanvasBounds, playShootSound, resizeGame } from "./functions";
+import { resizeGame } from "./functions";
 
 window.addEventListener("resize", resizeGame);
 
@@ -41,45 +39,45 @@ onScriptReady(() => {
   gameLoop.start();
 });
 
-onSpawnerTimeUpdated((time) => {
-  if (time < 0.1) return;
+// onSpawnerTimeUpdated((time) => {
+//   if (time < 0.1) return;
 
-  const spawned = pool.get({
-    x: textObject.x,
-    y: textObject.y,
-    velocity: gameObject.position
-      .subtract(textObject.position)
-      .normalize()
-      .scale(5),
-    width: 4,
-    height: 4,
-    color: "red",
-    props: {
-      collided: false,
-    },
-    update: () => {
-      spawned.advance();
+//   const spawned = pool.get({
+//     x: textObject.x,
+//     y: textObject.y,
+//     velocity: gameObject.position
+//       .subtract(textObject.position)
+//       .normalize()
+//       .scale(5),
+//     width: 4,
+//     height: 4,
+//     color: "red",
+//     props: {
+//       collided: false,
+//     },
+//     update: () => {
+//       spawned.advance();
 
-      if (isOutOfCanvasBounds(spawned)) {
-        spawned.ttl = 0;
-      }
+//       if (isOutOfCanvasBounds(spawned)) {
+//         spawned.ttl = 0;
+//       }
 
-      if (spawned.props.collided) {
-        spawned.scaleX -= 0.01;
-        spawned.scaleY -= 0.01;
-        if (spawned.scaleX < 0 || spawned.scaleY < 0) {
-          spawned.ttl = 0;
-        }
-      } else if (collides(spawned, gameObject)) {
-        spawned.props.collided = true;
-        spawned.dx = -spawned.dx * Math.random();
-        spawned.dy = -spawned.dy * Math.random();
-        spawned.ddy = 0.1;
-      }
-    },
-  } as Partial<Sprite>) as Sprite;
+//       if (spawned.props.collided) {
+//         spawned.scaleX -= 0.01;
+//         spawned.scaleY -= 0.01;
+//         if (spawned.scaleX < 0 || spawned.scaleY < 0) {
+//           spawned.ttl = 0;
+//         }
+//       } else if (collides(spawned, gameObject)) {
+//         spawned.props.collided = true;
+//         spawned.dx = -spawned.dx * Math.random();
+//         spawned.dy = -spawned.dy * Math.random();
+//         spawned.ddy = 0.1;
+//       }
+//     },
+//   } as Partial<Sprite>) as Sprite;
 
-  playShootSound();
+//   playShootSound();
 
-  setSpawnerTime(0);
-});
+//   setSpawnerTime(0);
+// });

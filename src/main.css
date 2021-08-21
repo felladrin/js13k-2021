@@ -9,4 +9,5 @@ canvas#game {
   position: absolute;
   z-index: 1;
   background-color: #1b1d1f;
+  image-rendering: pixelated;
 }

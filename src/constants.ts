@@ -10,7 +10,8 @@ import {
   SpriteSheet,
   loadImage,
 } from "kontra";
-import catSpriteSheet from "./cat-sprite-sheet.png";
+import catSpriteSheet from "./catSpriteSheet.webp";
+import greenPortalSpriteSheet from "./portalSpriteSheet.webp";
 
 export const { canvas, context } = init("game");
 
@@ -63,7 +64,7 @@ export const gameObject = Sprite({
 });
 
 (async () => {
-  let spriteSheet = SpriteSheet({
+  const spriteSheet = SpriteSheet({
     image: await loadImage(catSpriteSheet),
     frameWidth: 32,
     frameHeight: 32,
@@ -128,6 +129,52 @@ export const gameObject = Sprite({
   gameObject.animations = spriteSheet.animations;
 })();
 
+export const portalSprite = Sprite({
+  x: canvas.width / 2,
+  y: canvas.height / 2,
+  scaleX: 1,
+  scaleY: 1,
+  anchor: { x: 0.5, y: 0.5 },
+  update: () => {
+    portalSprite.advance();
+
+    if (
+      portalSprite.currentAnimation === portalSprite.animations.open &&
+      // @ts-ignore
+      portalSprite.currentAnimation._f ===
+        portalSprite.currentAnimation.frames.length - 1
+    ) {
+      portalSprite.playAnimation("idle");
+    }
+  },
+});
+
+(async () => {
+  const portalSpriteSheet = SpriteSheet({
+    image: await loadImage(greenPortalSpriteSheet),
+    frameWidth: 64,
+    frameHeight: 64,
+    animations: {
+      idle: {
+        frames: "0..7",
+        frameRate: 12,
+      },
+      open: {
+        frames: "8..15",
+        frameRate: 12,
+        loop: false,
+      },
+      close: {
+        frames: "16..23",
+        frameRate: 12,
+        loop: false,
+      },
+    },
+  });
+
+  portalSprite.animations = portalSpriteSheet.animations;
+})();
+
 export const textObject = GameObject({
   x: 10,
   y: 10,
@@ -156,6 +203,11 @@ export const gameLoop = GameLoop({
   render: propagateGameLoopRender,
 });
 
-export const objectsToAlwaysUpdate = [gameObject, pool];
+export const objectsToAlwaysUpdate = [gameObject, portalSprite, pool];
 
-export const objectsToAlwaysRender = [gameObject, pool, textObject];
+export const objectsToAlwaysRender = [
+  gameObject,
+  portalSprite,
+  pool,
+  textObject,
+];
