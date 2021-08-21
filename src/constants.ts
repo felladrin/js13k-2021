@@ -1,15 +1,6 @@
 import { createPubSub, createPubSub as store } from "create-pubsub";
 import { initFont, font } from "tinyfont";
-import {
-  GameLoop,
-  GameObject,
-  getPointer,
-  init,
-  Pool,
-  Sprite,
-  SpriteSheet,
-  loadImage,
-} from "kontra";
+import { GameLoop, GameObject, getPointer, init, Pool, Sprite, SpriteSheet, loadImage } from "kontra";
 import catSpriteSheet from "./catSpriteSheet.webp";
 import greenPortalSpriteSheet from "./portalSpriteSheet.webp";
 
@@ -19,8 +10,7 @@ export const renderText = initFont(font, context);
 
 export const [emitScriptReady, onScriptReady] = createPubSub();
 
-export const [propagateGameLoopUpdate, onGameLoopUpdate] =
-  createPubSub<number>();
+export const [propagateGameLoopUpdate, onGameLoopUpdate] = createPubSub<number>();
 
 export const [propagateGameLoopRender, onGameLoopRender] = createPubSub();
 
@@ -141,8 +131,7 @@ export const portalSprite = Sprite({
     if (
       portalSprite.currentAnimation === portalSprite.animations.open &&
       // @ts-ignore
-      portalSprite.currentAnimation._f ===
-        portalSprite.currentAnimation.frames.length - 1
+      portalSprite.currentAnimation._f === portalSprite.currentAnimation.frames.length - 1
     ) {
       portalSprite.playAnimation("idle");
     }
@@ -205,9 +194,4 @@ export const gameLoop = GameLoop({
 
 export const objectsToAlwaysUpdate = [gameObject, portalSprite, pool];
 
-export const objectsToAlwaysRender = [
-  gameObject,
-  portalSprite,
-  pool,
-  textObject,
-];
+export const objectsToAlwaysRender = [gameObject, portalSprite, pool, textObject];
