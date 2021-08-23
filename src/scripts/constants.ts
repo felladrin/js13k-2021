@@ -141,8 +141,8 @@ export const portalSprite = Sprite({
     if (
       portalSprite.animations.open &&
       portalSprite.currentAnimation === portalSprite.animations.open &&
-      // @ts-ignore
-      portalSprite.currentAnimation._f === portalSprite.currentAnimation.frames.length - 1
+      (portalSprite.currentAnimation as unknown as { _f: number })._f ===
+        portalSprite.currentAnimation.frames.length - 1
     ) {
       portalSprite.playAnimation("idle");
     }
