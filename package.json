@@ -21,11 +21,11 @@
     "npm-check-updates": "^11.8.3",
     "ts-node": "^10.2.1",
     "typescript": "^4.3.5",
-    "vite": "^2.5.0",
+    "vite": "^2.5.1",
     "zipstats": "^1.1.0"
   },
   "dependencies": {
-    "create-pubsub": "^1.2.1",
+    "create-pubsub": "^1.2.2",
     "kontra": "^7.2.0",
     "math-fit": "^1.0.1",
     "tinyfont": "^1.3.2",
