@@ -17,11 +17,11 @@ export const [propagateGameLoopRender, onGameLoopRender] = createPubSub();
 
 export const [setSpawnerTime, onSpawnerTimeUpdated, getSpawnerTime] = store(0);
 
-export const [setGameObjectDragged, , getGameObjectDragged] = store<any>(null);
+export const [setGameObjectDragged, , getGameObjectDragged] = store<Sprite | null>(null);
 
 export const [setTimeInGame, onTimeInGameChanged, getTimeInGame] = store(0);
 
-export const [setFunctionToPlaySound, , getFunctionToPlaySound] = store<any>(null);
+export const [setFunctionToPlaySound, , getFunctionToPlaySound] = store<typeof import("zzfx").zzfx | null>(null);
 
 export const sounds = {
   pickup: [, , 1425, , , 0.3, 1, 0.45, , , 476, 0.07, , , , , , 0.99, 0.1],
