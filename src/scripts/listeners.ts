@@ -14,12 +14,13 @@ import {
   getSpawnerTime,
   setSpawnerTime,
 } from "./constants";
-import { loadSounds, resizeGame } from "./functions";
+import { loadSounds, playBackgroundMusic, resizeGame } from "./functions";
 
 window.addEventListener("resize", resizeGame);
 
 window.addEventListener("click", function handleFirstInteraction() {
   window.removeEventListener("click", handleFirstInteraction);
+  playBackgroundMusic();
   loadSounds();
 });
 
