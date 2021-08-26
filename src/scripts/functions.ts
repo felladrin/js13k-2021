@@ -1,8 +1,8 @@
 import { GameObject } from "kontra";
 import { contain } from "math-fit";
 import { canvas, getFunctionToPlaySound, setFunctionToPlaySound } from "./constants";
-import { playMidi } from "./playMidi";
-import { getZzFX } from "./getZzFX";
+import { playMidi } from "./lib/playMidi";
+import { getZzFX } from "./lib/getZzFX";
 
 export function resizeGame() {
   if (!canvas.parentElement) return;
