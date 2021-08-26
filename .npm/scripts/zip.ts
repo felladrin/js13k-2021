@@ -15,7 +15,7 @@ const zippedFilePath = resolve(__dirname, "..", "..", "dist.zip");
 
   await zip({
     cwd: distFolderPath,
-    source: "*",
+    source: "index.html",
     destination: zippedFilePath,
   });
 
