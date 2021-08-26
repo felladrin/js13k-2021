@@ -26,7 +26,3 @@ declare module "tinyfont" {
   ): (text: string, x?: number, y?: number, size?: number, color?: string) => void;
   let font: any;
 }
-
-declare module "zzfx" {
-  function zzfx(...sound: any): void;
-}

@@ -2,6 +2,7 @@ import { GameObject } from "kontra";
 import { contain } from "math-fit";
 import { canvas, getFunctionToPlaySound, setFunctionToPlaySound } from "./constants";
 import { playMidi } from "./playMidi";
+import { getZzFX } from "./getZzFX";
 
 export function resizeGame() {
   if (!canvas.parentElement) return;
@@ -33,8 +34,7 @@ export function isOutOfCanvasBounds(gameObject: GameObject) {
 }
 
 export async function loadSounds() {
-  const { zzfx } = await import("zzfx");
-  setFunctionToPlaySound(zzfx);
+  setFunctionToPlaySound(getZzFX());
 }
 
 export function playSound(sound: (number | undefined)[]) {
