@@ -1,7 +1,6 @@
-import { initPointer, track } from "kontra";
+import { initKeys } from "kontra";
 import {
   gameLoop,
-  gameObject,
   onGameLoopRender,
   onGameLoopUpdate,
   onScriptReady,
@@ -39,8 +38,7 @@ onTimeInGameChanged((timeInGame) => {
 });
 
 onScriptReady(() => {
-  initPointer();
-  track(gameObject);
+  initKeys();
   resizeGame();
   gameLoop.start();
 });

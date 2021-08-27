@@ -1,9 +1,8 @@
 import { createPubSub, createPubSub as store } from "create-pubsub";
 import { initFont, font } from "tinyfont";
-import { GameLoop, GameObject, getPointer, init, Pool, Sprite, SpriteSheet, loadImage } from "kontra";
+import { GameLoop, GameObject, init, Pool, Sprite, SpriteSheet, loadImage, keyPressed } from "kontra";
 import catSpriteSheet from "../images/catSpriteSheet.webp";
 import greenPortalSpriteSheet from "../images/portalSpriteSheet.webp";
-import { playSound } from "./functions";
 
 export const { canvas, context } = init("game");
 
@@ -17,47 +16,47 @@ export const [propagateGameLoopRender, onGameLoopRender] = createPubSub();
 
 export const [setSpawnerTime, onSpawnerTimeUpdated, getSpawnerTime] = store(0);
 
-export const [setGameObjectDragged, , getGameObjectDragged] = store<Sprite | null>(null);
-
 export const [setTimeInGame, onTimeInGameChanged, getTimeInGame] = store(0);
 
 export const [setFunctionToPlaySound, , getFunctionToPlaySound] = store<((...sound: any) => void) | null>(null);
 
-export const sounds = {
-  pickup: [, , 1425, , , 0.3, 1, 0.45, , , 476, 0.07, , , , , , 0.99, 0.1],
-  jump: [1.01, , 123, 0.04, 0.03, 0.19, , 0.87, -5, -2, , , , , , , , 0.68, 0.07],
-};
+export const pickupSound = [, , 1425, , , 0.3, 1, 0.45, , , 476, 0.07, , , , , , 0.99, 0.1];
 
-export const gameObject = Sprite({
+export const jumpSound = [1.01, , 123, 0.04, 0.03, 0.19, , 0.87, -5, -2, , , , , , , , 0.68, 0.07];
+
+const jumpKeys = ["up", "w", "z"];
+const moveLeftKeys = ["left", "a", "q"];
+const moveRightKeys = ["right", "d"];
+
+export const cat = Sprite({
   x: canvas.width / 2,
   y: canvas.height / 2,
   scaleX: 2,
   scaleY: 2,
   anchor: { x: 0.5, y: 1 },
-  onUp: () => {
-    if (getGameObjectDragged() === null) return;
-    setGameObjectDragged(null);
-    gameObject.playAnimation("falling");
-  },
-  onDown: () => {
-    if (getGameObjectDragged() !== null) return;
-    setGameObjectDragged(gameObject);
-    gameObject.playAnimation("dragged");
-    playSound(sounds.jump);
-  },
   update: () => {
-    gameObject.advance();
+    cat.advance();
 
-    if (getGameObjectDragged() === gameObject) {
-      gameObject.x = getPointer().x;
-      gameObject.y = getPointer().y;
-    } else if (gameObject.y < canvas.height) {
-      gameObject.ddy = 0.5;
+    const requestedJump = jumpKeys.some(keyPressed);
+    const isMovingLeft = moveLeftKeys.some(keyPressed);
+    const isMovingRight = moveRightKeys.some(keyPressed);
+
+    cat.scaleX = isMovingLeft ? -2 : isMovingRight ? 2 : cat.scaleX;
+
+    cat.dx = isMovingLeft ? -5 : isMovingRight ? 5 : 0;
+
+    cat.playAnimation(isMovingLeft || isMovingRight ? "walk" : "idleOne");
+
+    if (requestedJump) {
+      cat.y -= 10;
+    }
+
+    if (cat.y < canvas.height) {
+      cat.ddy = 0.5;
     } else {
-      gameObject.playAnimation("idleOne");
-      gameObject.y = canvas.height;
-      gameObject.dy = 0;
-      gameObject.ddy = 0;
+      cat.y = canvas.height;
+      cat.dy = 0;
+      cat.ddy = 0;
     }
   },
 });
@@ -125,7 +124,7 @@ export const gameObject = Sprite({
     },
   });
 
-  gameObject.animations = spriteSheet.animations;
+  cat.animations = spriteSheet.animations;
 })();
 
 export const portalSprite = Sprite({
@@ -202,6 +201,6 @@ export const gameLoop = GameLoop({
   render: propagateGameLoopRender,
 });
 
-export const objectsToAlwaysUpdate = [gameObject, portalSprite, pool];
+export const objectsToAlwaysUpdate = [cat, portalSprite, pool];
 
-export const objectsToAlwaysRender = [gameObject, portalSprite, pool, textObject];
+export const objectsToAlwaysRender = [cat, portalSprite, pool, textObject];
