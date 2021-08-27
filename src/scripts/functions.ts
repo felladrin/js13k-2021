@@ -42,6 +42,8 @@ export function playSound(sound: (number | undefined)[]) {
 }
 
 export function playBackgroundMusic() {
+  if (import.meta.env.DEV) return;
+
   const midiFile = {
     header: {
       formatType: 1,
