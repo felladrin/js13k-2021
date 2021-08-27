@@ -10,10 +10,12 @@ export default defineConfig({
       transformIndexHtml(html, context) {
         if (!context || !context.bundle) return html;
 
-        let transformedScripts = "";
+        let transformedScripts = [];
 
         for (const asset of Object.values(context.bundle)) {
           if (asset.type !== "chunk") continue;
+
+          html = html.replace(new RegExp(`<script type="module"[^>]*?src="/${asset.fileName}"[^>]*?></script>`), "");
 
           const { firstLine, secondLine } = new Packer(
             [
@@ -24,29 +26,25 @@ export default defineConfig({
               },
             ],
             {
-              maxMemoryMB: 1024,
+              maxMemoryMB: 150,
             }
           ).makeDecoder();
 
-          transformedScripts = transformedScripts.concat(`<script>${firstLine}\n${secondLine}</script>`);
-
-          html = html.replace(new RegExp(`<script type="module"[^>]*?src="/${asset.fileName}"[^>]*?></script>`), "");
+          transformedScripts.push(`<script>${firstLine}\n${secondLine}</script>`);
         }
 
-        return html.replace(/<\/body>/, transformedScripts + "</body>");
+        return html.replace(/<\/body>/, `${transformedScripts.join("")}</body>`);
       },
     },
     viteSingleFile(),
     minifyHtml(),
   ],
-  logLevel: "warn",
   build: {
-    target: "esnext",
     rollupOptions: {
-      inlineDynamicImports: true,
       output: {
         manualChunks: {},
       },
     },
   },
+  logLevel: "warn",
 });
