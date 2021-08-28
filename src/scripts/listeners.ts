@@ -6,9 +6,7 @@ import {
   onScriptReady,
   objectsToAlwaysRender,
   objectsToAlwaysUpdate,
-  onTimeInGameChanged,
   setTimeInGame,
-  textObject,
   getTimeInGame,
 } from "./constants";
 import {
@@ -16,6 +14,7 @@ import {
   handleFirstInteraction,
   loadCatSpriteSheet,
   loadPortalSpriteSheet,
+  renderTimeInGameText,
   resizeCanvas,
 } from "./functions";
 
@@ -32,10 +31,7 @@ onGameLoopUpdate((dt) => {
 
 onGameLoopRender(() => {
   objectsToAlwaysRender.forEach((object) => object.render());
-});
-
-onTimeInGameChanged((timeInGame) => {
-  textObject.props.text = timeInGame.toFixed(1);
+  renderTimeInGameText();
 });
 
 onScriptReady(async () => {

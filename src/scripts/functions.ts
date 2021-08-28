@@ -4,9 +4,11 @@ import {
   canvas,
   cat,
   getFunctionToPlaySound,
+  getTimeInGame,
   jumpSound,
   platformsPool,
   portalSprite,
+  renderText,
   setFunctionToPlaySound,
 } from "./constants";
 import { playMidi } from "./lib/playMidi";
@@ -155,6 +157,10 @@ export async function loadPortalSpriteSheet() {
   });
 
   portalSprite.animations = portalSpriteSheet.animations;
+}
+
+export function renderTimeInGameText() {
+  renderText(getTimeInGame().toFixed(1), portalSprite.x - 12, portalSprite.y - 40, 10, "white");
 }
 
 export function playBackgroundMusic() {

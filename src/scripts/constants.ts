@@ -1,6 +1,6 @@
 import { createPubSub, createPubSub as store } from "create-pubsub";
 import { initFont, font } from "tinyfont";
-import { GameLoop, GameObject, init, Pool, Sprite, keyPressed, collides } from "kontra";
+import { GameLoop, init, Pool, Sprite, keyPressed, collides } from "kontra";
 import { playSound } from "./functions";
 
 export const { canvas, context } = init("game");
@@ -13,7 +13,7 @@ export const [propagateGameLoopUpdate, onGameLoopUpdate] = createPubSub<number>(
 
 export const [propagateGameLoopRender, onGameLoopRender] = createPubSub();
 
-export const [setTimeInGame, onTimeInGameChanged, getTimeInGame] = store(0);
+export const [setTimeInGame, , getTimeInGame] = store(0);
 
 export const [setFunctionToPlaySound, , getFunctionToPlaySound] = store<((...sound: any) => void) | null>(null);
 
@@ -115,19 +115,6 @@ export const portalSprite = Sprite({
   },
 });
 
-export const textObject = GameObject({
-  x: portalSprite.x - 12,
-  y: portalSprite.y - 40,
-  props: {
-    text: "0",
-    color: "white",
-    size: 10,
-  },
-  render: () => {
-    renderText(textObject.props.text as string, 0, 0, textObject.props.size, textObject.props.color);
-  },
-});
-
 export const gameLoop = GameLoop({
   update: propagateGameLoopUpdate,
   render: propagateGameLoopRender,
@@ -135,4 +122,4 @@ export const gameLoop = GameLoop({
 
 export const objectsToAlwaysUpdate = [cat, portalSprite, platformsPool];
 
-export const objectsToAlwaysRender = [cat, portalSprite, platformsPool, textObject];
+export const objectsToAlwaysRender = [cat, portalSprite, platformsPool];
