@@ -11,7 +11,13 @@ import {
   textObject,
   getTimeInGame,
 } from "./constants";
-import { addPlatforms, handleFirstInteraction, resizeCanvas } from "./functions";
+import {
+  addPlatforms,
+  handleFirstInteraction,
+  loadCatSpriteSheet,
+  loadPortalSpriteSheet,
+  resizeCanvas,
+} from "./functions";
 
 window.addEventListener("resize", resizeCanvas);
 
@@ -32,12 +38,14 @@ onTimeInGameChanged((timeInGame) => {
   textObject.props.text = timeInGame.toFixed(1);
 });
 
-onScriptReady(() => {
+onScriptReady(async () => {
   initKeys();
   resizeCanvas();
-  gameLoop.start();
   addPlatforms([
     [256, 400, 60, 2],
     [120, 400, 60, 2],
   ]);
+  await loadCatSpriteSheet();
+  await loadPortalSpriteSheet();
+  gameLoop.start();
 });
