@@ -41,6 +41,7 @@ export function addPlatforms(platforms: [x: number, y: number, width: number, he
 
 export async function loadSounds() {
   setFunctionToPlaySound(getZzFX());
+  playSound([0]);
 }
 
 export function playSound(sound: (number | undefined)[]) {
