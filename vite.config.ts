@@ -42,6 +42,7 @@ export default defineConfig({
     minifyHtml(),
   ],
   build: {
+    target: "esnext",
     rollupOptions: {
       output: {
         manualChunks: {},
