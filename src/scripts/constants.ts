@@ -85,7 +85,7 @@ export const cat = Sprite({
       },
       walk: {
         frames: "32..39",
-        frameRate: 8,
+        frameRate: 30,
       },
       jumpOne: {
         frames: "40..43",
