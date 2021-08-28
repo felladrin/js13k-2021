@@ -15,8 +15,6 @@ export const [propagateGameLoopUpdate, onGameLoopUpdate] = createPubSub<number>(
 
 export const [propagateGameLoopRender, onGameLoopRender] = createPubSub();
 
-export const [setSpawnerTime, onSpawnerTimeUpdated, getSpawnerTime] = store(0);
-
 export const [setTimeInGame, onTimeInGameChanged, getTimeInGame] = store(0);
 
 export const [setFunctionToPlaySound, , getFunctionToPlaySound] = store<((...sound: any) => void) | null>(null);
@@ -206,21 +204,15 @@ export const portalSprite = Sprite({
 })();
 
 export const textObject = GameObject({
-  x: 10,
-  y: 10,
+  x: portalSprite.x - 12,
+  y: portalSprite.y - 40,
   props: {
-    text: "TIME: 0",
+    text: "0",
     color: "white",
     size: 10,
   },
   render: () => {
-    renderText(
-      textObject.props.text as string,
-      textObject.x,
-      textObject.y,
-      textObject.props.size,
-      textObject.props.color
-    );
+    renderText(textObject.props.text as string, 0, 0, textObject.props.size, textObject.props.color);
   },
 });
 

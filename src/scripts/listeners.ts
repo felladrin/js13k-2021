@@ -10,8 +10,6 @@ import {
   setTimeInGame,
   textObject,
   getTimeInGame,
-  getSpawnerTime,
-  setSpawnerTime,
 } from "./constants";
 import { addPlatforms, handleFirstInteraction, resizeCanvas } from "./functions";
 
@@ -24,7 +22,6 @@ window.addEventListener("keydown", handleFirstInteraction);
 onGameLoopUpdate((dt) => {
   objectsToAlwaysUpdate.forEach((object) => object.update(dt));
   setTimeInGame(getTimeInGame() + dt);
-  setSpawnerTime(getSpawnerTime() + dt);
 });
 
 onGameLoopRender(() => {
@@ -32,7 +29,7 @@ onGameLoopRender(() => {
 });
 
 onTimeInGameChanged((timeInGame) => {
-  textObject.props.text = `TIME: ${timeInGame.toFixed(1)}`;
+  textObject.props.text = timeInGame.toFixed(1);
 });
 
 onScriptReady(() => {
