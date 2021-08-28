@@ -20,6 +20,8 @@ import {
   renderText,
   setFunctionToPlaySound,
   setPlatformWhichCatIsOn,
+  setBackgroundMusicPlaying,
+  getBackgroundMusicPlaying,
 } from "./constants";
 import { getZzFX } from "./modules/getZzFX";
 import { playMidi } from "./modules/playMidi";
@@ -59,20 +61,14 @@ export function addPlatforms(platforms: [x: number, y: number, width: number, he
   });
 }
 
-export async function loadSounds() {
+export async function enableSoundEffects() {
+  if (getFunctionToPlaySound()) return;
   setFunctionToPlaySound(getZzFX());
   playSound([0]);
 }
 
 export function playSound(sound: (number | undefined)[]) {
   getFunctionToPlaySound()?.(...sound);
-}
-
-export function handleFirstInteraction() {
-  window.removeEventListener("click", handleFirstInteraction);
-  window.removeEventListener("keydown", handleFirstInteraction);
-  playBackgroundMusic();
-  loadSounds();
 }
 
 export function processPortalAnimation() {
@@ -135,14 +131,11 @@ export function renderTimeInGameText() {
 }
 
 export function playBackgroundMusic() {
-  if (import.meta.env.DEV) return;
+  if (getBackgroundMusicPlaying()) return;
 
-  const play = () =>
-    playMidi(backgroundMusicMidi, () => {
-      window.setTimeout(() => {
-        play();
-      }, 2000);
-    });
+  playMidi(backgroundMusicMidi, () => {
+    setBackgroundMusicPlaying(false);
+  });
 
-  play();
+  setBackgroundMusicPlaying(true);
 }

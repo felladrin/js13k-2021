@@ -14,13 +14,15 @@ export const [propagateGameLoopRender, onGameLoopRender] = createPubSub();
 
 export const [setTimeInGame, , getTimeInGame] = store(0);
 
+export const [setBackgroundMusicPlaying, , getBackgroundMusicPlaying] = store(false);
+
 export const [setFunctionToPlaySound, , getFunctionToPlaySound] = store<((...sound: any) => void) | null>(null);
 
 export const [setPlatformWhichCatIsOn, , getPlatformWhichCatIsOn] = store<Sprite | null>(null);
 
-export const [emitCatSpriteSheetImageLoaded, onCatSpriteSheetImageLoaded] = store<HTMLImageElement>();
+export const [emitCatSpriteSheetImageLoaded, onCatSpriteSheetImageLoaded] = createPubSub<HTMLImageElement>();
 
-export const [emitPortalSpriteSheetImageLoaded, onPortalSpriteSheetImageLoaded] = store<HTMLImageElement>();
+export const [emitPortalSpriteSheetImageLoaded, onPortalSpriteSheetImageLoaded] = createPubSub<HTMLImageElement>();
 
 export const pickupSound = [, , 1425, , , 0.3, 1, 0.45, , , 476, 0.07, , , , , , 0.99, 0.1];
 

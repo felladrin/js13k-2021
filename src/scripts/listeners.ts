@@ -19,18 +19,22 @@ import {
 } from "./constants";
 import {
   addPlatforms,
-  handleFirstInteraction,
   renderTimeInGameText,
   resizeCanvas,
   processPortalAnimation,
   updateCatSprite,
+  playBackgroundMusic,
+  enableSoundEffects,
 } from "./functions";
 
 window.addEventListener("resize", resizeCanvas);
 
-window.addEventListener("click", handleFirstInteraction);
-
-window.addEventListener("keydown", handleFirstInteraction);
+["click", "keydown"].forEach((eventName) => {
+  window.addEventListener(eventName, () => {
+    enableSoundEffects();
+    playBackgroundMusic();
+  });
+});
 
 onCatSpriteSheetImageLoaded((image) => {
   const spriteSheet = SpriteSheet({
