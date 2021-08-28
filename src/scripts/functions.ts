@@ -1,6 +1,6 @@
-import { GameObject } from "kontra";
+import { GameObject, Sprite } from "kontra";
 import { contain } from "math-fit";
-import { canvas, getFunctionToPlaySound, setFunctionToPlaySound } from "./constants";
+import { canvas, getFunctionToPlaySound, platformsPool, setFunctionToPlaySound } from "./constants";
 import { playMidi } from "./lib/playMidi";
 import { getZzFX } from "./lib/getZzFX";
 
@@ -23,6 +23,20 @@ export function resizeCanvas() {
 
 export function isOutOfCanvasBounds(gameObject: GameObject) {
   return gameObject.x > canvas.width || gameObject.y > canvas.height || gameObject.x < 0 || gameObject.y < 0;
+}
+
+export function addPlatforms(platforms: [x: number, y: number, width: number, height: number][]) {
+  platforms.forEach((platform) => {
+    const [x, y, width, height] = platform;
+    platformsPool.get({
+      x,
+      y,
+      width,
+      height,
+      color: "lightgreen",
+      anchor: { x: 0.5, y: 0 },
+    } as Partial<Sprite>) as Sprite;
+  });
 }
 
 export async function loadSounds() {

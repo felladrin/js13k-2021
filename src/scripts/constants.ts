@@ -1,6 +1,6 @@
 import { createPubSub, createPubSub as store } from "create-pubsub";
 import { initFont, font } from "tinyfont";
-import { GameLoop, GameObject, init, Pool, Sprite, SpriteSheet, loadImage, keyPressed } from "kontra";
+import { GameLoop, GameObject, init, Pool, Sprite, SpriteSheet, loadImage, keyPressed, collides } from "kontra";
 import catSpriteSheet from "../images/catSpriteSheet.webp";
 import greenPortalSpriteSheet from "../images/portalSpriteSheet.webp";
 
@@ -20,19 +20,29 @@ export const [setTimeInGame, onTimeInGameChanged, getTimeInGame] = store(0);
 
 export const [setFunctionToPlaySound, , getFunctionToPlaySound] = store<((...sound: any) => void) | null>(null);
 
+const [setPlatformWhichCatIsOn, , getPlatformWhichCatIsOn] = store<Sprite | null>(null);
+
 export const pickupSound = [, , 1425, , , 0.3, 1, 0.45, , , 476, 0.07, , , , , , 0.99, 0.1];
 
 export const jumpSound = [1.01, , 123, 0.04, 0.03, 0.19, , 0.87, -5, -2, , , , , , , , 0.68, 0.07];
 
+const catSpriteScale = 2;
+const catWalkSpeed = 2.5;
+const catJumpSpeed = 10;
+const gravityAcceleration = 0.5;
 const jumpKeys = ["up", "w", "z"];
 const moveLeftKeys = ["left", "a", "q"];
 const moveRightKeys = ["right", "d"];
 
+export const platformsPool = Pool({
+  create: Sprite as any,
+});
+
 export const cat = Sprite({
   x: canvas.width / 2,
   y: canvas.height / 2,
-  scaleX: 2,
-  scaleY: 2,
+  scaleX: catSpriteScale,
+  scaleY: catSpriteScale,
   anchor: { x: 0.5, y: 1 },
   update: () => {
     cat.advance();
@@ -41,23 +51,43 @@ export const cat = Sprite({
     const isMovingLeft = moveLeftKeys.some(keyPressed);
     const isMovingRight = moveRightKeys.some(keyPressed);
 
-    cat.scaleX = isMovingLeft ? -2 : isMovingRight ? 2 : cat.scaleX;
+    let platformWhichCatIsOn = getPlatformWhichCatIsOn();
 
-    cat.dx = isMovingLeft ? -5 : isMovingRight ? 5 : 0;
-
-    cat.playAnimation(isMovingLeft || isMovingRight ? "walk" : "idleOne");
-
-    if (requestedJump) {
-      cat.y -= 10;
+    for (const platform of platformsPool.getAliveObjects() as Sprite[]) {
+      if (collides(cat, platform)) {
+        platformWhichCatIsOn = platform;
+        cat.y = platformWhichCatIsOn.y;
+        break;
+      }
     }
 
-    if (cat.y < canvas.height) {
-      cat.ddy = 0.5;
+    cat.scaleX = isMovingLeft ? -catSpriteScale : isMovingRight ? catSpriteScale : cat.scaleX;
+
+    cat.dx = isMovingLeft ? -catWalkSpeed : isMovingRight ? catWalkSpeed : 0;
+
+    if (platformWhichCatIsOn) {
+      cat.playAnimation(isMovingLeft || isMovingRight ? "walk" : "idleOne");
     } else {
-      cat.y = canvas.height;
+      cat.playAnimation(cat.dy < 0 ? "jumpTwo" : "falling");
+    }
+
+    if (requestedJump && platformWhichCatIsOn) {
+      cat.dy = -catJumpSpeed;
+      platformWhichCatIsOn = null;
+    }
+
+    if (isMovingLeft || isMovingRight) {
+      platformWhichCatIsOn = null;
+    }
+
+    if (platformWhichCatIsOn) {
       cat.dy = 0;
       cat.ddy = 0;
+    } else {
+      cat.ddy = gravityAcceleration;
     }
+
+    setPlatformWhichCatIsOn(platformWhichCatIsOn);
   },
 });
 
@@ -192,15 +222,11 @@ export const textObject = GameObject({
   },
 });
 
-export const pool = Pool({
-  create: Sprite as any,
-});
-
 export const gameLoop = GameLoop({
   update: propagateGameLoopUpdate,
   render: propagateGameLoopRender,
 });
 
-export const objectsToAlwaysUpdate = [cat, portalSprite, pool];
+export const objectsToAlwaysUpdate = [cat, portalSprite, platformsPool];
 
-export const objectsToAlwaysRender = [cat, portalSprite, pool, textObject];
+export const objectsToAlwaysRender = [cat, portalSprite, platformsPool, textObject];
