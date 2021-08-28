@@ -61,7 +61,7 @@ export function addPlatforms(platforms: [x: number, y: number, width: number, he
   });
 }
 
-export async function enableSoundEffects() {
+export function enableSoundEffects() {
   if (getFunctionToPlaySound()) return;
   setFunctionToPlaySound(getZzFX());
   playSound([0]);
