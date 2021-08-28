@@ -4,7 +4,7 @@ import { canvas, getFunctionToPlaySound, setFunctionToPlaySound } from "./consta
 import { playMidi } from "./lib/playMidi";
 import { getZzFX } from "./lib/getZzFX";
 
-export function resizeGame() {
+export function resizeCanvas() {
   if (!canvas.parentElement) return;
 
   const fittingProps = contain(
@@ -15,18 +15,10 @@ export function resizeGame() {
     }
   );
 
-  const style: Partial<CSSStyleDeclaration> = {
-    marginTop: `${fittingProps.top}px`,
-    marginLeft: `${fittingProps.left}px`,
-    width: `${fittingProps.width}px`,
-    height: `${fittingProps.height}px`,
-  };
-
-  for (const declaration of Object.keys(style)) {
-    canvas.style[declaration as any] = (style as Record<string, string>)[declaration];
-  }
-
-  window.scrollTo(1, 0);
+  canvas.style.marginTop = `${fittingProps.top}px`;
+  canvas.style.marginLeft = `${fittingProps.left}px`;
+  canvas.style.width = `${fittingProps.width}px`;
+  canvas.style.height = `${fittingProps.height}px`;
 }
 
 export function isOutOfCanvasBounds(gameObject: GameObject) {

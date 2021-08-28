@@ -13,9 +13,9 @@ import {
   getSpawnerTime,
   setSpawnerTime,
 } from "./constants";
-import { loadSounds, playBackgroundMusic, resizeGame } from "./functions";
+import { loadSounds, playBackgroundMusic, resizeCanvas } from "./functions";
 
-window.addEventListener("resize", resizeGame);
+window.addEventListener("resize", resizeCanvas);
 
 window.addEventListener("click", function handleFirstInteraction() {
   window.removeEventListener("click", handleFirstInteraction);
@@ -39,7 +39,7 @@ onTimeInGameChanged((timeInGame) => {
 
 onScriptReady(() => {
   initKeys();
-  resizeGame();
+  resizeCanvas();
   gameLoop.start();
 });
 
