@@ -2,8 +2,8 @@ import { collides, GameObject, keyPressed, loadImage, Sprite, SpriteSheet } from
 import { contain } from "math-fit";
 import catSpriteSheet from "../images/catSpriteSheet.webp";
 import greenPortalSpriteSheet from "../images/portalSpriteSheet.webp";
+import backgroundMusicMidi from "../music/music.json";
 import {
-  backgroundMusicMidi,
   canvas,
   cat,
   catJumpSpeed,
