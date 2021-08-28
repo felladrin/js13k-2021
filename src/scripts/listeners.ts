@@ -16,6 +16,8 @@ import {
   loadPortalSpriteSheet,
   renderTimeInGameText,
   resizeCanvas,
+  processPortalAnimation,
+  updateCatSprite,
 } from "./functions";
 
 window.addEventListener("resize", resizeCanvas);
@@ -25,8 +27,10 @@ window.addEventListener("click", handleFirstInteraction);
 window.addEventListener("keydown", handleFirstInteraction);
 
 onGameLoopUpdate((dt) => {
-  objectsToAlwaysUpdate.forEach((object) => object.update(dt));
   setTimeInGame(getTimeInGame() + dt);
+  objectsToAlwaysUpdate.forEach((object) => object.update());
+  processPortalAnimation();
+  updateCatSprite();
 });
 
 onGameLoopRender(() => {

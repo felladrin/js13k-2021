@@ -1,20 +1,29 @@
-import { GameObject, Sprite, SpriteSheet, loadImage } from "kontra";
+import { collides, GameObject, keyPressed, loadImage, Sprite, SpriteSheet } from "kontra";
 import { contain } from "math-fit";
+import catSpriteSheet from "../images/catSpriteSheet.webp";
+import greenPortalSpriteSheet from "../images/portalSpriteSheet.webp";
 import {
   canvas,
   cat,
+  catJumpSpeed,
+  catSpriteScale,
+  catWalkSpeed,
   getFunctionToPlaySound,
+  getPlatformWhichCatIsOn,
   getTimeInGame,
+  gravityAcceleration,
+  jumpKeys,
   jumpSound,
+  moveLeftKeys,
+  moveRightKeys,
   platformsPool,
   portalSprite,
   renderText,
   setFunctionToPlaySound,
+  setPlatformWhichCatIsOn,
 } from "./constants";
-import { playMidi } from "./lib/playMidi";
 import { getZzFX } from "./lib/getZzFX";
-import catSpriteSheet from "../images/catSpriteSheet.webp";
-import greenPortalSpriteSheet from "../images/portalSpriteSheet.webp";
+import { playMidi } from "./lib/playMidi";
 
 export function resizeCanvas() {
   if (!canvas.parentElement) return;
@@ -157,6 +166,61 @@ export async function loadPortalSpriteSheet() {
   });
 
   portalSprite.animations = portalSpriteSheet.animations;
+}
+
+export function processPortalAnimation() {
+  if (
+    portalSprite.animations.open &&
+    portalSprite.currentAnimation === portalSprite.animations.open &&
+    (portalSprite.currentAnimation as unknown as { _f: number })._f === portalSprite.currentAnimation.frames.length - 1
+  ) {
+    portalSprite.playAnimation("idle");
+  }
+}
+
+export function updateCatSprite() {
+  const requestedJump = jumpKeys.some(keyPressed);
+  const isMovingLeft = moveLeftKeys.some(keyPressed);
+  const isMovingRight = moveRightKeys.some(keyPressed);
+
+  let platformWhichCatIsOn = getPlatformWhichCatIsOn();
+
+  for (const platform of platformsPool.getAliveObjects() as Sprite[]) {
+    if (collides(cat, platform)) {
+      platformWhichCatIsOn = platform;
+      cat.y = platformWhichCatIsOn.y;
+      break;
+    }
+  }
+
+  cat.scaleX = isMovingLeft ? -catSpriteScale : isMovingRight ? catSpriteScale : cat.scaleX;
+
+  cat.dx = isMovingLeft ? -catWalkSpeed : isMovingRight ? catWalkSpeed : 0;
+
+  if (platformWhichCatIsOn) {
+    cat.playAnimation(isMovingLeft || isMovingRight ? "walk" : "idleOne");
+  } else {
+    cat.playAnimation(cat.dy < 0 ? "jumpTwo" : "falling");
+  }
+
+  if (requestedJump && platformWhichCatIsOn) {
+    cat.dy = -catJumpSpeed;
+    playSound(jumpSound);
+    platformWhichCatIsOn = null;
+  }
+
+  if (isMovingLeft || isMovingRight) {
+    platformWhichCatIsOn = null;
+  }
+
+  if (platformWhichCatIsOn) {
+    cat.dy = 0;
+    cat.ddy = 0;
+  } else {
+    cat.ddy = gravityAcceleration;
+  }
+
+  setPlatformWhichCatIsOn(platformWhichCatIsOn);
 }
 
 export function renderTimeInGameText() {
