@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [
     {
       name: "roadroller",
-      transformIndexHtml(html, context) {
+      async transformIndexHtml(html, context) {
         if (!context || !context.bundle) return html;
 
         let transformedScripts = [];
@@ -17,7 +17,7 @@ export default defineConfig({
 
           html = html.replace(new RegExp(`<script type="module"[^>]*?src="/${asset.fileName}"[^>]*?></script>`), "");
 
-          const { firstLine, secondLine } = new Packer(
+          const packer = new Packer(
             [
               {
                 data: asset.code,
@@ -25,12 +25,14 @@ export default defineConfig({
                 action: "eval" as InputAction.Eval,
               },
             ],
-            {
-              maxMemoryMB: 150,
-            }
-          ).makeDecoder();
+            {}
+          );
 
-          transformedScripts.push(`<script>${firstLine}\n${secondLine}</script>`);
+          await packer.optimize();
+
+          const { firstLine, secondLine } = packer.makeDecoder();
+
+          transformedScripts.push(`<script>${firstLine}${secondLine}</script>`);
         }
 
         return html.replace(/<\/body>/, `${transformedScripts.join("")}</body>`);
