@@ -18,6 +18,10 @@ export const [setFunctionToPlaySound, , getFunctionToPlaySound] = store<((...sou
 
 export const [setPlatformWhichCatIsOn, , getPlatformWhichCatIsOn] = store<Sprite | null>(null);
 
+export const [emitCatSpriteSheetImageLoaded, onCatSpriteSheetImageLoaded] = store<HTMLImageElement>();
+
+export const [emitPortalSpriteSheetImageLoaded, onPortalSpriteSheetImageLoaded] = store<HTMLImageElement>();
+
 export const pickupSound = [, , 1425, , , 0.3, 1, 0.45, , , 476, 0.07, , , , , , 0.99, 0.1];
 
 export const jumpSound = [1.01, , 123, 0.04, 0.03, 0.19, , 0.87, -5, -2, , , , , , , , 0.68, 0.07];
