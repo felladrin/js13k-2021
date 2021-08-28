@@ -47,6 +47,13 @@ export function playSound(sound: (number | undefined)[]) {
   getFunctionToPlaySound()?.(...sound);
 }
 
+export function handleFirstInteraction() {
+  window.removeEventListener("click", handleFirstInteraction);
+  window.removeEventListener("keydown", handleFirstInteraction);
+  playBackgroundMusic();
+  loadSounds();
+}
+
 export function playBackgroundMusic() {
   if (import.meta.env.DEV) return;
 

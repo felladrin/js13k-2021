@@ -3,6 +3,7 @@ import { initFont, font } from "tinyfont";
 import { GameLoop, GameObject, init, Pool, Sprite, SpriteSheet, loadImage, keyPressed, collides } from "kontra";
 import catSpriteSheet from "../images/catSpriteSheet.webp";
 import greenPortalSpriteSheet from "../images/portalSpriteSheet.webp";
+import { playSound } from "./functions";
 
 export const { canvas, context } = init("game");
 
@@ -73,6 +74,7 @@ export const cat = Sprite({
 
     if (requestedJump && platformWhichCatIsOn) {
       cat.dy = -catJumpSpeed;
+      playSound(jumpSound);
       platformWhichCatIsOn = null;
     }
 

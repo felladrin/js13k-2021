@@ -13,15 +13,13 @@ import {
   getSpawnerTime,
   setSpawnerTime,
 } from "./constants";
-import { addPlatforms, loadSounds, playBackgroundMusic, resizeCanvas } from "./functions";
+import { addPlatforms, handleFirstInteraction, resizeCanvas } from "./functions";
 
 window.addEventListener("resize", resizeCanvas);
 
-window.addEventListener("click", function handleFirstInteraction() {
-  window.removeEventListener("click", handleFirstInteraction);
-  playBackgroundMusic();
-  loadSounds();
-});
+window.addEventListener("click", handleFirstInteraction);
+
+window.addEventListener("keydown", handleFirstInteraction);
 
 onGameLoopUpdate((dt) => {
   objectsToAlwaysUpdate.forEach((object) => object.update(dt));
