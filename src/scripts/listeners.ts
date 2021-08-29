@@ -1,6 +1,7 @@
 import { initKeys, loadImage, SpriteSheet } from "kontra";
 import catSpriteSheetUrl from "../images/catSpriteSheet.webp";
 import portalSpriteSheetUrl from "../images/portalSpriteSheet.webp";
+import platformImageUrl from "../images/platform.webp";
 import {
   gameLoop,
   onGameLoopRender,
@@ -16,6 +17,7 @@ import {
   portalSprite,
   onCatSpriteSheetImageLoaded,
   cat,
+  emitPlatformImageLoaded,
 } from "./constants";
 import {
   addPlatforms,
@@ -141,13 +143,14 @@ onGameLoopRender(() => {
 });
 
 onScriptReady(async () => {
+  emitPlatformImageLoaded(await loadImage(platformImageUrl));
   emitCatSpriteSheetImageLoaded(await loadImage(catSpriteSheetUrl));
   emitPortalSpriteSheetImageLoaded(await loadImage(portalSpriteSheetUrl));
   initKeys();
   resizeCanvas();
   addPlatforms([
-    [256, 400, 60, 2],
-    [120, 400, 60, 2],
+    [124, 230],
+    [30, 210],
   ]);
   gameLoop.start();
 });

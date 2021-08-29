@@ -24,17 +24,19 @@ export const [emitCatSpriteSheetImageLoaded, onCatSpriteSheetImageLoaded] = crea
 
 export const [emitPortalSpriteSheetImageLoaded, onPortalSpriteSheetImageLoaded] = createPubSub<HTMLImageElement>();
 
+export const [emitPlatformImageLoaded, , getPlatformImage] = createPubSub<HTMLImageElement>();
+
 export const pickupSound = [, , 1425, , , 0.3, 1, 0.45, , , 476, 0.07, , , , , , 0.99, 0.1];
 
 export const jumpSound = [1.01, , 123, 0.04, 0.03, 0.19, , 0.87, -5, -2, , , , , , , , 0.68, 0.07];
 
-export const catSpriteScale = 2;
+export const catSpriteScale = 1;
 
-export const catWalkSpeed = 2.5;
+export const catWalkSpeed = 1.75;
 
-export const catJumpSpeed = 10;
+export const catJumpSpeed = 6.8;
 
-export const catFallingAcceleration = 0.5;
+export const catFallingAcceleration = 0.4;
 
 export const jumpKeys = ["up", "w", "z"];
 

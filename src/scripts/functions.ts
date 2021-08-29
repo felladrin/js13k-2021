@@ -22,6 +22,7 @@ import {
   setPlatformWhichCatIsOn,
   setBackgroundMusicPlaying,
   getBackgroundMusicPlaying,
+  getPlatformImage,
 } from "./constants";
 import { getZzFX } from "./modules/getZzFX";
 import { playMidi } from "./modules/playMidi";
@@ -47,16 +48,14 @@ export function isOutOfCanvasBounds(gameObject: GameObject) {
   return gameObject.x > canvas.width || gameObject.y > canvas.height || gameObject.x < 0 || gameObject.y < 0;
 }
 
-export function addPlatforms(platforms: [x: number, y: number, width: number, height: number][]) {
+export function addPlatforms(platforms: [x: number, y: number][]) {
   platforms.forEach((platform) => {
-    const [x, y, width, height] = platform;
+    const [x, y] = platform;
     platformsPool.get({
       x,
       y,
-      width,
-      height,
-      color: "lightgreen",
-      anchor: { x: 0.5, y: 0 },
+      image: getPlatformImage(),
+      anchor: { x: 0.5, y: 0.4 },
     } as Partial<Sprite>) as Sprite;
   });
 }
@@ -127,7 +126,7 @@ export function updateCatSprite() {
 }
 
 export function renderTimeInGameText() {
-  renderText(getTimeInGame().toFixed(1), portalSprite.x - 12, portalSprite.y - 40, 10, "white");
+  renderText(getTimeInGame().toFixed(1), portalSprite.x - 12, portalSprite.y - 40, 10, "#fff");
 }
 
 export function playBackgroundMusic() {
