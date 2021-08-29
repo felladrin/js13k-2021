@@ -16,7 +16,7 @@ import {
   onPortalSpriteSheetImageLoaded,
   portalSprite,
   onCatSpriteSheetImageLoaded,
-  cat,
+  catSprite,
   emitPlatformImageLoaded,
 } from "./constants";
 import {
@@ -101,7 +101,7 @@ onCatSpriteSheetImageLoaded((image) => {
     },
   });
 
-  cat.animations = spriteSheet.animations;
+  catSprite.animations = spriteSheet.animations;
 });
 
 onPortalSpriteSheetImageLoaded((image) => {
@@ -149,7 +149,8 @@ onScriptReady(async () => {
   initKeys();
   resizeCanvas();
   addPlatforms([
-    [124, 230],
+    [160, 310],
+    [100, 250],
     [30, 210],
   ]);
   gameLoop.start();

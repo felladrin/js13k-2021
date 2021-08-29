@@ -3,7 +3,7 @@ import { contain } from "math-fit";
 import backgroundMusicMidi from "../music/music.json";
 import {
   canvas,
-  cat,
+  catSprite,
   catJumpSpeed,
   catSpriteScale,
   catWalkSpeed,
@@ -84,29 +84,31 @@ export function updateCatSprite() {
   const requestedJump = jumpKeys.some(keyPressed);
   const isMovingLeft = moveLeftKeys.some(keyPressed);
   const isMovingRight = moveRightKeys.some(keyPressed);
+  const isMovingUp = catSprite.dy > 0;
+  const isMovingDown = catSprite.dy < 0;
 
   let platformWhichCatIsOn = getPlatformWhichCatIsOn();
 
   for (const platform of platformsPool.getAliveObjects() as Sprite[]) {
-    if (collides(cat, platform)) {
+    if (isMovingUp && collides(catSprite, platform)) {
       platformWhichCatIsOn = platform;
-      cat.y = platformWhichCatIsOn.y;
+      catSprite.y = platformWhichCatIsOn.y;
       break;
     }
   }
 
-  cat.scaleX = isMovingLeft ? -catSpriteScale : isMovingRight ? catSpriteScale : cat.scaleX;
+  catSprite.scaleX = isMovingLeft ? -catSpriteScale : isMovingRight ? catSpriteScale : catSprite.scaleX;
 
-  cat.dx = isMovingLeft ? -catWalkSpeed : isMovingRight ? catWalkSpeed : 0;
+  catSprite.dx = isMovingLeft ? -catWalkSpeed : isMovingRight ? catWalkSpeed : 0;
 
   if (platformWhichCatIsOn) {
-    cat.playAnimation(isMovingLeft || isMovingRight ? "walk" : "idleOne");
+    catSprite.playAnimation(isMovingLeft || isMovingRight ? "walk" : "idleOne");
   } else {
-    cat.playAnimation(cat.dy < 0 ? "jumpTwo" : "falling");
+    catSprite.playAnimation(isMovingDown ? "jumpTwo" : "falling");
   }
 
   if (requestedJump && platformWhichCatIsOn) {
-    cat.dy = -catJumpSpeed;
+    catSprite.dy = -catJumpSpeed;
     playSound(jumpSound);
     platformWhichCatIsOn = null;
   }
@@ -116,15 +118,15 @@ export function updateCatSprite() {
   }
 
   if (platformWhichCatIsOn) {
-    cat.dy = 0;
-    cat.ddy = 0;
+    catSprite.dy = 0;
+    catSprite.ddy = 0;
   } else {
-    cat.ddy = catFallingAcceleration;
+    catSprite.ddy = catFallingAcceleration;
   }
 
   setPlatformWhichCatIsOn(platformWhichCatIsOn);
 
-  if (isOutOfCanvasBounds(cat)) {
+  if (isOutOfCanvasBounds(catSprite)) {
     window.location.reload();
   }
 }

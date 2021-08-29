@@ -52,7 +52,7 @@ export const platformsPool = Pool({
   create: Sprite as any,
 });
 
-export const cat = Sprite({
+export const catSprite = Sprite({
   x: canvas.width / 2,
   y: canvas.height / 2,
   scaleX: catSpriteScale,
@@ -71,6 +71,6 @@ export const gameLoop = GameLoop({
   render: propagateGameLoopRender,
 });
 
-export const objectsToAlwaysUpdate = [cat, portalSprite, platformsPool];
+export const objectsToAlwaysUpdate = [catSprite, portalSprite, platformsPool];
 
-export const objectsToAlwaysRender = [cat, portalSprite, platformsPool];
+export const objectsToAlwaysRender = [catSprite, portalSprite, platformsPool];
