@@ -27,6 +27,10 @@ Sound effects made possible via [ZzFX](https://killedbyapixel.github.io/ZzFX/).
 
 SVG art created on [SVG-Edit](https://github.com/SVG-Edit/svgedit), optimized with [SVGOMG](https://jakearchibald.github.io/svgomg/) and converted to canvas code using [SVG2Canvas](https://github.com/samsha/svg2canvas).
 
+PNGs optimized with [TinyPNG](https://tinypng.com/) and converted to WEBP via [Convertio](https://convertio.co/).
+
+Sprite sheets edited with [Piskel](https://www.piskelapp.com/).
+
 Canvas scaling based on [math-fit](https://github.com/nk-components/math-fit).
 
 Code written in [Typescript](https://www.typescriptlang.org/), compiled by [Vite](https://vitejs.dev/), compressed by [Roadroller](https://lifthrasiir.github.io/roadroller/) + [BestZip](https://github.com/nfriedly/node-bestzip) + [ECT](https://github.com/CT1994/ect-bin).
