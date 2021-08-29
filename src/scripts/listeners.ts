@@ -41,63 +41,26 @@ window.addEventListener("resize", resizeCanvas);
 onCatSpriteSheetImageLoaded((image) => {
   const spriteSheet = SpriteSheet({
     image,
-    frameWidth: 32,
-    frameHeight: 32,
+    frameWidth: 18,
+    frameHeight: 18,
     animations: {
-      idleOne: {
+      idle: {
         frames: "0..3",
         frameRate: 8,
       },
-      idleTwo: {
-        frames: "8..11",
-        frameRate: 8,
-      },
-      idleThree: {
-        frames: "16..19",
-        frameRate: 8,
-      },
-      idleFour: {
-        frames: "24..27",
-        frameRate: 8,
-      },
       walk: {
-        frames: "32..39",
-        frameRate: 30,
+        frames: "4..11",
+        frameRate: 20,
       },
-      jumpOne: {
-        frames: "40..43",
-        frameRate: 8,
+      up: {
+        frames: 12,
       },
-      jumpTwo: {
-        frames: "44..47",
-        frameRate: 8,
+      down: {
+        frames: 13,
       },
-      rest: {
-        frames: "48..51",
-        frameRate: 2,
-      },
-      poke: {
-        frames: "56..61",
-        frameRate: 8,
-      },
-      attack: {
-        frames: "64..70",
-        frameRate: 8,
-      },
-      scare: {
-        frames: "72..79",
-        frameRate: 8,
-      },
-      dragged: {
-        frames: "64..65",
-        frameRate: 8,
-        loop: false,
-      },
-      falling: {
-        frames: "66..70",
-        frameRate: 8,
-        loop: false,
-      },
+      // stopped: {
+      //   frames: 14,
+      // },
     },
   });
 

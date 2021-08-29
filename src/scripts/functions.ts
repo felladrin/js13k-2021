@@ -84,13 +84,13 @@ export function updateCatSprite() {
   const requestedJump = jumpKeys.some(keyPressed);
   const isMovingLeft = moveLeftKeys.some(keyPressed);
   const isMovingRight = moveRightKeys.some(keyPressed);
-  const isMovingUp = catSprite.dy > 0;
-  const isMovingDown = catSprite.dy < 0;
+  const isMovingDown = catSprite.dy > 0;
+  const isMovingUp = catSprite.dy < 0;
 
   let platformWhichCatIsOn = getPlatformWhichCatIsOn();
 
   for (const platform of platformsPool.getAliveObjects() as Sprite[]) {
-    if (isMovingUp && collides(catSprite, platform)) {
+    if (isMovingDown && collides(catSprite, platform)) {
       platformWhichCatIsOn = platform;
       catSprite.y = platformWhichCatIsOn.y;
       break;
@@ -102,9 +102,9 @@ export function updateCatSprite() {
   catSprite.dx = isMovingLeft ? -catWalkSpeed : isMovingRight ? catWalkSpeed : 0;
 
   if (platformWhichCatIsOn) {
-    catSprite.playAnimation(isMovingLeft || isMovingRight ? "walk" : "idleOne");
+    catSprite.playAnimation(isMovingLeft || isMovingRight ? "walk" : "idle");
   } else {
-    catSprite.playAnimation(isMovingDown ? "jumpTwo" : "falling");
+    catSprite.playAnimation(isMovingUp ? "up" : "down");
   }
 
   if (requestedJump && platformWhichCatIsOn) {
@@ -127,7 +127,7 @@ export function updateCatSprite() {
   setPlatformWhichCatIsOn(platformWhichCatIsOn);
 
   if (isOutOfCanvasBounds(catSprite)) {
-    window.location.reload();
+    catSprite.position = portalSprite.position;
   }
 }
 
