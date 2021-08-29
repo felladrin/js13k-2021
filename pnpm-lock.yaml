@@ -3,7 +3,7 @@ lockfileVersion: 5.3
 specifiers:
   arkit: ^1.6.4
   bestzip: ^2.2.0
-  create-pubsub: ^1.2.2
+  create-pubsub: ^1.3.0
   cross-exec-file: ^2.0.0
   dpdm: ^3.7.1
   ect-bin: ^1.4.1
@@ -23,7 +23,7 @@ specifiers:
   zipstats: ^1.1.0
 
 dependencies:
-  create-pubsub: 1.2.2
+  create-pubsub: 1.3.0
   kontra: 7.2.0
   math-fit: 1.0.1
   tinyfont: 1.3.2
@@ -325,14 +325,14 @@ packages:
   /@types/fs-extra/9.0.12:
     resolution: {integrity: sha512-I+bsBr67CurCGnSenZZ7v94gd3tc3+Aj2taxMT4yu4ABLuOgOjeFxX3dokG24ztSRg5tnT00sL8BszO7gSMoIw==}
     dependencies:
-      '@types/node': 16.7.4
+      '@types/node': 16.7.6
     dev: true
 
   /@types/glob/7.1.4:
     resolution: {integrity: sha512-w+LsMxKyYQm347Otw+IfBXOv9UWVjpHpCDdbBMt8Kz/xbvCYNjP+0qPh91Km3iKfSRLBB0P7fAMf0KHrPu+MyA==}
     dependencies:
       '@types/minimatch': 3.0.5
-      '@types/node': 16.7.4
+      '@types/node': 16.7.6
     dev: true
 
   /@types/json5/0.0.29:
@@ -343,8 +343,8 @@ packages:
     resolution: {integrity: sha512-Klz949h02Gz2uZCMGwDUSDS1YBlTdDDgbWHi+81l29tQALUtvz4rAYi5uoVhE5Lagoq6DeqAUlbrHvW/mXDgdQ==}
     dev: true
 
-  /@types/node/16.7.4:
-    resolution: {integrity: sha512-25QXpDsTiDnl2rZGUenagVMwO46way8dOUdvoC3R3p+6TrbpxeJBo/v87BEG1IHI31Jhaa8lPeSHcqwxsVBeYQ==}
+  /@types/node/16.7.6:
+    resolution: {integrity: sha512-VESVNFoa/ahYA62xnLBjo5ur6gPsgEE5cNRy8SrdnkZ2nwJSW0kJ4ufbFr2zuU9ALtHM8juY53VcRoTA7htXSg==}
     dev: true
 
   /@types/parse-json/4.0.0:
@@ -354,7 +354,7 @@ packages:
   /@types/resolve/1.17.1:
     resolution: {integrity: sha512-yy7HuzQhj0dhGpD8RLXSZWEkLsV9ibvxvi6EiJ3bkqLAO1RGo0WbkWQiwpRlSFymTJRz0d3k5LM3kkx8ArDbLw==}
     dependencies:
-      '@types/node': 16.7.4
+      '@types/node': 16.7.6
     dev: true
 
   /@types/yargs-parser/20.2.1:
@@ -1281,8 +1281,8 @@ packages:
       readable-stream: 3.6.0
     dev: true
 
-  /create-pubsub/1.2.2:
-    resolution: {integrity: sha512-mV0V9suAHGC9aoRSkuF6kCQ67kq01mvFa19FDaQWSrSClxiICLiQe5CTosmOPGqu9kY4S+z0WcdIdDyryFwWfA==}
+  /create-pubsub/1.3.0:
+    resolution: {integrity: sha512-pFM/oHPU+/V5COJGOiH5W06GRsgAETp+0RwFf6lvEqa+QdCn0c9iav833DZ1kH8+zlbdTU4+mB5aEE4kwAXTdQ==}
     dev: false
 
   /create-require/1.1.1:
