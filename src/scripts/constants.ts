@@ -1,16 +1,20 @@
 import { createPubSub, createPubSub as store } from "create-pubsub";
 import { initFont, font } from "tinyfont";
-import { GameLoop, init, Pool, Sprite } from "kontra";
+import { GameLoop, init, Pool, Sprite, getContext } from "kontra";
 
-export const { canvas, context } = init("game");
+export const { canvas } = init("game");
 
-export const renderText = initFont(font, context);
+export const renderText = initFont(font, getContext());
 
 export const [emitScriptReady, onScriptReady] = createPubSub();
 
-export const [propagateGameLoopUpdate, onGameLoopUpdate] = createPubSub<number>();
+const [propagateGameLoopUpdate, onGameLoopUpdate] = createPubSub<number>();
 
-export const [propagateGameLoopRender, onGameLoopRender] = createPubSub();
+export { onGameLoopUpdate };
+
+const [propagateGameLoopRender, onGameLoopRender] = createPubSub();
+
+export { onGameLoopRender };
 
 export const [setTimeInGame, , getTimeInGame] = store(0);
 
@@ -26,7 +30,7 @@ export const [emitPortalSpriteSheetImageLoaded, onPortalSpriteSheetImageLoaded] 
 
 export const [emitPlatformImageLoaded, , getPlatformImage] = createPubSub<HTMLImageElement>();
 
-export const pickupSound = [, , 1425, , , 0.3, 1, 0.45, , , 476, 0.07, , , , , , 0.99, 0.1];
+// export const pickupSound = [, , 1425, , , 0.3, 1, 0.45, , , 476, 0.07, , , , , , 0.99, 0.1];
 
 export const jumpSound = [1.01, , 123, 0.04, 0.03, 0.19, , 0.87, -5, -2, , , , , , , , 0.68, 0.07];
 

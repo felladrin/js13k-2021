@@ -44,7 +44,7 @@ export function resizeCanvas() {
   canvas.style.height = `${fittingProps.height}px`;
 }
 
-export function isOutOfCanvasBounds(gameObject: GameObject) {
+function isOutOfCanvasBounds(gameObject: GameObject) {
   return gameObject.x > canvas.width || gameObject.y > canvas.height || gameObject.x < 0 || gameObject.y < 0;
 }
 
@@ -66,7 +66,7 @@ export function enableSoundEffects() {
   playSound([0]);
 }
 
-export function playSound(sound: (number | undefined)[]) {
+function playSound(sound: (number | undefined)[]) {
   getFunctionToPlaySound()?.(...sound);
 }
 
@@ -123,6 +123,10 @@ export function updateCatSprite() {
   }
 
   setPlatformWhichCatIsOn(platformWhichCatIsOn);
+
+  if (isOutOfCanvasBounds(cat)) {
+    window.location.reload();
+  }
 }
 
 export function renderTimeInGameText() {
