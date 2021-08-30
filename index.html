@@ -3,12 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <title>js13k-2021</title>
-    <link rel="stylesheet" href="./src/styleSheets/main.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        background: radial-gradient(circle, #bed678 0%, #3b8d89 100%);
+      }
+
+      canvas {
+        display: block;
+        image-rendering: pixelated;
+      }
+    </style>
   </head>
   <body>
-    <div class="container">
-      <canvas id="game" width="360" height="360"></canvas>
-    </div>
+    <canvas id="game" width="360" height="360"></canvas>
     <script type="module" src="./src/scripts/main.ts"></script>
   </body>
 </html>
