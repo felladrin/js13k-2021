@@ -22,6 +22,9 @@ import {
   setBackgroundMusicPlaying,
   getBackgroundMusicPlaying,
   getPlatformImage,
+  gemsPool,
+  getGemAnimations,
+  pickupSound,
 } from "./constants";
 import { getZzFX } from "./modules/getZzFX";
 import { playMidi } from "./modules/playMidi";
@@ -50,8 +53,7 @@ function isOutOfCanvasBounds(gameObject: GameObject) {
 }
 
 export function addPlatforms(platforms: [x: number, y: number][]) {
-  platforms.forEach((platform) => {
-    const [x, y] = platform;
+  platforms.forEach(([x, y]) => {
     platformsPool.get({
       x,
       y,
@@ -59,6 +61,30 @@ export function addPlatforms(platforms: [x: number, y: number][]) {
       anchor: { x: 0.5, y: 0.4 },
     } as Partial<Sprite>) as Sprite;
   });
+}
+
+export function addGems(gems: [x: number, y: number][]) {
+  gems.forEach(([x, y]) => {
+    gemsPool.get({
+      x,
+      y,
+      animations: getGemAnimations(),
+      anchor: { x: 0.5, y: 0.5 },
+    } as Partial<Sprite>) as Sprite;
+  });
+}
+
+function getCatCollisionObject() {
+  return { world: { x: catSprite.x, y: catSprite.y - catSprite.height, height: catSprite.height, width: 1 } };
+}
+
+export function checkCollisionWithGems() {
+  for (const gem of gemsPool.getAliveObjects() as Sprite[]) {
+    if (collides(getCatCollisionObject(), gem)) {
+      gem.ttl = 0;
+      playSound(pickupSound);
+    }
+  }
 }
 
 export function enableSoundEffects() {
@@ -91,7 +117,7 @@ export function updateCatSprite() {
   let platformWhichCatIsOn = getPlatformWhichCatIsOn();
 
   for (const platform of platformsPool.getAliveObjects() as Sprite[]) {
-    if (isMovingDown && collides({ world: { x: catSprite.x, y: catSprite.y, width: 1, height: 1 } }, platform)) {
+    if (isMovingDown && collides(getCatCollisionObject(), platform)) {
       platformWhichCatIsOn = platform;
       catSprite.y = platformWhichCatIsOn.y;
       break;

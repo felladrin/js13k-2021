@@ -2,6 +2,7 @@ import { initKeys, loadImage, SpriteSheet } from "kontra";
 import catSpriteSheetUrl from "../images/catSpriteSheet.webp";
 import portalSpriteSheetUrl from "../images/portalSpriteSheet.webp";
 import platformImageUrl from "../images/platform.webp";
+import gemSpriteSheetUrl from "../images/gemSpriteSheet.webp";
 import {
   gameLoop,
   onGameLoopRender,
@@ -18,6 +19,9 @@ import {
   onCatSpriteSheetImageLoaded,
   catSprite,
   emitPlatformImageLoaded,
+  emitGemSpriteSheetImageLoaded,
+  onGemSpriteSheetImageLoaded,
+  setGemAnimations,
 } from "./constants";
 import {
   addPlatforms,
@@ -27,6 +31,8 @@ import {
   updateCatSprite,
   playBackgroundMusic,
   enableSoundEffects,
+  addGems,
+  checkCollisionWithGems,
 } from "./functions";
 
 window.addEventListener("resize", resizeCanvas);
@@ -65,6 +71,22 @@ onCatSpriteSheetImageLoaded((image) => {
   }).animations;
 });
 
+onGemSpriteSheetImageLoaded((image) => {
+  setGemAnimations(
+    SpriteSheet({
+      image,
+      frameWidth: 16,
+      frameHeight: 16,
+      animations: {
+        idle: {
+          frames: "0..3",
+          frameRate: 5,
+        },
+      },
+    }).animations
+  );
+});
+
 onPortalSpriteSheetImageLoaded((image) => {
   portalSprite.animations = SpriteSheet({
     image,
@@ -94,6 +116,7 @@ onGameLoopUpdate((dt) => {
   objectsToAlwaysUpdate.forEach((object) => object.update());
   processPortalAnimation();
   updateCatSprite();
+  checkCollisionWithGems();
 });
 
 onGameLoopRender(() => {
@@ -104,6 +127,7 @@ onGameLoopRender(() => {
 onScriptReady(async () => {
   emitPlatformImageLoaded(await loadImage(platformImageUrl));
   emitCatSpriteSheetImageLoaded(await loadImage(catSpriteSheetUrl));
+  emitGemSpriteSheetImageLoaded(await loadImage(gemSpriteSheetUrl));
   emitPortalSpriteSheetImageLoaded(await loadImage(portalSpriteSheetUrl));
   initKeys();
   resizeCanvas();
@@ -111,6 +135,11 @@ onScriptReady(async () => {
     [160, 310],
     [100, 250],
     [30, 210],
+  ]);
+  addGems([
+    [160, 295],
+    [100, 235],
+    [30, 195],
   ]);
   gameLoop.start();
 });

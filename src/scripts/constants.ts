@@ -1,6 +1,6 @@
 import { createPubSub, createPubSub as store } from "create-pubsub";
 import { initFont, font } from "tinyfont";
-import { GameLoop, init, Pool, Sprite, getContext } from "kontra";
+import { GameLoop, init, Pool, Sprite, getContext, SpriteSheet } from "kontra";
 
 export const { canvas } = init("game");
 
@@ -30,7 +30,11 @@ export const [emitPortalSpriteSheetImageLoaded, onPortalSpriteSheetImageLoaded] 
 
 export const [emitPlatformImageLoaded, , getPlatformImage] = createPubSub<HTMLImageElement>();
 
-// export const pickupSound = [, , 1425, , , 0.3, 1, 0.45, , , 476, 0.07, , , , , , 0.99, 0.1];
+export const [emitGemSpriteSheetImageLoaded, onGemSpriteSheetImageLoaded] = createPubSub<HTMLImageElement>();
+
+export const [setGemAnimations, , getGemAnimations] = store<SpriteSheet["animations"] | null>(null);
+
+export const pickupSound = [, , 1425, , , 0.3, 1, 0.45, , , 476, 0.07, , , , , , 0.99, 0.1];
 
 export const jumpSound = [1.01, , 123, 0.04, 0.03, 0.19, , 0.87, -5, -2, , , , , , , , 0.68, 0.07];
 
@@ -46,9 +50,11 @@ export const moveLeftKeys = ["left", "a", "q"];
 
 export const moveRightKeys = ["right", "d"];
 
-export const platformsPool = Pool({
-  create: Sprite as any,
-});
+const commonPoolParameters = { create: Sprite as any };
+
+export const platformsPool = Pool(commonPoolParameters);
+
+export const gemsPool = Pool(commonPoolParameters);
 
 export const catSprite = Sprite({
   x: canvas.width / 2,
@@ -67,6 +73,6 @@ export const gameLoop = GameLoop({
   render: propagateGameLoopRender,
 });
 
-export const objectsToAlwaysUpdate = [catSprite, portalSprite, platformsPool];
+export const objectsToAlwaysUpdate = [gemsPool, portalSprite, catSprite, platformsPool];
 
-export const objectsToAlwaysRender = [catSprite, portalSprite, platformsPool];
+export const objectsToAlwaysRender = [gemsPool, portalSprite, catSprite, platformsPool];
