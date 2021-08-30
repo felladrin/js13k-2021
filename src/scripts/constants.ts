@@ -34,9 +34,9 @@ export const [emitGemSpriteSheetImageLoaded, onGemSpriteSheetImageLoaded] = crea
 
 export const [setGemAnimations, , getGemAnimations] = store<SpriteSheet["animations"] | null>(null);
 
-export const pickupSound = [, , 1425, , , 0.3, 1, 0.45, , , 476, 0.07, , , , , , 0.99, 0.1];
+export const pickupSound = [0.8, 5, 578, , 0.01, 0.21, , 1.01, , , , , , , , , 0.06, 0.68, 0.09];
 
-export const jumpSound = [1.01, , 123, 0.04, 0.03, 0.19, , 0.87, -5, -2, , , , , , , , 0.68, 0.07];
+export const jumpSound = [1, , 123, 0.04, 0.03, 0.19, , 0.87, -5, -2, , , , , , , , 0.68, 0.07];
 
 export const catWalkSpeed = 1.75;
 
