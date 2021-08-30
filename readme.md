@@ -27,7 +27,7 @@ Sound effects made possible via [ZzFX](https://killedbyapixel.github.io/ZzFX/).
 
 SVG art created on [SVG-Edit](https://github.com/SVG-Edit/svgedit), optimized with [SVGOMG](https://jakearchibald.github.io/svgomg/) and converted to canvas code using [SVG2Canvas](https://github.com/samsha/svg2canvas).
 
-PNGs optimized with [TinyPNG](https://tinypng.com/) and converted to WEBP via [Convertio](https://convertio.co/).
+Images converted and optimized to WEBP via [Squoosh](https://squoosh.app/).
 
 Sprite sheets edited with [Piskel](https://www.piskelapp.com/).
 
