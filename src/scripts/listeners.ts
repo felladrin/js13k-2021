@@ -39,7 +39,7 @@ window.addEventListener("resize", resizeCanvas);
 });
 
 onCatSpriteSheetImageLoaded((image) => {
-  const spriteSheet = SpriteSheet({
+  catSprite.animations = SpriteSheet({
     image,
     frameWidth: 18,
     frameHeight: 18,
@@ -62,13 +62,11 @@ onCatSpriteSheetImageLoaded((image) => {
       //   frames: 14,
       // },
     },
-  });
-
-  catSprite.animations = spriteSheet.animations;
+  }).animations;
 });
 
 onPortalSpriteSheetImageLoaded((image) => {
-  const portalSpriteSheet = SpriteSheet({
+  portalSprite.animations = SpriteSheet({
     image,
     frameWidth: 64,
     frameHeight: 64,
@@ -88,9 +86,7 @@ onPortalSpriteSheetImageLoaded((image) => {
         loop: false,
       },
     },
-  });
-
-  portalSprite.animations = portalSpriteSheet.animations;
+  }).animations;
 });
 
 onGameLoopUpdate((dt) => {

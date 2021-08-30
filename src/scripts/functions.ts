@@ -27,9 +27,9 @@ import { getZzFX } from "./modules/getZzFX";
 import { playMidi } from "./modules/playMidi";
 
 export function resizeCanvas() {
-  if (!canvas.parentElement) return;
-
   const { width, height, parentElement, style } = canvas;
+
+  if (!parentElement) return;
 
   const fittingProps = contain(
     { w: width, h: height },
