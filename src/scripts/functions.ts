@@ -25,6 +25,10 @@ import {
   gemsPool,
   getGemAnimations,
   pickupSound,
+  rightLaserSprite,
+  bottomLaserSprite,
+  leftLaserSprite,
+  topLaserSprite,
 } from "./constants";
 import { getZzFX } from "./modules/getZzFX";
 import { playMidi } from "./modules/playMidi";
@@ -48,8 +52,13 @@ export function resizeCanvas() {
   style.height = `${fittingProps.height}px`;
 }
 
-function isOutOfCanvasBounds(gameObject: GameObject) {
-  return gameObject.x > canvas.width || gameObject.y > canvas.height || gameObject.x < 0 || gameObject.y < 0;
+function isOutOfLasersBounds(gameObject: GameObject) {
+  return (
+    gameObject.x > rightLaserSprite.x ||
+    gameObject.y > bottomLaserSprite.y ||
+    gameObject.x < leftLaserSprite.x ||
+    gameObject.y < topLaserSprite.y
+  );
 }
 
 export function addPlatforms(platforms: [x: number, y: number][]) {
@@ -153,7 +162,7 @@ export function updateCatSprite() {
 
   setPlatformWhichCatIsOn(platformWhichCatIsOn);
 
-  if (isOutOfCanvasBounds(catSprite)) {
+  if (isOutOfLasersBounds(catSprite)) {
     catSprite.position = portalSprite.position;
   }
 }

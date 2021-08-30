@@ -73,6 +73,119 @@ export const gameLoop = GameLoop({
   render: propagateGameLoopRender,
 });
 
-export const objectsToAlwaysUpdate = [gemsPool, portalSprite, catSprite, platformsPool];
+const commonDroneProperties = {
+  width: 10,
+  height: 10,
+  color: "black",
+  anchor: { x: 0.5, y: 0.5 },
+} as Partial<Sprite>;
 
-export const objectsToAlwaysRender = [gemsPool, portalSprite, catSprite, platformsPool];
+export const topLeftDroneSprite = Sprite({
+  ...commonDroneProperties,
+  dx: 0.05,
+  dy: 0.05,
+  x: 10,
+  y: 10,
+});
+
+export const topRightDroneSprite = Sprite({
+  ...commonDroneProperties,
+  dx: -0.05,
+  dy: 0.05,
+  x: canvas.width - 10,
+  y: 10,
+});
+
+export const bottomLeftDroneSprite = Sprite({
+  ...commonDroneProperties,
+  dx: 0.05,
+  dy: -0.05,
+  x: 10,
+  y: canvas.height - 10,
+});
+
+export const bottomRightDroneSprite = Sprite({
+  ...commonDroneProperties,
+  dx: -0.05,
+  dy: -0.05,
+  x: canvas.width - 10,
+  y: canvas.height - 10,
+});
+
+const randomLaserColor = () => (Math.random() < 0.5 ? "#CC3333" : "brown");
+
+const randomLaserSize = () => Math.random() * 1.4 + 1.5;
+
+export const topLaserSprite = Sprite({
+  anchor: { x: 0, y: 0.5 },
+  update: () => {
+    topLaserSprite.x = topLeftDroneSprite.x;
+    topLaserSprite.y = topLeftDroneSprite.y;
+    topLaserSprite.width = topRightDroneSprite.x - topLeftDroneSprite.x;
+    topLaserSprite.height = randomLaserSize();
+    topLaserSprite.color = randomLaserColor();
+  },
+});
+
+export const bottomLaserSprite = Sprite({
+  anchor: { x: 0, y: 0.5 },
+  update: () => {
+    bottomLaserSprite.x = bottomLeftDroneSprite.x;
+    bottomLaserSprite.y = bottomLeftDroneSprite.y;
+    bottomLaserSprite.width = bottomRightDroneSprite.x - bottomLeftDroneSprite.x;
+    bottomLaserSprite.height = randomLaserSize();
+    bottomLaserSprite.color = randomLaserColor();
+  },
+});
+
+export const leftLaserSprite = Sprite({
+  anchor: { x: 0.5, y: 0 },
+  update: () => {
+    leftLaserSprite.x = topLeftDroneSprite.x;
+    leftLaserSprite.y = topLeftDroneSprite.y;
+    leftLaserSprite.height = bottomLeftDroneSprite.y - topLeftDroneSprite.y;
+    leftLaserSprite.width = randomLaserSize();
+    leftLaserSprite.color = randomLaserColor();
+  },
+});
+
+export const rightLaserSprite = Sprite({
+  anchor: { x: 0.5, y: 0 },
+  update: () => {
+    rightLaserSprite.x = topRightDroneSprite.x;
+    rightLaserSprite.y = topRightDroneSprite.y;
+    rightLaserSprite.height = bottomRightDroneSprite.y - topRightDroneSprite.y;
+    rightLaserSprite.width = randomLaserSize();
+    rightLaserSprite.color = randomLaserColor();
+  },
+});
+
+export const objectsToAlwaysUpdate = [
+  gemsPool,
+  portalSprite,
+  catSprite,
+  platformsPool,
+  topLaserSprite,
+  bottomLaserSprite,
+  leftLaserSprite,
+  rightLaserSprite,
+  topLeftDroneSprite,
+  topRightDroneSprite,
+  bottomLeftDroneSprite,
+  bottomRightDroneSprite,
+];
+
+export const objectsToAlwaysRender = [
+  gemsPool,
+  portalSprite,
+  catSprite,
+  platformsPool,
+  topLaserSprite,
+  bottomLaserSprite,
+  leftLaserSprite,
+  rightLaserSprite,
+  topLeftDroneSprite,
+  topRightDroneSprite,
+  bottomLeftDroneSprite,
+  bottomRightDroneSprite,
+];
