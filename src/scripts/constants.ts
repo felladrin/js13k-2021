@@ -34,8 +34,6 @@ export const [emitPlatformImageLoaded, , getPlatformImage] = createPubSub<HTMLIm
 
 export const jumpSound = [1.01, , 123, 0.04, 0.03, 0.19, , 0.87, -5, -2, , , , , , , , 0.68, 0.07];
 
-export const catSpriteScale = 1;
-
 export const catWalkSpeed = 1.75;
 
 export const catJumpSpeed = 6.8;
@@ -55,8 +53,6 @@ export const platformsPool = Pool({
 export const catSprite = Sprite({
   x: canvas.width / 2,
   y: canvas.height / 2,
-  scaleX: catSpriteScale,
-  scaleY: catSpriteScale,
   anchor: { x: 0.5, y: 1 },
 });
 

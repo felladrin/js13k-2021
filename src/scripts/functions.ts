@@ -5,7 +5,6 @@ import {
   canvas,
   catSprite,
   catJumpSpeed,
-  catSpriteScale,
   catWalkSpeed,
   getFunctionToPlaySound,
   getPlatformWhichCatIsOn,
@@ -30,18 +29,20 @@ import { playMidi } from "./modules/playMidi";
 export function resizeCanvas() {
   if (!canvas.parentElement) return;
 
+  const { width, height, parentElement, style } = canvas;
+
   const fittingProps = contain(
-    { w: canvas.width, h: canvas.height },
+    { w: width, h: height },
     {
-      w: canvas.parentElement.clientWidth,
-      h: canvas.parentElement.clientHeight,
+      w: parentElement.clientWidth,
+      h: parentElement.clientHeight,
     }
   );
 
-  canvas.style.marginTop = `${fittingProps.top}px`;
-  canvas.style.marginLeft = `${fittingProps.left}px`;
-  canvas.style.width = `${fittingProps.width}px`;
-  canvas.style.height = `${fittingProps.height}px`;
+  style.marginTop = `${fittingProps.top}px`;
+  style.marginLeft = `${fittingProps.left}px`;
+  style.width = `${fittingProps.width}px`;
+  style.height = `${fittingProps.height}px`;
 }
 
 function isOutOfCanvasBounds(gameObject: GameObject) {
@@ -97,7 +98,7 @@ export function updateCatSprite() {
     }
   }
 
-  catSprite.scaleX = isMovingLeft ? -catSpriteScale : isMovingRight ? catSpriteScale : catSprite.scaleX;
+  catSprite.scaleX = isMovingLeft ? -1 : isMovingRight ? 1 : catSprite.scaleX;
 
   catSprite.dx = isMovingLeft ? -catWalkSpeed : isMovingRight ? catWalkSpeed : 0;
 
