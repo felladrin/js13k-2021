@@ -91,7 +91,7 @@ export function updateCatSprite() {
   let platformWhichCatIsOn = getPlatformWhichCatIsOn();
 
   for (const platform of platformsPool.getAliveObjects() as Sprite[]) {
-    if (isMovingDown && collides(catSprite, platform)) {
+    if (isMovingDown && collides({ world: { x: catSprite.x, y: catSprite.y, width: 1, height: 1 } }, platform)) {
       platformWhichCatIsOn = platform;
       catSprite.y = platformWhichCatIsOn.y;
       break;
