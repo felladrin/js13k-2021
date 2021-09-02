@@ -20,7 +20,7 @@ export const [setTimeInGame, , getTimeInGame] = store(0);
 
 export const [setBackgroundMusicPlaying, , getBackgroundMusicPlaying] = store(false);
 
-export const [setFunctionToPlaySound, , getFunctionToPlaySound] = store<((...sound: any) => void) | null>(null);
+export const [setFunctionToPlaySound, , getFunctionToPlaySound] = store<(...sound: any) => void>();
 
 export const [setPlatformWhichCatIsOn, , getPlatformWhichCatIsOn] = store<Sprite | null>(null);
 
@@ -32,7 +32,7 @@ export const [emitPlatformImageLoaded, , getPlatformImage] = createPubSub<HTMLIm
 
 export const [emitGemSpriteSheetImageLoaded, onGemSpriteSheetImageLoaded] = createPubSub<HTMLImageElement>();
 
-export const [setGemAnimations, , getGemAnimations] = store<SpriteSheet["animations"] | null>(null);
+export const [setGemAnimations, , getGemAnimations] = store<SpriteSheet["animations"]>();
 
 export const pickupSound = [0.8, 5, 578, , 0.01, 0.21, , 1.01, , , , , , , , , 0.06, 0.68, 0.09];
 
@@ -112,52 +112,20 @@ export const bottomRightDroneSprite = Sprite({
   y: canvas.height - 10,
 });
 
-const randomLaserColor = () => (Math.random() < 0.5 ? "#CC3333" : "brown");
-
-const randomLaserSize = () => Math.random() * 1.4 + 1.5;
-
 export const topLaserSprite = Sprite({
   anchor: { x: 0, y: 0.5 },
-  update: () => {
-    topLaserSprite.x = topLeftDroneSprite.x;
-    topLaserSprite.y = topLeftDroneSprite.y;
-    topLaserSprite.width = topRightDroneSprite.x - topLeftDroneSprite.x;
-    topLaserSprite.height = randomLaserSize();
-    topLaserSprite.color = randomLaserColor();
-  },
 });
 
 export const bottomLaserSprite = Sprite({
   anchor: { x: 0, y: 0.5 },
-  update: () => {
-    bottomLaserSprite.x = bottomLeftDroneSprite.x;
-    bottomLaserSprite.y = bottomLeftDroneSprite.y;
-    bottomLaserSprite.width = bottomRightDroneSprite.x - bottomLeftDroneSprite.x;
-    bottomLaserSprite.height = randomLaserSize();
-    bottomLaserSprite.color = randomLaserColor();
-  },
 });
 
 export const leftLaserSprite = Sprite({
   anchor: { x: 0.5, y: 0 },
-  update: () => {
-    leftLaserSprite.x = topLeftDroneSprite.x;
-    leftLaserSprite.y = topLeftDroneSprite.y;
-    leftLaserSprite.height = bottomLeftDroneSprite.y - topLeftDroneSprite.y;
-    leftLaserSprite.width = randomLaserSize();
-    leftLaserSprite.color = randomLaserColor();
-  },
 });
 
 export const rightLaserSprite = Sprite({
   anchor: { x: 0.5, y: 0 },
-  update: () => {
-    rightLaserSprite.x = topRightDroneSprite.x;
-    rightLaserSprite.y = topRightDroneSprite.y;
-    rightLaserSprite.height = bottomRightDroneSprite.y - topRightDroneSprite.y;
-    rightLaserSprite.width = randomLaserSize();
-    rightLaserSprite.color = randomLaserColor();
-  },
 });
 
 export const objectsToAlwaysUpdate = [

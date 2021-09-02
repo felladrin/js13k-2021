@@ -1,4 +1,4 @@
-import { collides, GameObject, keyPressed, Sprite } from "kontra";
+import { collides, GameObject, keyPressed, Sprite, initKeys, loadImage, SpriteSheet } from "kontra";
 import { contain } from "math-fit";
 import backgroundMusicMidi from "../music/music.json";
 import {
@@ -29,9 +29,26 @@ import {
   bottomLaserSprite,
   leftLaserSprite,
   topLaserSprite,
+  bottomLeftDroneSprite,
+  bottomRightDroneSprite,
+  topLeftDroneSprite,
+  topRightDroneSprite,
+  setTimeInGame,
+  objectsToAlwaysUpdate,
+  emitCatSpriteSheetImageLoaded,
+  emitGemSpriteSheetImageLoaded,
+  emitPlatformImageLoaded,
+  emitPortalSpriteSheetImageLoaded,
+  gameLoop,
+  objectsToAlwaysRender,
+  setGemAnimations,
 } from "./constants";
 import { getZzFX } from "./modules/getZzFX";
 import { playMidi } from "./modules/playMidi";
+import catSpriteSheetUrl from "../images/catSpriteSheet.webp";
+import portalSpriteSheetUrl from "../images/portalSpriteSheet.webp";
+import platformImageUrl from "../images/platform.webp";
+import gemSpriteSheetUrl from "../images/gemSpriteSheet.webp";
 
 export function resizeCanvas() {
   const { width, height, parentElement, style } = canvas;
@@ -179,4 +196,148 @@ export function playBackgroundMusic() {
   });
 
   setBackgroundMusicPlaying(true);
+}
+
+function randomLaserColor() {
+  return Math.random() < 0.5 ? "#CC3333" : "brown";
+}
+
+function randomLaserSize() {
+  return Math.random() * 1.4 + 1.5;
+}
+
+function updateTopLaserSprite() {
+  topLaserSprite.x = topLeftDroneSprite.x;
+  topLaserSprite.y = topLeftDroneSprite.y;
+  topLaserSprite.width = topRightDroneSprite.x - topLeftDroneSprite.x;
+  topLaserSprite.height = randomLaserSize();
+  topLaserSprite.color = randomLaserColor();
+}
+
+function updateBottomLaserSprite() {
+  bottomLaserSprite.x = bottomLeftDroneSprite.x;
+  bottomLaserSprite.y = bottomLeftDroneSprite.y;
+  bottomLaserSprite.width = bottomRightDroneSprite.x - bottomLeftDroneSprite.x;
+  bottomLaserSprite.height = randomLaserSize();
+  bottomLaserSprite.color = randomLaserColor();
+}
+
+function updateLeftLaserSprite() {
+  leftLaserSprite.x = topLeftDroneSprite.x;
+  leftLaserSprite.y = topLeftDroneSprite.y;
+  leftLaserSprite.height = bottomLeftDroneSprite.y - topLeftDroneSprite.y;
+  leftLaserSprite.width = randomLaserSize();
+  leftLaserSprite.color = randomLaserColor();
+}
+
+function updateRightLaserSprite() {
+  rightLaserSprite.x = topRightDroneSprite.x;
+  rightLaserSprite.y = topRightDroneSprite.y;
+  rightLaserSprite.height = bottomRightDroneSprite.y - topRightDroneSprite.y;
+  rightLaserSprite.width = randomLaserSize();
+  rightLaserSprite.color = randomLaserColor();
+}
+
+export function handleGameLoopUpdate(dt: number) {
+  setTimeInGame(getTimeInGame() + dt);
+  objectsToAlwaysUpdate.forEach((object) => object.update());
+  processPortalAnimation();
+  updateCatSprite();
+  checkCollisionWithGems();
+  updateTopLaserSprite();
+  updateBottomLaserSprite();
+  updateLeftLaserSprite();
+  updateRightLaserSprite();
+}
+
+export function handleGameLoopRender() {
+  objectsToAlwaysRender.forEach((object) => object.render());
+  renderTimeInGameText();
+}
+
+export async function handleScriptReady() {
+  emitPlatformImageLoaded(await loadImage(platformImageUrl));
+  emitCatSpriteSheetImageLoaded(await loadImage(catSpriteSheetUrl));
+  emitGemSpriteSheetImageLoaded(await loadImage(gemSpriteSheetUrl));
+  emitPortalSpriteSheetImageLoaded(await loadImage(portalSpriteSheetUrl));
+  initKeys();
+  resizeCanvas();
+  addPlatforms([
+    [160, 310],
+    [100, 250],
+    [30, 210],
+  ]);
+  addGems([
+    [160, 295],
+    [100, 235],
+    [30, 195],
+  ]);
+  gameLoop.start();
+}
+
+export function handlePortalSpriteSheetImageLoaded(image: HTMLImageElement) {
+  portalSprite.animations = SpriteSheet({
+    image,
+    frameWidth: 64,
+    frameHeight: 64,
+    animations: {
+      idle: {
+        frames: "0..7",
+        frameRate: 12,
+      },
+      open: {
+        frames: "8..15",
+        frameRate: 12,
+        loop: false,
+      },
+      close: {
+        frames: "16..23",
+        frameRate: 12,
+        loop: false,
+      },
+    },
+  }).animations;
+}
+
+export function handleGemSpriteSheetImageLoaded(image: HTMLImageElement) {
+  setGemAnimations(
+    SpriteSheet({
+      image,
+      frameWidth: 16,
+      frameHeight: 16,
+      animations: {
+        idle: {
+          frames: "0..3",
+          frameRate: 5,
+        },
+      },
+    }).animations
+  );
+}
+
+export function handleCatSpriteSheetImageLoaded(image: HTMLImageElement) {
+  catSprite.animations = SpriteSheet({
+    image,
+    frameWidth: 18,
+    frameHeight: 18,
+    animations: {
+      idle: {
+        frames: "0..3",
+        frameRate: 8,
+      },
+      walk: {
+        frames: "4..11",
+        frameRate: 20,
+      },
+      up: {
+        frames: 12,
+      },
+      down: {
+        frames: 13,
+      },
+      // stopped: {
+      //   frames: 14,
+      // },
+    },
+  }).animations;
 }
