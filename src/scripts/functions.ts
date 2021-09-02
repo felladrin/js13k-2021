@@ -25,10 +25,10 @@ import {
   gemsPool,
   getGemAnimations,
   pickupSound,
-  rightLaserSprite,
-  bottomLaserSprite,
-  leftLaserSprite,
-  topLaserSprite,
+  laserFromTopRightDrone,
+  laserFromBottomLeftDrone,
+  laserFromBottomRightDrone,
+  laserFromTopLeftDrone,
   bottomLeftDroneSprite,
   bottomRightDroneSprite,
   topLeftDroneSprite,
@@ -69,12 +69,9 @@ export function resizeCanvas() {
   style.height = `${fittingProps.height}px`;
 }
 
-function isOutOfLasersBounds(gameObject: GameObject) {
-  return (
-    gameObject.x > rightLaserSprite.x ||
-    gameObject.y > bottomLaserSprite.y ||
-    gameObject.x < leftLaserSprite.x ||
-    gameObject.y < topLaserSprite.y
+function isCollidingWithLaser(gameObject: GameObject) {
+  return [laserFromTopRightDrone, laserFromBottomLeftDrone, laserFromBottomRightDrone, laserFromTopLeftDrone].some(
+    (laser) => collides(gameObject, laser)
   );
 }
 
@@ -179,7 +176,7 @@ export function updateCatSprite() {
 
   setPlatformWhichCatIsOn(platformWhichCatIsOn);
 
-  if (isOutOfLasersBounds(catSprite)) {
+  if (isCollidingWithLaser(catSprite)) {
     catSprite.position = portalSprite.position;
   }
 }
@@ -206,36 +203,36 @@ function randomLaserSize() {
   return Math.random() * 1.4 + 1.5;
 }
 
-function updateTopLaserSprite() {
-  topLaserSprite.x = topLeftDroneSprite.x;
-  topLaserSprite.y = topLeftDroneSprite.y;
-  topLaserSprite.width = topRightDroneSprite.x - topLeftDroneSprite.x;
-  topLaserSprite.height = randomLaserSize();
-  topLaserSprite.color = randomLaserColor();
+function updateLaserFromTopLeftDrone() {
+  laserFromTopLeftDrone.x = topLeftDroneSprite.x;
+  laserFromTopLeftDrone.y = topLeftDroneSprite.y;
+  laserFromTopLeftDrone.width = canvas.width;
+  laserFromTopLeftDrone.height = randomLaserSize();
+  laserFromTopLeftDrone.color = randomLaserColor();
 }
 
-function updateBottomLaserSprite() {
-  bottomLaserSprite.x = bottomLeftDroneSprite.x;
-  bottomLaserSprite.y = bottomLeftDroneSprite.y;
-  bottomLaserSprite.width = bottomRightDroneSprite.x - bottomLeftDroneSprite.x;
-  bottomLaserSprite.height = randomLaserSize();
-  bottomLaserSprite.color = randomLaserColor();
+function updateLaserFromTopRightDrone() {
+  laserFromTopRightDrone.x = topRightDroneSprite.x;
+  laserFromTopRightDrone.y = topRightDroneSprite.y;
+  laserFromTopRightDrone.height = canvas.height;
+  laserFromTopRightDrone.width = randomLaserSize();
+  laserFromTopRightDrone.color = randomLaserColor();
 }
 
-function updateLeftLaserSprite() {
-  leftLaserSprite.x = topLeftDroneSprite.x;
-  leftLaserSprite.y = topLeftDroneSprite.y;
-  leftLaserSprite.height = bottomLeftDroneSprite.y - topLeftDroneSprite.y;
-  leftLaserSprite.width = randomLaserSize();
-  leftLaserSprite.color = randomLaserColor();
+function updateLaserFromBottomLeftDrone() {
+  laserFromBottomLeftDrone.x = bottomLeftDroneSprite.x;
+  laserFromBottomLeftDrone.y = bottomLeftDroneSprite.y;
+  laserFromBottomLeftDrone.height = -canvas.height;
+  laserFromBottomLeftDrone.width = randomLaserSize();
+  laserFromBottomLeftDrone.color = randomLaserColor();
 }
 
-function updateRightLaserSprite() {
-  rightLaserSprite.x = topRightDroneSprite.x;
-  rightLaserSprite.y = topRightDroneSprite.y;
-  rightLaserSprite.height = bottomRightDroneSprite.y - topRightDroneSprite.y;
-  rightLaserSprite.width = randomLaserSize();
-  rightLaserSprite.color = randomLaserColor();
+function updateLaserFromBottomRightDrone() {
+  laserFromBottomRightDrone.x = bottomRightDroneSprite.x;
+  laserFromBottomRightDrone.y = bottomRightDroneSprite.y;
+  laserFromBottomRightDrone.width = -canvas.width;
+  laserFromBottomRightDrone.height = randomLaserSize();
+  laserFromBottomRightDrone.color = randomLaserColor();
 }
 
 export function handleGameLoopUpdate(dt: number) {
@@ -244,10 +241,10 @@ export function handleGameLoopUpdate(dt: number) {
   processPortalAnimation();
   updateCatSprite();
   checkCollisionWithGems();
-  updateTopLaserSprite();
-  updateBottomLaserSprite();
-  updateLeftLaserSprite();
-  updateRightLaserSprite();
+  updateLaserFromTopLeftDrone();
+  updateLaserFromBottomLeftDrone();
+  updateLaserFromBottomRightDrone();
+  updateLaserFromTopRightDrone();
 }
 
 export function handleGameLoopRender() {

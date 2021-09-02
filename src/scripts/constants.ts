@@ -74,57 +74,49 @@ export const gameLoop = GameLoop({
 });
 
 const commonDroneProperties = {
-  width: 10,
-  height: 10,
+  width: 6,
+  height: 6,
   color: "black",
   anchor: { x: 0.5, y: 0.5 },
 } as Partial<Sprite>;
 
 export const topLeftDroneSprite = Sprite({
   ...commonDroneProperties,
-  dx: 0.05,
-  dy: 0.05,
-  x: 10,
-  y: 10,
+  dy: 0.2,
 });
 
 export const topRightDroneSprite = Sprite({
   ...commonDroneProperties,
-  dx: -0.05,
-  dy: 0.05,
-  x: canvas.width - 10,
-  y: 10,
+  dx: -0.2,
+  x: canvas.width,
 });
 
 export const bottomLeftDroneSprite = Sprite({
   ...commonDroneProperties,
-  dx: 0.05,
-  dy: -0.05,
-  x: 10,
-  y: canvas.height - 10,
+  dx: 0.2,
+  y: canvas.height,
 });
 
 export const bottomRightDroneSprite = Sprite({
   ...commonDroneProperties,
-  dx: -0.05,
-  dy: -0.05,
-  x: canvas.width - 10,
-  y: canvas.height - 10,
+  dy: -0.2,
+  x: canvas.width,
+  y: canvas.height,
 });
 
-export const topLaserSprite = Sprite({
+export const laserFromTopLeftDrone = Sprite({
   anchor: { x: 0, y: 0.5 },
 });
 
-export const bottomLaserSprite = Sprite({
-  anchor: { x: 0, y: 0.5 },
-});
-
-export const leftLaserSprite = Sprite({
+export const laserFromBottomLeftDrone = Sprite({
   anchor: { x: 0.5, y: 0 },
 });
 
-export const rightLaserSprite = Sprite({
+export const laserFromBottomRightDrone = Sprite({
+  anchor: { x: 0, y: 0.5 },
+});
+
+export const laserFromTopRightDrone = Sprite({
   anchor: { x: 0.5, y: 0 },
 });
 
@@ -133,10 +125,10 @@ export const objectsToAlwaysUpdate = [
   portalSprite,
   catSprite,
   platformsPool,
-  topLaserSprite,
-  bottomLaserSprite,
-  leftLaserSprite,
-  rightLaserSprite,
+  laserFromTopLeftDrone,
+  laserFromBottomLeftDrone,
+  laserFromBottomRightDrone,
+  laserFromTopRightDrone,
   topLeftDroneSprite,
   topRightDroneSprite,
   bottomLeftDroneSprite,
@@ -148,10 +140,10 @@ export const objectsToAlwaysRender = [
   portalSprite,
   catSprite,
   platformsPool,
-  topLaserSprite,
-  bottomLaserSprite,
-  leftLaserSprite,
-  rightLaserSprite,
+  laserFromTopLeftDrone,
+  laserFromBottomLeftDrone,
+  laserFromBottomRightDrone,
+  laserFromTopRightDrone,
   topLeftDroneSprite,
   topRightDroneSprite,
   bottomLeftDroneSprite,
