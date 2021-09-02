@@ -42,6 +42,8 @@ import {
   gameLoop,
   objectsToAlwaysRender,
   setGemAnimations,
+  setCatMoving,
+  getCatMoving,
 } from "./constants";
 import { getZzFX } from "./modules/getZzFX";
 import { playMidi } from "./modules/playMidi";
@@ -177,8 +179,10 @@ export function updateCatSprite() {
   setPlatformWhichCatIsOn(platformWhichCatIsOn);
 
   if (isCollidingWithLaser(catSprite)) {
-    catSprite.position = portalSprite.position;
+    window.location.reload();
   }
+
+  setCatMoving(catSprite.dx !== 0 || catSprite.dy !== 0);
 }
 
 export function renderTimeInGameText() {
@@ -204,35 +208,39 @@ function randomLaserSize() {
 }
 
 function updateLaserFromTopLeftDrone() {
-  laserFromTopLeftDrone.x = topLeftDroneSprite.x;
-  laserFromTopLeftDrone.y = topLeftDroneSprite.y;
+  laserFromTopLeftDrone.position = topLeftDroneSprite.position;
   laserFromTopLeftDrone.width = canvas.width;
   laserFromTopLeftDrone.height = randomLaserSize();
   laserFromTopLeftDrone.color = randomLaserColor();
 }
 
 function updateLaserFromTopRightDrone() {
-  laserFromTopRightDrone.x = topRightDroneSprite.x;
-  laserFromTopRightDrone.y = topRightDroneSprite.y;
+  laserFromTopRightDrone.position = topRightDroneSprite.position;
   laserFromTopRightDrone.height = canvas.height;
   laserFromTopRightDrone.width = randomLaserSize();
   laserFromTopRightDrone.color = randomLaserColor();
 }
 
 function updateLaserFromBottomLeftDrone() {
-  laserFromBottomLeftDrone.x = bottomLeftDroneSprite.x;
-  laserFromBottomLeftDrone.y = bottomLeftDroneSprite.y;
+  laserFromBottomLeftDrone.position = bottomLeftDroneSprite.position;
   laserFromBottomLeftDrone.height = -canvas.height;
   laserFromBottomLeftDrone.width = randomLaserSize();
   laserFromBottomLeftDrone.color = randomLaserColor();
 }
 
 function updateLaserFromBottomRightDrone() {
-  laserFromBottomRightDrone.x = bottomRightDroneSprite.x;
-  laserFromBottomRightDrone.y = bottomRightDroneSprite.y;
+  laserFromBottomRightDrone.position = bottomRightDroneSprite.position;
   laserFromBottomRightDrone.width = -canvas.width;
   laserFromBottomRightDrone.height = randomLaserSize();
   laserFromBottomRightDrone.color = randomLaserColor();
+}
+
+export function updateDronesVelocity() {
+  const velocity = getCatMoving() ? 0.2 : 0;
+  topLeftDroneSprite.dy = velocity;
+  topRightDroneSprite.dx = -velocity;
+  bottomLeftDroneSprite.dx = velocity;
+  bottomRightDroneSprite.dy = -velocity;
 }
 
 export function handleGameLoopUpdate(dt: number) {
@@ -245,6 +253,7 @@ export function handleGameLoopUpdate(dt: number) {
   updateLaserFromBottomLeftDrone();
   updateLaserFromBottomRightDrone();
   updateLaserFromTopRightDrone();
+  updateDronesVelocity();
 }
 
 export function handleGameLoopRender() {

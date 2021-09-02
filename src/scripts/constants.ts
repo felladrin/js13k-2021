@@ -18,6 +18,8 @@ export { onGameLoopRender };
 
 export const [setTimeInGame, , getTimeInGame] = store(0);
 
+export const [setCatMoving, , getCatMoving] = store(false);
+
 export const [setBackgroundMusicPlaying, , getBackgroundMusicPlaying] = store(false);
 
 export const [setFunctionToPlaySound, , getFunctionToPlaySound] = store<(...sound: any) => void>();
@@ -82,24 +84,20 @@ const commonDroneProperties = {
 
 export const topLeftDroneSprite = Sprite({
   ...commonDroneProperties,
-  dy: 0.2,
 });
 
 export const topRightDroneSprite = Sprite({
   ...commonDroneProperties,
-  dx: -0.2,
   x: canvas.width,
 });
 
 export const bottomLeftDroneSprite = Sprite({
   ...commonDroneProperties,
-  dx: 0.2,
   y: canvas.height,
 });
 
 export const bottomRightDroneSprite = Sprite({
   ...commonDroneProperties,
-  dy: -0.2,
   x: canvas.width,
   y: canvas.height,
 });
