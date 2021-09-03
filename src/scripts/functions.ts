@@ -13,6 +13,7 @@ import {
   catJumpSpeed,
   catSprite,
   catWalkSpeed,
+  droneSpeed,
   emitCatSpriteSheetImageLoaded,
   emitGemSpriteSheetImageLoaded,
   emitPlatformImageLoaded,
@@ -236,7 +237,7 @@ function updateLaserFromBottomRightDrone() {
 }
 
 function updateDronesVelocity() {
-  const velocity = getCatMoving() ? 0.2 : 0;
+  const velocity = getCatMoving() ? droneSpeed : 0;
   topLeftDroneSprite.dy = velocity;
   topRightDroneSprite.dx = -velocity;
   bottomLeftDroneSprite.dx = velocity;
