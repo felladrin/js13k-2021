@@ -1,56 +1,56 @@
-import { collides, GameObject, keyPressed, Sprite, initKeys, loadImage, SpriteSheet } from "kontra";
+import { collides, GameObject, initKeys, keyPressed, loadImage, Sprite, SpriteSheet } from "kontra";
 import { contain } from "math-fit";
+import catSpriteSheetUrl from "../images/catSpriteSheet.webp";
+import gemSpriteSheetUrl from "../images/gemSpriteSheet.webp";
+import platformImageUrl from "../images/platform.webp";
+import portalSpriteSheetUrl from "../images/portalSpriteSheet.webp";
 import backgroundMusicMidi from "../music/music.json";
 import {
-  canvas,
-  catSprite,
-  catJumpSpeed,
-  catWalkSpeed,
-  getFunctionToPlaySound,
-  getPlatformWhichCatIsOn,
-  getTimeInGame,
-  catFallingAcceleration,
-  jumpKeys,
-  jumpSound,
-  moveLeftKeys,
-  moveRightKeys,
-  platformsPool,
-  portalSprite,
-  renderText,
-  setFunctionToPlaySound,
-  setPlatformWhichCatIsOn,
-  setBackgroundMusicPlaying,
-  getBackgroundMusicPlaying,
-  getPlatformImage,
-  gemsPool,
-  getGemAnimations,
-  pickupSound,
-  laserFromTopRightDrone,
-  laserFromBottomLeftDrone,
-  laserFromBottomRightDrone,
-  laserFromTopLeftDrone,
   bottomLeftDroneSprite,
   bottomRightDroneSprite,
-  topLeftDroneSprite,
-  topRightDroneSprite,
-  setTimeInGame,
-  objectsToAlwaysUpdate,
+  canvas,
+  catFallingAcceleration,
+  catJumpSpeed,
+  catSprite,
+  catWalkSpeed,
   emitCatSpriteSheetImageLoaded,
   emitGemSpriteSheetImageLoaded,
   emitPlatformImageLoaded,
   emitPortalSpriteSheetImageLoaded,
   gameLoop,
-  objectsToAlwaysRender,
-  setGemAnimations,
-  setCatMoving,
+  gemsPool,
+  getBackgroundMusicPlaying,
   getCatMoving,
+  getFunctionToPlaySound,
+  getGemAnimations,
+  getPlatformImage,
+  getPlatformWhichCatIsOn,
+  getTimeInGame,
+  jumpKeys,
+  jumpSound,
+  laserFromBottomLeftDrone,
+  laserFromBottomRightDrone,
+  laserFromTopLeftDrone,
+  laserFromTopRightDrone,
+  moveLeftKeys,
+  moveRightKeys,
+  objectsToAlwaysRender,
+  objectsToAlwaysUpdate,
+  pickupSound,
+  platformsPool,
+  portalSprite,
+  renderText,
+  setBackgroundMusicPlaying,
+  setCatMoving,
+  setFunctionToPlaySound,
+  setGemAnimations,
+  setPlatformWhichCatIsOn,
+  setTimeInGame,
+  topLeftDroneSprite,
+  topRightDroneSprite,
 } from "./constants";
 import { getZzFX } from "./modules/getZzFX";
 import { playMidi } from "./modules/playMidi";
-import catSpriteSheetUrl from "../images/catSpriteSheet.webp";
-import portalSpriteSheetUrl from "../images/portalSpriteSheet.webp";
-import platformImageUrl from "../images/platform.webp";
-import gemSpriteSheetUrl from "../images/gemSpriteSheet.webp";
 
 export function resizeCanvas() {
   const { width, height, parentElement, style } = canvas;
@@ -77,7 +77,7 @@ function isCollidingWithLaser(gameObject: GameObject) {
   );
 }
 
- function addPlatforms(platforms: [x: number, y: number][]) {
+function addPlatforms(platforms: [x: number, y: number][]) {
   platforms.forEach(([x, y]) => {
     platformsPool.get({
       x,
@@ -88,7 +88,7 @@ function isCollidingWithLaser(gameObject: GameObject) {
   });
 }
 
- function addGems(gems: [x: number, y: number][]) {
+function addGems(gems: [x: number, y: number][]) {
   gems.forEach(([x, y]) => {
     gemsPool.get({
       x,
@@ -103,7 +103,7 @@ function getCatCollisionObject() {
   return { world: { x: catSprite.x, y: catSprite.y - catSprite.height, height: catSprite.height, width: 1 } };
 }
 
- function checkCollisionWithGems() {
+function checkCollisionWithGems() {
   for (const gem of gemsPool.getAliveObjects() as Sprite[]) {
     if (collides(getCatCollisionObject(), gem)) {
       gem.ttl = 0;
