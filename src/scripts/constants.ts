@@ -44,7 +44,7 @@ export const catWalkSpeed = 1.75;
 
 export const catJumpSpeed = 6.8;
 
-export const droneSpeed = 0.2;
+export const droneSpeed = 0.1;
 
 export const catFallingAcceleration = 0.4;
 
