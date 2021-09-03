@@ -80,7 +80,7 @@ export const gameLoop = GameLoop({
 const commonDroneProperties = {
   width: 6,
   height: 6,
-  color: "black",
+  color: "#184E77",
   anchor: { x: 0.5, y: 0.5 },
 } as Partial<Sprite>;
 

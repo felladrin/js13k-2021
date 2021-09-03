@@ -89,6 +89,18 @@ function addPlatforms(platforms: [x: number, y: number][]) {
   });
 }
 
+function checkPlatformsCollisionWithLasers() {
+  for (const platform of platformsPool.getAliveObjects() as Sprite[]) {
+    if (isCollidingWithLaser(platform)) {
+      platform.scaleX -= 0.01;
+
+      if (platform.scaleX <= 0.01) {
+        platform.ttl = 0;
+      }
+    }
+  }
+}
+
 function addGems(gems: [x: number, y: number][]) {
   gems.forEach(([x, y]) => {
     gemsPool.get({
@@ -201,7 +213,7 @@ export function playBackgroundMusic() {
 }
 
 function randomLaserColor() {
-  return Math.random() < 0.5 ? "#CC3333" : "brown";
+  return Math.random() < 0.5 ? "#1A759F" : "#1E6091";
 }
 
 function randomLaserSize() {
@@ -250,6 +262,7 @@ export function handleGameLoopUpdate(dt: number) {
   processPortalAnimation();
   updateCatSprite();
   checkCollisionWithGems();
+  checkPlatformsCollisionWithLasers();
   updateLaserFromTopLeftDrone();
   updateLaserFromBottomLeftDrone();
   updateLaserFromBottomRightDrone();
