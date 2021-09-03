@@ -77,7 +77,7 @@ function isCollidingWithLaser(gameObject: GameObject) {
   );
 }
 
-export function addPlatforms(platforms: [x: number, y: number][]) {
+ function addPlatforms(platforms: [x: number, y: number][]) {
   platforms.forEach(([x, y]) => {
     platformsPool.get({
       x,
@@ -88,7 +88,7 @@ export function addPlatforms(platforms: [x: number, y: number][]) {
   });
 }
 
-export function addGems(gems: [x: number, y: number][]) {
+ function addGems(gems: [x: number, y: number][]) {
   gems.forEach(([x, y]) => {
     gemsPool.get({
       x,
@@ -103,7 +103,7 @@ function getCatCollisionObject() {
   return { world: { x: catSprite.x, y: catSprite.y - catSprite.height, height: catSprite.height, width: 1 } };
 }
 
-export function checkCollisionWithGems() {
+ function checkCollisionWithGems() {
   for (const gem of gemsPool.getAliveObjects() as Sprite[]) {
     if (collides(getCatCollisionObject(), gem)) {
       gem.ttl = 0;
@@ -122,7 +122,7 @@ function playSound(sound: (number | undefined)[]) {
   getFunctionToPlaySound()?.(...sound);
 }
 
-export function processPortalAnimation() {
+function processPortalAnimation() {
   if (
     portalSprite.animations.open &&
     portalSprite.currentAnimation === portalSprite.animations.open &&
@@ -132,7 +132,7 @@ export function processPortalAnimation() {
   }
 }
 
-export function updateCatSprite() {
+function updateCatSprite() {
   const requestedJump = jumpKeys.some(keyPressed);
   const isMovingLeft = moveLeftKeys.some(keyPressed);
   const isMovingRight = moveRightKeys.some(keyPressed);
@@ -185,7 +185,7 @@ export function updateCatSprite() {
   setCatMoving(catSprite.dx !== 0 || catSprite.dy !== 0);
 }
 
-export function renderTimeInGameText() {
+function renderTimeInGameText() {
   renderText(getTimeInGame().toFixed(1), portalSprite.x - 12, portalSprite.y - 40, 10, "#fff");
 }
 
@@ -235,7 +235,7 @@ function updateLaserFromBottomRightDrone() {
   laserFromBottomRightDrone.color = randomLaserColor();
 }
 
-export function updateDronesVelocity() {
+function updateDronesVelocity() {
   const velocity = getCatMoving() ? 0.2 : 0;
   topLeftDroneSprite.dy = velocity;
   topRightDroneSprite.dx = -velocity;
