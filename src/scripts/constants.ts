@@ -16,8 +16,6 @@ const [propagateGameLoopRender, onGameLoopRender] = createPubSub();
 
 export { onGameLoopRender };
 
-export const [setTimeInGame, , getTimeInGame] = store(0);
-
 export const [setCatMoving, , getCatMoving] = store(false);
 
 export const [setBackgroundMusicPlaying, , getBackgroundMusicPlaying] = store(false);

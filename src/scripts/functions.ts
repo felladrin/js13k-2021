@@ -26,7 +26,6 @@ import {
   getGemAnimations,
   getPlatformImage,
   getPlatformWhichCatIsOn,
-  getTimeInGame,
   jumpKeys,
   jumpSound,
   laserFromBottomLeftDrone,
@@ -46,7 +45,6 @@ import {
   setFunctionToPlaySound,
   setGemAnimations,
   setPlatformWhichCatIsOn,
-  setTimeInGame,
   topLeftDroneSprite,
   topRightDroneSprite,
 } from "./constants";
@@ -198,8 +196,8 @@ function updateCatSprite() {
   setCatMoving(catSprite.dx !== 0 || catSprite.dy !== 0);
 }
 
-function renderTimeInGameText() {
-  renderText(getTimeInGame().toFixed(1), portalSprite.x - 12, portalSprite.y - 40, 10, "#fff");
+function renderCurrentLevelText() {
+  renderText("LEVEL 1", canvas.width / 2 - 30, 10, 10, "#fff");
 }
 
 export function playBackgroundMusic() {
@@ -257,7 +255,6 @@ function updateDronesVelocity() {
 }
 
 export function handleGameLoopUpdate(dt: number) {
-  setTimeInGame(getTimeInGame() + dt);
   objectsToAlwaysUpdate.forEach((object) => object.update());
   processPortalAnimation();
   updateCatSprite();
@@ -272,7 +269,7 @@ export function handleGameLoopUpdate(dt: number) {
 
 export function handleGameLoopRender() {
   objectsToAlwaysRender.forEach((object) => object.render());
-  renderTimeInGameText();
+  renderCurrentLevelText();
 }
 
 export async function handleScriptReady() {
