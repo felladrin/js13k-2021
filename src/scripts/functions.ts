@@ -289,16 +289,16 @@ export function handlePortalSpriteSheetImageLoaded(image: HTMLImageElement) {
     animations: {
       idle: {
         frames: "0..7",
-        frameRate: 12,
+        frameRate: 10,
       },
       open: {
-        frames: "8..15",
-        frameRate: 12,
+        frames: "12..8",
+        frameRate: 8,
         loop: false,
       },
       close: {
-        frames: "16..23",
-        frameRate: 12,
+        frames: "8..14",
+        frameRate: 8,
         loop: false,
       },
     },
@@ -341,9 +341,6 @@ export function handleCatSpriteSheetImageLoaded(image: HTMLImageElement) {
       down: {
         frames: 13,
       },
-      // stopped: {
-      //   frames: 14,
-      // },
     },
   }).animations;
 }
