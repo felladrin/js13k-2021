@@ -1,6 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@tweakpane/core': ^1.0.6
   arkit: ^1.6.4
   bestzip: ^2.2.0
   create-pubsub: ^1.3.0
@@ -16,6 +17,7 @@ specifiers:
   tinyfont: ^1.3.2
   ts-node: ^10.2.1
   ts-prune: ^0.10.0
+  tweakpane: ^3.0.5
   typescript: ^4.4.2
   vite: ^2.5.3
   vite-plugin-html: ^2.1.0
@@ -29,6 +31,7 @@ dependencies:
   tinyfont: 1.3.2
 
 devDependencies:
+  '@tweakpane/core': 1.0.6
   arkit: 1.6.4
   bestzip: 2.2.0
   cross-exec-file: 2.0.0
@@ -40,6 +43,7 @@ devDependencies:
   roadroller: 2.0.0
   ts-node: 10.2.1_typescript@4.4.2
   ts-prune: 0.10.0
+  tweakpane: 3.0.5
   typescript: 4.4.2
   vite: 2.5.3
   vite-plugin-html: 2.1.0_vite@2.5.3
@@ -316,6 +320,10 @@ packages:
 
   /@tsconfig/node16/1.0.2:
     resolution: {integrity: sha512-eZxlbI8GZscaGS7kkc/trHTT5xgrjH3/1n2JDwusC9iahPKWMRvRjJSAN5mCXviuTGQ/lHnhvv8Q1YTpnfz9gA==}
+    dev: true
+
+  /@tweakpane/core/1.0.6:
+    resolution: {integrity: sha512-Q5331dFAgGyLvQHzrUdK11FV5nX7UTucW2x9w/Nl0h2zd/qtxs9mtbYSU5xEGnj5mtuI095CMV3mcQjYpyTCkQ==}
     dev: true
 
   /@types/estree/0.0.39:
@@ -5138,6 +5146,10 @@ packages:
     resolution: {integrity: sha1-J6XeoGs2sEoKmWZ3SykIaPD8QP0=}
     dependencies:
       safe-buffer: 5.2.1
+    dev: true
+
+  /tweakpane/3.0.5:
+    resolution: {integrity: sha512-HivFjOs510RbZSNgxv4x5LVFsHFN1ryfgpOp3n6wrgg1jLxbdlA/UTIbTLi/DYH7g76rGQqW/+IRmHPfjIujpQ==}
     dev: true
 
   /tweetnacl/0.14.5:
