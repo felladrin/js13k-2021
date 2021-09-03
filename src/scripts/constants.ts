@@ -108,12 +108,12 @@ export const laserFromTopLeftDrone = Sprite({
   anchor: { x: 0, y: 0.5 },
 });
 
-export const laserFromBottomLeftDrone = Sprite({
-  anchor: { x: 0.5, y: 0 },
-});
-
 export const laserFromBottomRightDrone = Sprite({
   anchor: { x: 0, y: 0.5 },
+});
+
+export const laserFromBottomLeftDrone = Sprite({
+  anchor: { x: 0.5, y: 0 },
 });
 
 export const laserFromTopRightDrone = Sprite({
