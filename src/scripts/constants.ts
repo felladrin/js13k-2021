@@ -137,22 +137,7 @@ export const laserFromTopRightDrone = Sprite({
   anchor: { x: 0.5, y: 0 },
 });
 
-export const objectsToAlwaysUpdate = [
-  gemsPool,
-  portalSprite,
-  catSprite,
-  platformsPool,
-  laserFromTopLeftDrone,
-  laserFromBottomLeftDrone,
-  laserFromBottomRightDrone,
-  laserFromTopRightDrone,
-  topLeftDroneSprite,
-  topRightDroneSprite,
-  bottomLeftDroneSprite,
-  bottomRightDroneSprite,
-];
-
-export const objectsToAlwaysRender = [
+export const objectsToAlwaysUpdateAndRender = [
   gemsPool,
   portalSprite,
   catSprite,

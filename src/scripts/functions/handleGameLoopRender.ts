@@ -1,7 +1,7 @@
-import { objectsToAlwaysRender } from "../constants";
+import { objectsToAlwaysUpdateAndRender } from "../constants";
 import { renderCurrentLevelText } from "./renderCurrentLevelText";
 
 export function handleGameLoopRender() {
-  objectsToAlwaysRender.forEach((object) => object.render());
+  objectsToAlwaysUpdateAndRender.forEach((object) => object.render());
   renderCurrentLevelText();
 }

@@ -1,4 +1,4 @@
-import { objectsToAlwaysUpdate } from "../constants";
+import { objectsToAlwaysUpdateAndRender } from "../constants";
 import { checkPlatformsCollisionWithLasers } from "./checkPlatformsCollisionWithLasers";
 import { checkCollisionWithGems } from "./checkCollisionWithGems";
 import { processPortalAnimation } from "./processPortalAnimation";
@@ -10,7 +10,7 @@ import { updateLaserFromBottomRightDrone } from "./updateLaserFromBottomRightDro
 import { updateDronesVelocity } from "./updateDronesVelocity";
 
 export function handleGameLoopUpdate() {
-  objectsToAlwaysUpdate.forEach((object) => object.update());
+  objectsToAlwaysUpdateAndRender.forEach((object) => object.update());
   processPortalAnimation();
   updateCatSprite();
   checkCollisionWithGems();
