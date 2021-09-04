@@ -54,8 +54,6 @@ export const moveLeftKeys = ["left", "a", "q"];
 
 export const moveRightKeys = ["right", "d"];
 
-const commonPoolParameters = { create: Sprite as any };
-
 export const platformsPositionsPerLevel: [x: number, y: number][][] = [
   [
     [30, 340],
@@ -73,9 +71,9 @@ export const gemsPositionsPerLevel: [x: number, y: number][][] = [
   ],
 ];
 
-export const platformsPool = Pool(commonPoolParameters);
+export const platformsPool = Pool({ create: Sprite as any });
 
-export const gemsPool = Pool(commonPoolParameters);
+export const gemsPool = Pool({ create: Sprite as any });
 
 export const catSprite = Sprite({
   x: platformsPositionsPerLevel[getCurrentLevel()][0][0],
