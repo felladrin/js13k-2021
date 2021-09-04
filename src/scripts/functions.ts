@@ -213,40 +213,40 @@ export function playBackgroundMusic() {
   setBackgroundMusicPlaying(true);
 }
 
-function randomLaserColor() {
+function getRandomLaserColor() {
   return Math.random() < 0.5 ? "#1A759F" : "#1E6091";
 }
 
-function randomLaserSize() {
-  return Math.random() * 1.4 + 1.5;
+function getRandomLaserSize() {
+  return Math.random() * 1.5 + 1.5;
 }
 
 function updateLaserFromTopLeftDrone() {
   laserFromTopLeftDrone.position = topLeftDroneSprite.position;
   laserFromTopLeftDrone.width = canvas.width;
-  laserFromTopLeftDrone.height = randomLaserSize();
-  laserFromTopLeftDrone.color = randomLaserColor();
+  laserFromTopLeftDrone.height = getRandomLaserSize();
+  laserFromTopLeftDrone.color = getRandomLaserColor();
 }
 
 function updateLaserFromTopRightDrone() {
   laserFromTopRightDrone.position = topRightDroneSprite.position;
   laserFromTopRightDrone.height = canvas.height;
-  laserFromTopRightDrone.width = randomLaserSize();
-  laserFromTopRightDrone.color = randomLaserColor();
+  laserFromTopRightDrone.width = getRandomLaserSize();
+  laserFromTopRightDrone.color = getRandomLaserColor();
 }
 
 function updateLaserFromBottomLeftDrone() {
   laserFromBottomLeftDrone.position = bottomLeftDroneSprite.position;
   laserFromBottomLeftDrone.height = -canvas.height;
-  laserFromBottomLeftDrone.width = randomLaserSize();
-  laserFromBottomLeftDrone.color = randomLaserColor();
+  laserFromBottomLeftDrone.width = getRandomLaserSize();
+  laserFromBottomLeftDrone.color = getRandomLaserColor();
 }
 
 function updateLaserFromBottomRightDrone() {
   laserFromBottomRightDrone.position = bottomRightDroneSprite.position;
   laserFromBottomRightDrone.width = -canvas.width;
-  laserFromBottomRightDrone.height = randomLaserSize();
-  laserFromBottomRightDrone.color = randomLaserColor();
+  laserFromBottomRightDrone.height = getRandomLaserSize();
+  laserFromBottomRightDrone.color = getRandomLaserColor();
 }
 
 function updateDronesVelocity() {
