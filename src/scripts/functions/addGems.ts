@@ -1,8 +1,10 @@
 import { Sprite } from "kontra";
-import { gemsPool, getGemAnimations } from "../constants";
+import { gemsPool, gemsPositionsPerLevel, getCurrentLevel, getGemAnimations } from "../constants";
 
-export function addGems(gems: [x: number, y: number][]) {
-  gems.forEach(([x, y]) => {
+export function resetGemsFromCurrentLevel() {
+  gemsPool.clear();
+
+  gemsPositionsPerLevel[getCurrentLevel()].forEach(([x, y]) => {
     gemsPool.get({
       x,
       y,

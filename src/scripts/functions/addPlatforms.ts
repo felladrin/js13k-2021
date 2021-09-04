@@ -1,8 +1,10 @@
 import { Sprite } from "kontra";
-import { getPlatformImage, platformsPool } from "../constants";
+import { getCurrentLevel, getPlatformImage, platformsPool, platformsPositionsPerLevel } from "../constants";
 
-export function addPlatforms(platforms: [x: number, y: number][]) {
-  platforms.forEach(([x, y]) => {
+export function resetPlatformsFromCurrentLevel() {
+  platformsPool.clear();
+
+  platformsPositionsPerLevel[getCurrentLevel()].forEach(([x, y]) => {
     platformsPool.get({
       x,
       y,

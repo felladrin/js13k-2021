@@ -10,13 +10,9 @@ import {
   emitPlatformImageLoaded,
   emitPortalSpriteSheetImageLoaded,
   gameLoop,
-  gemsPositionsPerLevel,
-  getCurrentLevel,
-  platformsPositionsPerLevel,
 } from "../constants";
 import { fitCanvasElementInsideItsParent } from "./fitCanvasElementInsideItsParent";
-import { addPlatforms } from "./addPlatforms";
-import { addGems } from "./addGems";
+import { resetCurrentLevel } from "./resetCurrentLevel";
 
 export async function handleScriptReady() {
   emitPlatformImageLoaded(await loadImage(platformImageUrl));
@@ -25,7 +21,6 @@ export async function handleScriptReady() {
   emitPortalSpriteSheetImageLoaded(await loadImage(portalSpriteSheetUrl));
   initKeys();
   fitCanvasElementInsideItsParent(canvas);
-  addGems(gemsPositionsPerLevel[getCurrentLevel()]);
-  addPlatforms(platformsPositionsPerLevel[getCurrentLevel()]);
+  resetCurrentLevel();
   gameLoop.start();
 }

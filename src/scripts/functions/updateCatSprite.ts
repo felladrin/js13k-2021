@@ -16,6 +16,7 @@ import {
 import { isCollidingWithLaser } from "./isCollidingWithLaser";
 import { getCatCollisionObject } from "./getCatCollisionObject";
 import { playSound } from "./playSound";
+import { resetCurrentLevel } from "./resetCurrentLevel";
 
 export function updateCatSprite() {
   const requestedJump = jumpKeys.some(keyPressed);
@@ -60,7 +61,7 @@ export function updateCatSprite() {
   }
 
   if (isCollidingWithLaser(catSprite)) {
-    window.location.reload();
+    resetCurrentLevel();
   }
 
   setPlatformWhichCatIsOn(platformWhichCatIsOn);

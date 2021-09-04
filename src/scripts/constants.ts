@@ -24,6 +24,11 @@ export const [setFunctionToPlaySound, , getFunctionToPlaySound] = store<(...soun
 
 export const [setPlatformWhichCatIsOn, , getPlatformWhichCatIsOn] = store<Sprite | null>(null);
 
+export const [setShouldCheckCollisionBetweenCatAndPortal, , shouldCheckCollisionBetweenCatAndPortal] = store(false);
+
+export const [setGemsCollectedOnCurrentLevel, onGemsCollectedOnCurrentLevelUpdated, getGemsCollectedOnCurrentLevel] =
+  store(0);
+
 export const [emitCatSpriteSheetImageLoaded, onCatSpriteSheetImageLoaded] = createPubSub<HTMLImageElement>();
 
 export const [emitPortalSpriteSheetImageLoaded, onPortalSpriteSheetImageLoaded] = createPubSub<HTMLImageElement>();
@@ -34,7 +39,7 @@ export const [emitGemSpriteSheetImageLoaded, onGemSpriteSheetImageLoaded] = crea
 
 export const [setGemAnimations, , getGemAnimations] = store<SpriteSheet["animations"]>();
 
-export const [, , getCurrentLevel] = store(0);
+export const [setCurrentLevel, onCurrentLevelChanged, getCurrentLevel] = store(0);
 
 export const pickupSound = [0.8, 5, 578, , 0.01, 0.21, , 1.01, , , , , , , , , 0.06, 0.68, 0.09];
 
@@ -61,6 +66,14 @@ export const platformsPositionsPerLevel: [x: number, y: number][][] = [
     [122, 260],
     [170, 220],
   ],
+  [
+    [180, 340],
+    [76, 300],
+    [254, 300],
+    [180, 260],
+    [120, 215],
+    [37, 250],
+  ],
 ];
 
 export const gemsPositionsPerLevel: [x: number, y: number][][] = [
@@ -69,6 +82,11 @@ export const gemsPositionsPerLevel: [x: number, y: number][][] = [
     [122, 245],
     [170, 205],
   ],
+  [
+    [76, 285],
+    [121, 195],
+    [254, 285],
+  ],
 ];
 
 export const platformsPool = Pool({ create: Sprite as any });
@@ -76,14 +94,12 @@ export const platformsPool = Pool({ create: Sprite as any });
 export const gemsPool = Pool({ create: Sprite as any });
 
 export const catSprite = Sprite({
-  x: platformsPositionsPerLevel[getCurrentLevel()][0][0],
-  y: platformsPositionsPerLevel[getCurrentLevel()][0][1],
   anchor: { x: 0.5, y: 1 },
 });
 
 export const portalSprite = Sprite({
-  x: canvas.width / 2,
-  y: canvas.height / 2,
+  x: 180,
+  y: 180,
   anchor: { x: 0.5, y: 0.5 },
 });
 
@@ -99,25 +115,13 @@ const commonDroneProperties = {
   anchor: { x: 0.5, y: 0.5 },
 } as Partial<Sprite>;
 
-export const topLeftDroneSprite = Sprite({
-  ...commonDroneProperties,
-});
+export const topLeftDroneSprite = Sprite(commonDroneProperties);
 
-export const topRightDroneSprite = Sprite({
-  ...commonDroneProperties,
-  x: canvas.width,
-});
+export const topRightDroneSprite = Sprite(commonDroneProperties);
 
-export const bottomLeftDroneSprite = Sprite({
-  ...commonDroneProperties,
-  y: canvas.height,
-});
+export const bottomLeftDroneSprite = Sprite(commonDroneProperties);
 
-export const bottomRightDroneSprite = Sprite({
-  ...commonDroneProperties,
-  x: canvas.width,
-  y: canvas.height,
-});
+export const bottomRightDroneSprite = Sprite(commonDroneProperties);
 
 export const laserFromTopLeftDrone = Sprite({
   anchor: { x: 0, y: 0.5 },
