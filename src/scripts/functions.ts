@@ -278,29 +278,6 @@ export async function handleScriptReady() {
   gameLoop.start();
 }
 
-export async function loadDevTools() {
-  const { Pane } = await import("tweakpane");
-  const { initPointer, getPointer } = await import("kontra");
-
-  initPointer();
-
-  const pane = new Pane({ title: "Dev Panel" });
-
-  const kontraFolder = pane.addFolder({ title: "Kontra" });
-
-  const kontraFields = {
-    pointer: { x: 0, y: 0 },
-  };
-
-  const pointerField = kontraFolder.addInput(kontraFields, "pointer", { disabled: true });
-
-  window.addEventListener("click", () => {
-    const { x, y } = getPointer();
-    kontraFields.pointer = { x, y };
-    pointerField.refresh();
-  });
-}
-
 export function handlePortalSpriteSheetImageLoaded(image: HTMLImageElement) {
   portalSprite.animations = SpriteSheet({
     image,
