@@ -3,7 +3,7 @@ import { minifyHtml } from "vite-plugin-html";
 import { viteSingleFile } from "vite-plugin-singlefile";
 import { Packer, InputType, InputAction } from "roadroller";
 
-export default defineConfig({
+export default defineConfig((configEnv) => ({
   plugins: [
     {
       name: "roadroller",
@@ -49,5 +49,5 @@ export default defineConfig({
       },
     },
   },
-  logLevel: "warn",
-});
+  logLevel: configEnv.command === "serve" ? "info" : "warn",
+}));
