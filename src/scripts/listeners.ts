@@ -5,29 +5,23 @@ import {
   onPortalSpriteSheetImageLoaded,
   onCatSpriteSheetImageLoaded,
   onGemSpriteSheetImageLoaded,
-  canvas,
 } from "./constants";
 import {
-  fitCanvasElementInsideItsParent,
-  playBackgroundMusic,
-  enableSoundEffects,
   handleGameLoopUpdate,
   handleScriptReady,
   handleGameLoopRender,
   handlePortalSpriteSheetImageLoaded,
   handleGemSpriteSheetImageLoaded,
   handleCatSpriteSheetImageLoaded,
+  handleWindowResize,
+  handleClickOrKeyDownOnWindow,
 } from "./functions";
 
-window.addEventListener("resize", () => fitCanvasElementInsideItsParent(canvas));
+window.addEventListener("resize", handleWindowResize);
 
-window.addEventListener("click", enableSoundEffects);
+window.addEventListener("click", handleClickOrKeyDownOnWindow);
 
-window.addEventListener("click", playBackgroundMusic);
-
-window.addEventListener("keydown", enableSoundEffects);
-
-window.addEventListener("keydown", playBackgroundMusic);
+window.addEventListener("keydown", handleClickOrKeyDownOnWindow);
 
 onCatSpriteSheetImageLoaded(handleCatSpriteSheetImageLoaded);
 

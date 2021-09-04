@@ -341,3 +341,12 @@ export function handleCatSpriteSheetImageLoaded(image: HTMLImageElement) {
     },
   }).animations;
 }
+
+export function handleWindowResize() {
+  fitCanvasElementInsideItsParent(canvas);
+}
+
+export function handleClickOrKeyDownOnWindow() {
+  enableSoundEffects();
+  playBackgroundMusic();
+}
