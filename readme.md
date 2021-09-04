@@ -31,8 +31,6 @@ Images converted and optimized to WEBP via [Squoosh](https://squoosh.app/).
 
 Sprite sheets edited with [Piskel](https://www.piskelapp.com/).
 
-Canvas scaling based on [math-fit](https://github.com/nk-components/math-fit).
-
 Color palette from [Coolors](https://coolors.co/d9ed92-b5e48c-99d98c-76c893-52b69a-34a0a4-168aad-1a759f-1e6091-184e77).
 
 Code written in [Typescript](https://www.typescriptlang.org/), compiled by [Vite](https://vitejs.dev/), compressed by [Roadroller](https://lifthrasiir.github.io/roadroller/) + [BestZip](https://github.com/nfriedly/node-bestzip) + [ECT](https://github.com/CT1994/ect-bin).

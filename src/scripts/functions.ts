@@ -1,5 +1,4 @@
 import { collides, GameObject, initKeys, keyPressed, loadImage, Sprite, SpriteSheet } from "kontra";
-import { contain } from "math-fit";
 import catSpriteSheetUrl from "../images/catSpriteSheet.webp";
 import gemSpriteSheetUrl from "../images/gemSpriteSheet.webp";
 import platformImageUrl from "../images/platform.webp";
@@ -57,18 +56,16 @@ import { playMidi } from "./modules/playMidi";
 export function fitCanvasElementInsideItsParent(canvasElement: HTMLCanvasElement) {
   if (!canvasElement.parentElement) return;
 
-  const fittingParameters = contain(
-    { w: canvasElement.width, h: canvasElement.height },
-    {
-      w: canvasElement.parentElement.clientWidth,
-      h: canvasElement.parentElement.clientHeight,
-    }
-  );
+  const { width, height, style, parentElement } = canvasElement;
+  const { clientWidth, clientHeight } = parentElement;
+  const widthScale = clientWidth / width;
+  const heightScale = clientHeight / height;
+  const scale = widthScale < heightScale ? widthScale : heightScale;
 
-  canvasElement.style.marginTop = `${fittingParameters.top}px`;
-  canvasElement.style.marginLeft = `${fittingParameters.left}px`;
-  canvasElement.style.width = `${fittingParameters.width}px`;
-  canvasElement.style.height = `${fittingParameters.height}px`;
+  style.marginTop = `${(clientHeight - height * scale) / 2}px`;
+  style.marginLeft = `${(clientWidth - width * scale) / 2}px`;
+  style.width = `${width * scale}px`;
+  style.height = `${height * scale}px`;
 }
 
 function isCollidingWithLaser(gameObject: GameObject) {
