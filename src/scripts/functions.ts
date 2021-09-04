@@ -54,23 +54,21 @@ import {
 import { getZzFX } from "./modules/getZzFX";
 import { playMidi } from "./modules/playMidi";
 
-export function resizeCanvas() {
-  const { width, height, parentElement, style } = canvas;
+export function fitCanvasElementInsideItsParent(canvasElement: HTMLCanvasElement) {
+  if (!canvasElement.parentElement) return;
 
-  if (!parentElement) return;
-
-  const fittingProps = contain(
-    { w: width, h: height },
+  const fittingParameters = contain(
+    { w: canvasElement.width, h: canvasElement.height },
     {
-      w: parentElement.clientWidth,
-      h: parentElement.clientHeight,
+      w: canvasElement.parentElement.clientWidth,
+      h: canvasElement.parentElement.clientHeight,
     }
   );
 
-  style.marginTop = `${fittingProps.top}px`;
-  style.marginLeft = `${fittingProps.left}px`;
-  style.width = `${fittingProps.width}px`;
-  style.height = `${fittingProps.height}px`;
+  canvasElement.style.marginTop = `${fittingParameters.top}px`;
+  canvasElement.style.marginLeft = `${fittingParameters.left}px`;
+  canvasElement.style.width = `${fittingParameters.width}px`;
+  canvasElement.style.height = `${fittingParameters.height}px`;
 }
 
 function isCollidingWithLaser(gameObject: GameObject) {
@@ -92,13 +90,11 @@ function addPlatforms(platforms: [x: number, y: number][]) {
 
 function checkPlatformsCollisionWithLasers() {
   for (const platform of platformsPool.getAliveObjects() as Sprite[]) {
-    if (isCollidingWithLaser(platform)) {
-      platform.scaleX -= 0.01;
+    if (!isCollidingWithLaser(platform)) continue;
 
-      if (platform.scaleX <= 0.01) {
-        platform.ttl = 0;
-      }
-    }
+    platform.scaleX -= 0.01;
+
+    if (platform.scaleX <= 0.01) platform.ttl = 0;
   }
 }
 
@@ -167,11 +163,9 @@ function updateCatSprite() {
 
   catSprite.dx = isMovingLeft ? -catWalkSpeed : isMovingRight ? catWalkSpeed : 0;
 
-  if (platformWhichCatIsOn) {
-    catSprite.playAnimation(isMovingLeft || isMovingRight ? "walk" : "idle");
-  } else {
-    catSprite.playAnimation(isMovingUp ? "up" : "down");
-  }
+  catSprite.playAnimation(
+    platformWhichCatIsOn ? (isMovingLeft || isMovingRight ? "walk" : "idle") : isMovingUp ? "up" : "down"
+  );
 
   if (requestedJump && platformWhichCatIsOn) {
     catSprite.dy = -catJumpSpeed;
@@ -190,11 +184,11 @@ function updateCatSprite() {
     catSprite.ddy = catFallingAcceleration;
   }
 
-  setPlatformWhichCatIsOn(platformWhichCatIsOn);
-
   if (isCollidingWithLaser(catSprite)) {
     window.location.reload();
   }
+
+  setPlatformWhichCatIsOn(platformWhichCatIsOn);
 
   setCatMoving(catSprite.dx !== 0 || catSprite.dy !== 0);
 }
@@ -281,7 +275,7 @@ export async function handleScriptReady() {
   emitGemSpriteSheetImageLoaded(await loadImage(gemSpriteSheetUrl));
   emitPortalSpriteSheetImageLoaded(await loadImage(portalSpriteSheetUrl));
   initKeys();
-  resizeCanvas();
+  fitCanvasElementInsideItsParent(canvas);
   addGems(gemsPositionsPerLevel[getCurrentLevel()]);
   addPlatforms(platformsPositionsPerLevel[getCurrentLevel()]);
   gameLoop.start();

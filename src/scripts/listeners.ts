@@ -5,9 +5,10 @@ import {
   onPortalSpriteSheetImageLoaded,
   onCatSpriteSheetImageLoaded,
   onGemSpriteSheetImageLoaded,
+  canvas,
 } from "./constants";
 import {
-  resizeCanvas,
+  fitCanvasElementInsideItsParent,
   playBackgroundMusic,
   enableSoundEffects,
   handleGameLoopUpdate,
@@ -18,7 +19,7 @@ import {
   handleCatSpriteSheetImageLoaded,
 } from "./functions";
 
-window.addEventListener("resize", resizeCanvas);
+window.addEventListener("resize", () => fitCanvasElementInsideItsParent(canvas));
 
 window.addEventListener("click", enableSoundEffects);
 
