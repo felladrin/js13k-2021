@@ -1,5 +1,6 @@
 import { Sprite } from "kontra";
 import { platformsPool } from "../constants";
+import { destroyPlatform } from "./destroyPlatform";
 import { isCollidingWithLaser } from "./isCollidingWithLaser";
 
 export function checkPlatformsCollisionWithLasers() {
@@ -8,6 +9,6 @@ export function checkPlatformsCollisionWithLasers() {
 
     platform.scaleX -= 0.01;
 
-    if (platform.scaleX <= 0.01) platform.ttl = 0;
+    if (platform.scaleX < 0) destroyPlatform(platform);
   }
 }
