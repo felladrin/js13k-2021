@@ -20,8 +20,10 @@ import {
   emitPortalSpriteSheetImageLoaded,
   gameLoop,
   gemsPool,
+  gemsPositionsPerLevel,
   getBackgroundMusicPlaying,
   getCatMoving,
+  getCurrentLevel,
   getFunctionToPlaySound,
   getGemAnimations,
   getPlatformImage,
@@ -38,6 +40,7 @@ import {
   objectsToAlwaysUpdate,
   pickupSound,
   platformsPool,
+  platformsPositionsPerLevel,
   portalSprite,
   renderText,
   setBackgroundMusicPlaying,
@@ -254,7 +257,7 @@ function updateDronesVelocity() {
   bottomRightDroneSprite.dy = -velocity;
 }
 
-export function handleGameLoopUpdate(dt: number) {
+export function handleGameLoopUpdate() {
   objectsToAlwaysUpdate.forEach((object) => object.update());
   processPortalAnimation();
   updateCatSprite();
@@ -279,16 +282,8 @@ export async function handleScriptReady() {
   emitPortalSpriteSheetImageLoaded(await loadImage(portalSpriteSheetUrl));
   initKeys();
   resizeCanvas();
-  addPlatforms([
-    [160, 310],
-    [100, 250],
-    [30, 210],
-  ]);
-  addGems([
-    [160, 295],
-    [100, 235],
-    [30, 195],
-  ]);
+  addGems(gemsPositionsPerLevel[getCurrentLevel()]);
+  addPlatforms(platformsPositionsPerLevel[getCurrentLevel()]);
   gameLoop.start();
 }
 

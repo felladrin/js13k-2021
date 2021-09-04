@@ -34,6 +34,8 @@ export const [emitGemSpriteSheetImageLoaded, onGemSpriteSheetImageLoaded] = crea
 
 export const [setGemAnimations, , getGemAnimations] = store<SpriteSheet["animations"]>();
 
+export const [, , getCurrentLevel] = store(0);
+
 export const pickupSound = [0.8, 5, 578, , 0.01, 0.21, , 1.01, , , , , , , , , 0.06, 0.68, 0.09];
 
 export const jumpSound = [1, , 123, 0.04, 0.03, 0.19, , 0.87, -5, -2, , , , , , , , 0.68, 0.07];
@@ -54,13 +56,30 @@ export const moveRightKeys = ["right", "d"];
 
 const commonPoolParameters = { create: Sprite as any };
 
+export const platformsPositionsPerLevel: [x: number, y: number][][] = [
+  [
+    [30, 340],
+    [76, 300],
+    [122, 260],
+    [170, 220],
+  ],
+];
+
+export const gemsPositionsPerLevel: [x: number, y: number][][] = [
+  [
+    [76, 285],
+    [122, 245],
+    [170, 205],
+  ],
+];
+
 export const platformsPool = Pool(commonPoolParameters);
 
 export const gemsPool = Pool(commonPoolParameters);
 
 export const catSprite = Sprite({
-  x: canvas.width / 2,
-  y: canvas.height / 2,
+  x: platformsPositionsPerLevel[getCurrentLevel()][0][0],
+  y: platformsPositionsPerLevel[getCurrentLevel()][0][1],
   anchor: { x: 0.5, y: 1 },
 });
 
