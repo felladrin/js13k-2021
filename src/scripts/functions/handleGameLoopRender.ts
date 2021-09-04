@@ -1,4 +1,4 @@
-import { objectsToAlwaysUpdateAndRender } from "../constants";
+import { objectsToAlwaysUpdateAndRender } from "../instances";
 import { renderCurrentLevelText } from "./renderCurrentLevelText";
 
 export function handleGameLoopRender() {

@@ -1,4 +1,4 @@
-import { getFunctionToPlaySound } from "../constants";
+import { getFunctionToPlaySound } from "../stores";
 
 export function playSound(sound: (number | undefined)[]) {
   getFunctionToPlaySound()?.(...sound);

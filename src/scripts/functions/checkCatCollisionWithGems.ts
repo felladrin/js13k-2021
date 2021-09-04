@@ -1,5 +1,7 @@
 import { collides, Sprite } from "kontra";
-import { gemsPool, getGemsCollectedOnCurrentLevel, pickupSound, setGemsCollectedOnCurrentLevel } from "../constants";
+import { pickupSound } from "../sounds";
+import { gemsPool } from "../instances";
+import { getGemsCollectedOnCurrentLevel, setGemsCollectedOnCurrentLevel } from "../stores";
 import { getCatCollisionObject } from "./getCatCollisionObject";
 import { playSound } from "./playSound";
 

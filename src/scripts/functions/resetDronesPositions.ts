@@ -4,7 +4,7 @@ import {
   canvas,
   topLeftDroneSprite,
   topRightDroneSprite,
-} from "../constants";
+} from "../instances";
 
 export function resetDronesPositions() {
   topLeftDroneSprite.x = 0;

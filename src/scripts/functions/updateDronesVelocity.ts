@@ -1,11 +1,6 @@
-import {
-  bottomLeftDroneSprite,
-  bottomRightDroneSprite,
-  droneSpeed,
-  getCatMoving,
-  topLeftDroneSprite,
-  topRightDroneSprite,
-} from "../constants";
+import { droneSpeed } from "../config";
+import { bottomLeftDroneSprite, bottomRightDroneSprite, topLeftDroneSprite, topRightDroneSprite } from "../instances";
+import { getCatMoving } from "../stores";
 
 export function updateDronesVelocity() {
   const velocity = getCatMoving() ? droneSpeed : 0;

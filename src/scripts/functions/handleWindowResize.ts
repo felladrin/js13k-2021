@@ -1,5 +1,5 @@
-import { canvas } from "../constants";
-import { fitCanvasElementInsideItsParent } from "./fitCanvasElementInsideItsParent";
+import { canvas } from "../instances";
+import { fitCanvasElementInsideItsParent } from "./independent/fitCanvasElementInsideItsParent";
 
 export function handleWindowResize() {
   fitCanvasElementInsideItsParent(canvas);

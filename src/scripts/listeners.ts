@@ -1,3 +1,4 @@
+import { onCurrentLevelChanged, onGemsCollectedOnCurrentLevelUpdated } from "./stores";
 import {
   onGameLoopRender,
   onGameLoopUpdate,
@@ -5,9 +6,7 @@ import {
   onPortalSpriteSheetImageLoaded,
   onCatSpriteSheetImageLoaded,
   onGemSpriteSheetImageLoaded,
-  onCurrentLevelChanged,
-  onGemsCollectedOnCurrentLevelUpdated,
-} from "./constants";
+} from "./events";
 import { handleClickOrKeyDownOnWindow } from "./functions/handleClickOrKeyDownOnWindow";
 import { handleWindowResize } from "./functions/handleWindowResize";
 import { handleCatSpriteSheetImageLoaded } from "./functions/handleCatSpriteSheetImageLoaded";

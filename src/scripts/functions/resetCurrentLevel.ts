@@ -1,4 +1,4 @@
-import { setShouldCheckCollisionBetweenCatAndPortal, setGemsCollectedOnCurrentLevel } from "../constants";
+import { setShouldCheckCollisionBetweenCatAndPortal, setGemsCollectedOnCurrentLevel } from "../stores";
 import { resetGemsFromCurrentLevel } from "./addGems";
 import { resetPlatformsFromCurrentLevel } from "./addPlatforms";
 import { resetCatPosition } from "./resetCatPosition";

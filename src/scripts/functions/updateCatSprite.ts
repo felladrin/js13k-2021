@@ -1,18 +1,8 @@
 import { collides, keyPressed, Sprite } from "kontra";
-import {
-  catFallingAcceleration,
-  catJumpSpeed,
-  catSprite,
-  catWalkSpeed,
-  getPlatformWhichCatIsOn,
-  jumpKeys,
-  jumpSound,
-  moveLeftKeys,
-  moveRightKeys,
-  platformsPool,
-  setCatMoving,
-  setPlatformWhichCatIsOn,
-} from "../constants";
+import { catFallingAcceleration, catJumpSpeed, catWalkSpeed, jumpKeys, moveLeftKeys, moveRightKeys } from "../config";
+import { jumpSound } from "../sounds";
+import { catSprite, platformsPool } from "../instances";
+import { getPlatformWhichCatIsOn, setCatMoving, setPlatformWhichCatIsOn } from "../stores";
 import { isCollidingWithLaser } from "./isCollidingWithLaser";
 import { getCatCollisionObject } from "./getCatCollisionObject";
 import { playSound } from "./playSound";

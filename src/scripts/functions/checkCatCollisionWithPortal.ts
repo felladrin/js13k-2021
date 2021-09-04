@@ -1,5 +1,6 @@
 import { collides } from "kontra";
-import { pickupSound, shouldCheckCollisionBetweenCatAndPortal } from "../constants";
+import { pickupSound } from "../sounds";
+import { shouldCheckCollisionBetweenCatAndPortal } from "../stores";
 import { advanceToNextLevelIfPossible } from "./advanceToNextLevelIfPossible";
 import { getCatCollisionObject } from "./getCatCollisionObject";
 import { getPortalCollisionObject } from "./getPortalCollisionObject";

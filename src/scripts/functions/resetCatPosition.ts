@@ -1,4 +1,6 @@
-import { catSprite, getCurrentLevel, platformsPositionsPerLevel } from "../constants";
+import { platformsPositionsPerLevel } from "../config";
+import { catSprite } from "../instances";
+import { getCurrentLevel } from "../stores";
 
 export function resetCatPosition() {
   const [initialPlatform] = platformsPositionsPerLevel[getCurrentLevel()];

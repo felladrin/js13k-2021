@@ -3,15 +3,14 @@ import catSpriteSheetUrl from "../../images/catSpriteSheet.webp";
 import gemSpriteSheetUrl from "../../images/gemSpriteSheet.webp";
 import platformImageUrl from "../../images/platform.webp";
 import portalSpriteSheetUrl from "../../images/portalSpriteSheet.webp";
+import { canvas, gameLoop } from "../instances";
+import { emitPlatformImageLoaded } from "../stores";
 import {
-  canvas,
   emitCatSpriteSheetImageLoaded,
   emitGemSpriteSheetImageLoaded,
-  emitPlatformImageLoaded,
   emitPortalSpriteSheetImageLoaded,
-  gameLoop,
-} from "../constants";
-import { fitCanvasElementInsideItsParent } from "./fitCanvasElementInsideItsParent";
+} from "../events";
+import { fitCanvasElementInsideItsParent } from "./independent/fitCanvasElementInsideItsParent";
 import { resetCurrentLevel } from "./resetCurrentLevel";
 
 export async function handleScriptReady() {

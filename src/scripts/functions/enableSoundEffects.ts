@@ -1,5 +1,5 @@
-import { getFunctionToPlaySound, setFunctionToPlaySound } from "../constants";
-import { getZzFX } from "./getZzFX";
+import { getFunctionToPlaySound, setFunctionToPlaySound } from "../stores";
+import { getZzFX } from "./independent/getZzFX";
 import { playSound } from "./playSound";
 
 export function enableSoundEffects() {

@@ -1,4 +1,4 @@
-import { objectsToAlwaysUpdateAndRender } from "../constants";
+import { objectsToAlwaysUpdateAndRender } from "../instances";
 import { checkPlatformsCollisionWithLasers } from "./checkPlatformsCollisionWithLasers";
 import { checkCatCollisionWithGems } from "./checkCatCollisionWithGems";
 import { processPortalAnimation } from "./processPortalAnimation";

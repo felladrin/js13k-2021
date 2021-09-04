@@ -1,4 +1,4 @@
-import { portalSprite } from "../constants";
+import { portalSprite } from "../instances";
 
 export function processPortalAnimation() {
   if (

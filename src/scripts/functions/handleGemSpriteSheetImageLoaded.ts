@@ -1,5 +1,5 @@
 import { SpriteSheet } from "kontra";
-import { setGemAnimations } from "../constants";
+import { setGemAnimations } from "../stores";
 
 export function handleGemSpriteSheetImageLoaded(image: HTMLImageElement) {
   setGemAnimations(

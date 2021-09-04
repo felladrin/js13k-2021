@@ -4,7 +4,7 @@ import {
   laserFromBottomRightDrone,
   laserFromTopLeftDrone,
   laserFromTopRightDrone,
-} from "../constants";
+} from "../instances";
 
 export function isCollidingWithLaser(gameObject: GameObject) {
   return [laserFromTopRightDrone, laserFromBottomLeftDrone, laserFromBottomRightDrone, laserFromTopLeftDrone].some(

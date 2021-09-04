@@ -1,5 +1,5 @@
 import { Sprite } from "kontra";
-import { platformsPool } from "../constants";
+import { platformsPool } from "../instances";
 import { destroyPlatform } from "./destroyPlatform";
 import { isCollidingWithLaser } from "./isCollidingWithLaser";
 

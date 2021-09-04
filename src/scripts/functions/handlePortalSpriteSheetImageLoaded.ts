@@ -1,5 +1,5 @@
 import { SpriteSheet } from "kontra";
-import { portalSprite } from "../constants";
+import { portalSprite } from "../instances";
 
 export function handlePortalSpriteSheetImageLoaded(image: HTMLImageElement) {
   portalSprite.animations = SpriteSheet({

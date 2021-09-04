@@ -1,4 +1,4 @@
-import { emitScriptReady } from "./constants";
+import { emitScriptReady } from "./events";
 import "./listeners";
 
 emitScriptReady();
