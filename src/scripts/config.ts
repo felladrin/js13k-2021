@@ -6,7 +6,7 @@ export const droneSpeed = 0.1;
 
 export const catFallingAcceleration = 0.4;
 
-export const jumpKeys = ["up", "w", "z"];
+export const jumpKeys = ["space", "up", "w", "z"];
 
 export const moveLeftKeys = ["left", "a", "q"];
 
