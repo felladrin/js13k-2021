@@ -6,16 +6,14 @@ import {
   onCatSpriteSheetImageLoaded,
   onGemSpriteSheetImageLoaded,
 } from "./constants";
-import {
-  handleGameLoopUpdate,
-  handleScriptReady,
-  handleGameLoopRender,
-  handlePortalSpriteSheetImageLoaded,
-  handleGemSpriteSheetImageLoaded,
-  handleCatSpriteSheetImageLoaded,
-  handleWindowResize,
-  handleClickOrKeyDownOnWindow,
-} from "./functions";
+import { handleClickOrKeyDownOnWindow } from "./functions/handleClickOrKeyDownOnWindow";
+import { handleWindowResize } from "./functions/handleWindowResize";
+import { handleCatSpriteSheetImageLoaded } from "./functions/handleCatSpriteSheetImageLoaded";
+import { handleGemSpriteSheetImageLoaded } from "./functions/handleGemSpriteSheetImageLoaded";
+import { handlePortalSpriteSheetImageLoaded } from "./functions/handlePortalSpriteSheetImageLoaded";
+import { handleGameLoopRender } from "./functions/handleGameLoopRender";
+import { handleScriptReady } from "./functions/handleScriptReady";
+import { handleGameLoopUpdate } from "./functions/handleGameLoopUpdate";
 
 window.addEventListener("resize", handleWindowResize);
 
