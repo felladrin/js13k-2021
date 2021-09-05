@@ -1,7 +1,7 @@
 import { collides, keyPressed, Sprite } from "kontra";
 import { catFallingAcceleration, catJumpSpeed, catWalkSpeed, jumpKeys, moveLeftKeys, moveRightKeys } from "../config";
 import { jumpSound } from "../sounds";
-import { catSprite, platformsPool } from "../instances";
+import { catSprite, leftKeyButton, platformsPool, rightKeyButton, upKeyButton } from "../instances";
 import { getPlatformWhichCatIsOn, setCatMoving, setPlatformWhichCatIsOn } from "../stores";
 import { isCollidingWithLaser } from "./isCollidingWithLaser";
 import { getCatCollisionObject } from "./getCatCollisionObject";
@@ -9,9 +9,9 @@ import { playSound } from "./playSound";
 import { resetCurrentLevel } from "./resetCurrentLevel";
 
 export function updateCatSprite() {
-  const requestedJump = jumpKeys.some(keyPressed);
-  const isMovingLeft = moveLeftKeys.some(keyPressed);
-  const isMovingRight = moveRightKeys.some(keyPressed);
+  const requestedJump = jumpKeys.some(keyPressed) || upKeyButton.pressed;
+  const isMovingLeft = moveLeftKeys.some(keyPressed) || leftKeyButton.pressed;
+  const isMovingRight = moveRightKeys.some(keyPressed) || rightKeyButton.pressed;
   const isMovingDown = catSprite.dy > 0;
   const isMovingUp = catSprite.dy < 0;
 

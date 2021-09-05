@@ -1,9 +1,13 @@
 import { initFont, font } from "tinyfont";
-import { GameLoop, init, Pool, Sprite, getContext } from "kontra";
+import { GameLoop, init, Pool, Sprite, Button, getContext, initKeys, initPointer } from "kontra";
 import { propagateGameLoopUpdate, propagateGameLoopRender } from "./events";
 import { yaleBlue } from "./colors";
 
 export const { canvas } = init("game");
+
+initKeys();
+
+initPointer();
 
 export const renderText = initFont(font, getContext());
 
@@ -19,6 +23,30 @@ export const portalSprite = Sprite({
   x: 180,
   y: 180,
   anchor: { x: 0.5, y: 0.5 },
+});
+
+const commonKeyButtonProperties = {
+  width: 32,
+  height: 32,
+  anchor: { x: 0.5, y: 0.5 },
+};
+
+export const leftKeyButton = Button({
+  ...commonKeyButtonProperties,
+  x: 24,
+  y: canvas.height - 24,
+});
+
+export const upKeyButton = Button({
+  ...commonKeyButtonProperties,
+  x: canvas.width / 2,
+  y: canvas.height - 24,
+});
+
+export const rightKeyButton = Button({
+  ...commonKeyButtonProperties,
+  x: canvas.width - 24,
+  y: canvas.height - 24,
 });
 
 export const gameLoop = GameLoop({
@@ -70,4 +98,7 @@ export const objectsToAlwaysUpdateAndRender = [
   topRightDroneSprite,
   bottomLeftDroneSprite,
   bottomRightDroneSprite,
+  upKeyButton,
+  leftKeyButton,
+  rightKeyButton,
 ];

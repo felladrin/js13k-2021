@@ -6,6 +6,7 @@ import {
   onPortalSpriteSheetImageLoaded,
   onCatSpriteSheetImageLoaded,
   onGemSpriteSheetImageLoaded,
+  onKeysSpriteSheetImageLoaded,
 } from "./events";
 import { handleClickOrKeyDownOnWindow } from "./functions/handleClickOrKeyDownOnWindow";
 import { handleWindowResize } from "./functions/handleWindowResize";
@@ -17,6 +18,7 @@ import { handleScriptReady } from "./functions/handleScriptReady";
 import { handleGameLoopUpdate } from "./functions/handleGameLoopUpdate";
 import { resetCurrentLevel } from "./functions/resetCurrentLevel";
 import { handleGemsCollectedOnCurrentLevelUpdated } from "./functions/handleGemsCollectedOnCurrentLevelUpdated";
+import { handleKeysSpriteSheetImageLoaded } from "./functions/handleKeysSpriteSheetImageLoaded";
 
 window.addEventListener("resize", handleWindowResize);
 
@@ -29,6 +31,8 @@ onCatSpriteSheetImageLoaded(handleCatSpriteSheetImageLoaded);
 onGemSpriteSheetImageLoaded(handleGemSpriteSheetImageLoaded);
 
 onPortalSpriteSheetImageLoaded(handlePortalSpriteSheetImageLoaded);
+
+onKeysSpriteSheetImageLoaded(handleKeysSpriteSheetImageLoaded);
 
 onCurrentLevelChanged(resetCurrentLevel);
 

@@ -8,6 +8,8 @@ export const [emitCatSpriteSheetImageLoaded, onCatSpriteSheetImageLoaded] = crea
 
 export const [emitPortalSpriteSheetImageLoaded, onPortalSpriteSheetImageLoaded] = createPubSub<HTMLImageElement>();
 
+export const [emitKeysSpriteSheetImageLoaded, onKeysSpriteSheetImageLoaded] = createPubSub<HTMLImageElement>();
+
 export const [emitGemSpriteSheetImageLoaded, onGemSpriteSheetImageLoaded] = createPubSub<HTMLImageElement>();
 
 export const [propagateGameLoopRender, onGameLoopRender] = createPubSub();
