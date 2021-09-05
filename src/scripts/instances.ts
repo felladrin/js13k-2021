@@ -21,7 +21,7 @@ export const catSprite = Sprite({
 
 export const portalSprite = Sprite({
   x: 180,
-  y: 130,
+  y: 150,
   anchor: { x: 0.5, y: 0.5 },
 });
 
