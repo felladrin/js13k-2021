@@ -1,6 +1,6 @@
 import { bottomLeftDroneSprite, canvas, laserFromBottomLeftDrone } from "../instances";
-import { getRandomLaserColor } from "./independent/getRandomLaserColor";
-import { getRandomLaserSize } from "./independent/getRandomLaserSize";
+import { getRandomLaserColor } from "./getRandomLaserColor";
+import { getRandomLaserSize } from "./getRandomLaserSize";
 
 export function updateLaserFromBottomLeftDrone() {
   laserFromBottomLeftDrone.position = bottomLeftDroneSprite.position;

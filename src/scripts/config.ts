@@ -4,6 +4,8 @@ export const catJumpSpeed = 6.8;
 
 export const droneSpeed = 0.1;
 
+export const minimumLaserSize = 1.5;
+
 export const catFallingAcceleration = 0.4;
 
 export const jumpKeys = ["space", "up", "w", "z"];

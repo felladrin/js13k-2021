@@ -1,0 +1,10 @@
+export const keyLime = "#d9ed92";
+export const yellowGreenCrayola = "#b5e48c";
+export const grannySmithApple = "#99d98c";
+export const oceanGreen = "#76c893";
+export const keppel = "#52b69a";
+export const viridianGreen = "#34a0a4";
+export const blueMunsell = "#168aad";
+export const celadonBlue = "#1a759f";
+export const lapisLazuli = "#1e6091";
+export const yaleBlue = "#184e77";

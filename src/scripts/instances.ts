@@ -1,6 +1,7 @@
 import { initFont, font } from "tinyfont";
 import { GameLoop, init, Pool, Sprite, getContext } from "kontra";
 import { propagateGameLoopUpdate, propagateGameLoopRender } from "./events";
+import { yaleBlue } from "./colors";
 
 export const { canvas } = init("game");
 
@@ -28,7 +29,7 @@ export const gameLoop = GameLoop({
 const commonDroneProperties = {
   width: 6,
   height: 6,
-  color: "#184E77",
+  color: yaleBlue,
   anchor: { x: 0.5, y: 0.5 },
 } as Partial<Sprite>;
 
