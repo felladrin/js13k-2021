@@ -12,7 +12,7 @@ export default defineConfig((configEnv) => ({
         acceleration: true,
         anchor: true,
         camera: false,
-        group: false,
+        group: true,
         opacity: false,
         rotation: false,
         scale: true,
