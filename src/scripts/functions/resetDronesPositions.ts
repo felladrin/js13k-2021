@@ -17,5 +17,5 @@ export function resetDronesPositions() {
   bottomLeftDroneSprite.y = canvas.height;
 
   bottomRightDroneSprite.x = canvas.width;
-  bottomRightDroneSprite.y = canvas.height;
+  bottomRightDroneSprite.y = canvas.height - 50;
 }

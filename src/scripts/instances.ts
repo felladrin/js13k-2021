@@ -21,7 +21,7 @@ export const catSprite = Sprite({
 
 export const portalSprite = Sprite({
   x: 180,
-  y: 180,
+  y: 130,
   anchor: { x: 0.5, y: 0.5 },
 });
 
@@ -33,20 +33,20 @@ const commonKeyButtonProperties = {
 
 export const leftKeyButton = Button({
   ...commonKeyButtonProperties,
-  x: 24,
-  y: canvas.height - 24,
+  x: 25,
+  y: canvas.height - 25,
 });
 
 export const upKeyButton = Button({
   ...commonKeyButtonProperties,
   x: canvas.width / 2,
-  y: canvas.height - 24,
+  y: canvas.height - 25,
 });
 
 export const rightKeyButton = Button({
   ...commonKeyButtonProperties,
-  x: canvas.width - 24,
-  y: canvas.height - 24,
+  x: canvas.width - 25,
+  y: canvas.height - 25,
 });
 
 export const gameLoop = GameLoop({
