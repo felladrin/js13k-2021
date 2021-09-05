@@ -27,6 +27,17 @@ export const platformsPositionsPerLevel: [x: number, y: number][][] = [
     [120, 215],
     [37, 250],
   ],
+  [
+    [310, 32],
+    [50, 32],
+    [248, 112],
+    [124, 112],
+    [154, 219],
+    [303, 314],
+    [229, 278],
+    [74, 303],
+    [124, 261],
+  ],
 ];
 
 export const gemsPositionsPerLevel: [x: number, y: number][][] = [
@@ -39,5 +50,10 @@ export const gemsPositionsPerLevel: [x: number, y: number][][] = [
     [76, 285],
     [121, 195],
     [254, 285],
+  ],
+  [
+    [74, 291],
+    [153, 205],
+    [301, 301],
   ],
 ];
