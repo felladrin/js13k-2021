@@ -7,6 +7,7 @@ import {
   onCatSpriteSheetImageLoaded,
   onGemSpriteSheetImageLoaded,
   onKeysSpriteSheetImageLoaded,
+  onGameButtonClicked,
 } from "./events";
 import { handleClickOrKeyDownOnWindow } from "./functions/handleClickOrKeyDownOnWindow";
 import { handleWindowResize } from "./functions/handleWindowResize";
@@ -25,6 +26,8 @@ window.addEventListener("resize", handleWindowResize);
 window.addEventListener("click", handleClickOrKeyDownOnWindow);
 
 window.addEventListener("keydown", handleClickOrKeyDownOnWindow);
+
+onGameButtonClicked(handleClickOrKeyDownOnWindow);
 
 onCatSpriteSheetImageLoaded(handleCatSpriteSheetImageLoaded);
 

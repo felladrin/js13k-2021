@@ -4,6 +4,8 @@ export const [emitScriptReady, onScriptReady] = createPubSub();
 
 export const [propagateGameLoopUpdate, onGameLoopUpdate] = createPubSub<number>();
 
+export const [propagateGameButtonClicked, onGameButtonClicked] = createPubSub();
+
 export const [emitCatSpriteSheetImageLoaded, onCatSpriteSheetImageLoaded] = createPubSub<HTMLImageElement>();
 
 export const [emitPortalSpriteSheetImageLoaded, onPortalSpriteSheetImageLoaded] = createPubSub<HTMLImageElement>();

@@ -1,6 +1,6 @@
 import { initFont, font } from "tinyfont";
 import { GameLoop, init, Pool, Sprite, Button, getContext, initKeys, initPointer } from "kontra";
-import { propagateGameLoopUpdate, propagateGameLoopRender } from "./events";
+import { propagateGameLoopUpdate, propagateGameLoopRender, propagateGameButtonClicked } from "./events";
 import { yaleBlue } from "./colors";
 
 export const { canvas } = init("game");
@@ -29,6 +29,7 @@ const commonKeyButtonProperties = {
   width: 32,
   height: 32,
   anchor: { x: 0.5, y: 0.5 },
+  onDown: propagateGameButtonClicked,
 };
 
 export const leftKeyButton = Button({
