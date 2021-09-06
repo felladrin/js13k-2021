@@ -10,6 +10,8 @@ export const catFallingAcceleration = 0.4;
 
 export const maximumLaserY = 310;
 
+export const apertureSize = ["NIL", "MIN", "MID", "MAX"];
+
 export const jumpKeys = ["space", "up", "w", "z"];
 
 export const moveLeftKeys = ["left", "a", "q"];
