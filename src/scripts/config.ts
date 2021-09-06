@@ -8,6 +8,8 @@ export const minimumLaserSize = 1.5;
 
 export const catFallingAcceleration = 0.4;
 
+export const maximumLaserY = 310;
+
 export const jumpKeys = ["space", "up", "w", "z"];
 
 export const moveLeftKeys = ["left", "a", "q"];

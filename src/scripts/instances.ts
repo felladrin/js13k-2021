@@ -55,19 +55,27 @@ export const gameLoop = GameLoop({
 });
 
 const commonDroneProperties = {
-  width: 6,
-  height: 6,
+  width: 4,
+  height: 4,
   color: yaleBlue,
   anchor: { x: 0.5, y: 0.5 },
 } as Partial<Sprite>;
 
 export const topLeftDroneSprite = Sprite(commonDroneProperties);
 
+export const topLeftDroneFollowerSprite = Sprite(commonDroneProperties);
+
 export const topRightDroneSprite = Sprite(commonDroneProperties);
+
+export const topRightDroneFollowerSprite = Sprite(commonDroneProperties);
 
 export const bottomLeftDroneSprite = Sprite(commonDroneProperties);
 
+export const bottomLeftDroneFollowerSprite = Sprite(commonDroneProperties);
+
 export const bottomRightDroneSprite = Sprite(commonDroneProperties);
+
+export const bottomRightDroneFollowerSprite = Sprite(commonDroneProperties);
 
 export const laserFromTopLeftDrone = Sprite({
   anchor: { x: 0, y: 0.5 },
@@ -101,4 +109,8 @@ export const objectsToAlwaysUpdateAndRender = [
   upKeyButton,
   leftKeyButton,
   rightKeyButton,
+  topLeftDroneFollowerSprite,
+  topRightDroneFollowerSprite,
+  bottomLeftDroneFollowerSprite,
+  bottomRightDroneFollowerSprite,
 ];

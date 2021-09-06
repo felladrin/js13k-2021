@@ -10,6 +10,7 @@ import { updateLaserFromBottomRightDrone } from "./updateLaserFromBottomRightDro
 import { updateDronesVelocity } from "./updateDronesVelocity";
 import { checkCatCollisionWithPortal } from "./checkCatCollisionWithPortal";
 import { updateKeyButtonsAnimation } from "./updateKeyButtonsAnimation";
+import { updateDronesFollowersPosition } from "./updateDronesFollowersPosition";
 
 export function handleGameLoopUpdate() {
   objectsToAlwaysUpdateAndRender.forEach((object) => object.update());
@@ -18,6 +19,7 @@ export function handleGameLoopUpdate() {
   checkCatCollisionWithGems();
   checkCatCollisionWithPortal();
   checkPlatformsCollisionWithLasers();
+  updateDronesFollowersPosition();
   updateLaserFromTopLeftDrone();
   updateLaserFromBottomLeftDrone();
   updateLaserFromBottomRightDrone();

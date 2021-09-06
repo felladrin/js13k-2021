@@ -1,3 +1,4 @@
+import { maximumLaserY } from "../config";
 import {
   bottomLeftDroneSprite,
   bottomRightDroneSprite,
@@ -14,8 +15,8 @@ export function resetDronesPositions() {
   topRightDroneSprite.y = 0;
 
   bottomLeftDroneSprite.x = 1;
-  bottomLeftDroneSprite.y = canvas.height;
+  bottomLeftDroneSprite.y = maximumLaserY;
 
   bottomRightDroneSprite.x = canvas.width;
-  bottomRightDroneSprite.y = canvas.height - 50;
+  bottomRightDroneSprite.y = maximumLaserY;
 }
