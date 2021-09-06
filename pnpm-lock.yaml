@@ -3,6 +3,7 @@ lockfileVersion: 5.3
 specifiers:
   '@tweakpane/core': ^1.0.6
   arkit: ^1.6.4
+  base26: ^0.1.0
   bestzip: ^2.2.0
   create-pubsub: ^1.3.0
   cross-exec-file: ^2.0.0
@@ -25,6 +26,7 @@ specifiers:
   zipstats: ^1.1.0
 
 dependencies:
+  base26: 0.1.0
   create-pubsub: 1.3.0
   kontra: 7.3.1
   tinyfont: 1.3.2
@@ -693,6 +695,10 @@ packages:
       mixin-deep: 1.3.2
       pascalcase: 0.1.1
     dev: true
+
+  /base26/0.1.0:
+    resolution: {integrity: sha512-fu39ovAEARSpkOZJQjbQagPdW4sEz3d1owQx3oZey5b0GaTtsLddOfKYx+LEif9U20Xn9SlJ4zayERt0qXyhDQ==}
+    dev: false
 
   /base64-js/1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}

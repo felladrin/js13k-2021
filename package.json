@@ -12,6 +12,7 @@
     "dependencies-updater": "ncu -u"
   },
   "dependencies": {
+    "base26": "^0.1.0",
     "create-pubsub": "^1.3.0",
     "kontra": "^7.3.1",
     "tinyfont": "^1.3.2"
