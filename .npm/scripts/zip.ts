@@ -1,4 +1,4 @@
-import { statSync, unlinkSync } from "fs";
+import { statSync, unlinkSync, existsSync } from "fs";
 import { resolve } from "path";
 import zip from "bestzip";
 import efficientCompressionTool from "ect-bin";
@@ -9,7 +9,7 @@ const distFolderPath = resolve(__dirname, "..", "..", "dist");
 const zippedFilePath = resolve(__dirname, "..", "..", "dist.zip");
 
 (async () => {
-  if (statSync(zippedFilePath).isFile) {
+  if (existsSync(zippedFilePath)) {
     unlinkSync(zippedFilePath);
   }
 
