@@ -9,7 +9,7 @@ specifiers:
   base26: ^0.1.0
   bestzip: ^2.2.0
   colorette: ^1.4.0
-  create-pubsub: ^1.3.0
+  create-pubsub: ^1.3.1
   cross-exec-file: ^2.0.0
   dpdm: ^3.7.1
   ect-bin: ^1.4.1
@@ -32,7 +32,7 @@ specifiers:
 dependencies:
   base26: 0.1.0
   colorette: 1.4.0
-  create-pubsub: 1.3.0
+  create-pubsub: 1.3.1
   kontra: 7.3.1
   tinyfont: 1.3.2
 
@@ -1316,8 +1316,8 @@ packages:
       readable-stream: 3.6.0
     dev: true
 
-  /create-pubsub/1.3.0:
-    resolution: {integrity: sha512-pFM/oHPU+/V5COJGOiH5W06GRsgAETp+0RwFf6lvEqa+QdCn0c9iav833DZ1kH8+zlbdTU4+mB5aEE4kwAXTdQ==}
+  /create-pubsub/1.3.1:
+    resolution: {integrity: sha512-9zIDeEjaJ1bFoBQW+Y4Ybgs1hZC4G1i1gS1rWPFdmey0NoSe8tXqmKQcQnhhDxiEwGYsupjfHO+bdZNOEK4dmQ==}
     dev: false
 
   /create-require/1.1.1:

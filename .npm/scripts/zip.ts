@@ -1,5 +1,6 @@
 import { statSync, unlinkSync, existsSync } from "fs";
 import { resolve } from "path";
+import { createPubSub } from "create-pubsub";
 import { greenBright, redBright } from "colorette";
 import zip from "bestzip";
 import efficientCompressionTool from "ect-bin";
@@ -8,18 +9,30 @@ import zipstats from "zipstats";
 
 const distFolderPath = resolve(__dirname, "..", "..", "dist");
 const zippedFilePath = resolve(__dirname, "..", "..", "dist.zip");
+const [emitZipProcessInitialized, onZipProcessInitialized] = createPubSub();
+const [emitOldZipRemoved, onOldZipRemoved] = createPubSub();
+const [emitZipCreated, onZipCreated] = createPubSub();
+const [emitZipOptimized, onZipOptimized] = createPubSub();
 
-(async () => {
+onZipProcessInitialized(() => {
   if (existsSync(zippedFilePath)) {
     unlinkSync(zippedFilePath);
   }
 
+  emitOldZipRemoved();
+});
+
+onOldZipRemoved(async () => {
   await zip({
     cwd: distFolderPath,
     source: "index.html",
     destination: zippedFilePath,
   });
 
+  emitZipCreated();
+});
+
+onZipCreated(async () => {
   console.log("Zip file created successfully!");
 
   try {
@@ -30,6 +43,10 @@ const zippedFilePath = resolve(__dirname, "..", "..", "dist.zip");
     console.log("Skipping usage of Efficient Compression Tool.");
   }
 
+  emitZipOptimized();
+});
+
+onZipOptimized(() => {
   const maxSizeAllowed = 13 * 1024;
   const fileSize = statSync(zippedFilePath).size;
   const fileSizeDifference = Math.abs(maxSizeAllowed - fileSize);
@@ -40,4 +57,6 @@ const zippedFilePath = resolve(__dirname, "..", "..", "dist.zip");
   console.log(`${zippedFilePath} (${fileSize} bytes)`);
   console.log(zipstats(zippedFilePath));
   console.log(colorize(`Status: ${fileSizeDifference} bytes ${status} the 13KB limit!`));
-})();
+});
+
+emitZipProcessInitialized();
