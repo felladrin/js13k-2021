@@ -19,12 +19,16 @@ enum OnClickAction {
 
 const kontraFields = {
   pointer: { x: 0, y: 0 },
+  platformPositions: getPlatformPositionsAsString(),
+  gemsPositions: getGemsPositionsAsString(),
   onClickAction: OnClickAction.DoNothing,
-  platformPositions: "",
-  gemsPositions: "",
 };
 
 const pointerField = kontraFolder.addInput(kontraFields, "pointer", { disabled: true, label: "Pointer" });
+
+kontraFolder.addMonitor(kontraFields, "platformPositions", { label: "Pla. Pos." });
+
+kontraFolder.addMonitor(kontraFields, "gemsPositions", { label: "Gems Pos." });
 
 kontraFolder.addInput(kontraFields, "onClickAction", {
   label: "On Click",
@@ -36,10 +40,6 @@ kontraFolder.addInput(kontraFields, "onClickAction", {
     [OnClickAction.TeleportCat]: OnClickAction.TeleportCat,
   },
 });
-
-kontraFolder.addMonitor(kontraFields, "platformPositions", { label: "Pla. Pos." });
-
-kontraFolder.addMonitor(kontraFields, "gemsPositions", { label: "Gems Pos." });
 
 canvas.addEventListener("click", () => {
   const { x, y } = getPointer();
@@ -73,15 +73,27 @@ canvas.addEventListener("click", () => {
       break;
   }
 
-  kontraFields.platformPositions = JSON.stringify(
-    (platformsPool.getAliveObjects() as Sprite[]).map((platform) => [Math.round(platform.x), Math.round(platform.y)])
-  );
+  kontraFields.platformPositions = getPlatformPositionsAsString();
 
-  kontraFields.gemsPositions = JSON.stringify(
-    (gemsPool.getAliveObjects() as Sprite[]).map((gem) => [Math.round(gem.x), Math.round(gem.y)])
-  );
+  kontraFields.gemsPositions = getGemsPositionsAsString();
 
   kontraFields.pointer = { x, y };
 
   pointerField.refresh();
 });
+
+setInterval(() => {
+  kontraFields.platformPositions = getPlatformPositionsAsString();
+
+  kontraFields.gemsPositions = getGemsPositionsAsString();
+}, 1000);
+
+function getPlatformPositionsAsString() {
+  return JSON.stringify(
+    (platformsPool.getAliveObjects() as Sprite[]).map((platform) => [Math.round(platform.x), Math.round(platform.y)])
+  );
+}
+
+function getGemsPositionsAsString() {
+  return JSON.stringify((gemsPool.getAliveObjects() as Sprite[]).map((gem) => [Math.round(gem.x), Math.round(gem.y)]));
+}
