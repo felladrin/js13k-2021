@@ -1,7 +1,7 @@
 import { setShouldCheckCollisionBetweenCatAndPortal, setGemsCollectedOnCurrentLevel } from "../../constants/stores";
 import { resetGems } from "./resetGems";
 import { resetPlatforms } from "./resetPlatforms";
-import { resetCat } from "./resetCatPosition";
+import { resetCat } from "./resetCat";
 import { resetDronesPositions } from "./resetDronesPositions";
 
 export function resetCurrentLevel() {
