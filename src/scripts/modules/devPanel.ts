@@ -14,6 +14,7 @@ enum OnClickAction {
   AddPlatform = "Add Platform",
   DelPlatform = "Del Platform",
   AddGem = "Add Gem",
+  DelGem = "Del Gem",
   TeleportCat = "Teleport Cat",
 }
 
@@ -37,6 +38,7 @@ kontraFolder.addInput(kontraFields, "onClickAction", {
     [OnClickAction.AddPlatform]: OnClickAction.AddPlatform,
     [OnClickAction.DelPlatform]: OnClickAction.DelPlatform,
     [OnClickAction.AddGem]: OnClickAction.AddGem,
+    [OnClickAction.DelGem]: OnClickAction.DelGem,
     [OnClickAction.TeleportCat]: OnClickAction.TeleportCat,
   },
 });
@@ -57,6 +59,7 @@ canvas.addEventListener("click", () => {
       const foundPlatform = (platformsPool.getAliveObjects() as Sprite[]).find((platform) =>
         collides(platform, { world: { x, y, width: 1, height: 1 } })
       );
+
       if (foundPlatform) foundPlatform.ttl = 0;
       break;
     case OnClickAction.AddGem:
@@ -66,6 +69,13 @@ canvas.addEventListener("click", () => {
         animations: getGemAnimations(),
         anchor: { x: 0.5, y: 0.5 },
       } as Partial<Sprite>) as Sprite;
+      break;
+    case OnClickAction.DelGem:
+      const foundGem = (gemsPool.getAliveObjects() as Sprite[]).find((gem) =>
+        collides(gem, { world: { x, y, width: 1, height: 1 } })
+      );
+
+      if (foundGem) foundGem.ttl = 0;
       break;
     case OnClickAction.TeleportCat:
       catSprite.x = x;
