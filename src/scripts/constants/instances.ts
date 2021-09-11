@@ -25,6 +25,10 @@ export const portalSprite = Sprite({
   anchor: { x: 0.5, y: 0.5 },
 });
 
+export const entryPortalSprite = Sprite({
+  anchor: { x: 0.5, y: 0.5 },
+});
+
 const commonKeyButtonProperties = {
   width: 32,
   height: 32,
@@ -97,6 +101,7 @@ export const laserFromTopRightDrone = Sprite({
 export const objectsToAlwaysUpdateAndRender = [
   gemsPool,
   portalSprite,
+  entryPortalSprite,
   catSprite,
   platformsPool,
   laserFromTopLeftDrone,
