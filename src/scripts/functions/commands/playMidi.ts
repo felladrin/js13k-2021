@@ -25,12 +25,15 @@
 // ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+let context: AudioContext;
+let node: ScriptProcessorNode;
+
 export function playMidi(midiFile: { header: any; tracks: any }, onFinishCallback?: () => void) {
-  const context = new window.AudioContext();
+  if (!context) context = new window.AudioContext();
   const sampleRate = context.sampleRate;
   const channelCount = 2;
   const bufferSize = 4096 * 4;
-  const node = context.createScriptProcessor(bufferSize, 0, channelCount);
+  if (!node) node = context.createScriptProcessor(bufferSize, 0, channelCount);
   const generator = (() => {
     const synth = (() => {
       let generators: any[] = [];
