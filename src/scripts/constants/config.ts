@@ -34,8 +34,8 @@ export const platformsPositionsPerLevel: [x: number, y: number][][] = [
     [135, 212],
   ],
   [
-    [310, 32],
-    [50, 32],
+    [310, 42],
+    [50, 42],
     [248, 100],
     [124, 100],
     [180, 180],
