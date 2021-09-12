@@ -58,11 +58,11 @@ export function updateCatSprite() {
     catSprite.ddy = catFallingAcceleration;
   }
 
-  if (isCollidingWithLaser(catSprite) || isOutOfLasersBounds(catSprite)) {
-    resetCurrentLevel();
-  }
-
   setPlatformWhichCatIsOn(platformWhichCatIsOn);
 
   setCatMoving(catSprite.dx !== 0 || catSprite.dy !== 0);
+
+  if (isCollidingWithLaser(catSprite) || isOutOfLasersBounds(catSprite)) {
+    resetCurrentLevel();
+  }
 }
