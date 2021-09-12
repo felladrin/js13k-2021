@@ -12,8 +12,10 @@ import { checkCatCollisionWithPortal } from "../commands/checkCatCollisionWithPo
 import { updateKeyButtonsAnimation } from "../commands/updateKeyButtonsAnimation";
 import { updateDronesFollowersPosition } from "../commands/updateDronesFollowersPosition";
 import { checkGemsCollisionWithLasers } from "../commands/checkGemsCollisionWithLasers";
+import { updateEscapeTime } from "../commands/updateEscapeTime";
 
-export function handleGameLoopUpdate() {
+export function handleGameLoopUpdate(deltaTime: number) {
+  updateEscapeTime(deltaTime);
   objectsToAlwaysUpdateAndRender.forEach((object) => object.update());
   processPortalAnimation();
   updateCatSprite();

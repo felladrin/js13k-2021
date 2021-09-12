@@ -10,7 +10,7 @@ import {
   onScriptReady,
 } from "./constants/events";
 import { onCurrentLevelChanged, onGemsCollectedOnCurrentLevelUpdated } from "./constants/stores";
-import { resetCurrentLevel } from "./functions/commands/resetCurrentLevel";
+import { handleCurrentLevelChanged } from "./functions/handlers/handleCurrentLevelChanged";
 import { handleCatSpriteSheetImageLoaded } from "./functions/handlers/handleCatSpriteSheetImageLoaded";
 import { handleClickOrKeyDownOnWindow } from "./functions/handlers/handleClickOrKeyDownOnWindow";
 import { handleGameLoopRender } from "./functions/handlers/handleGameLoopRender";
@@ -38,7 +38,7 @@ onPortalSpriteSheetImageLoaded(handlePortalSpriteSheetImageLoaded);
 
 onKeysSpriteSheetImageLoaded(handleKeysSpriteSheetImageLoaded);
 
-onCurrentLevelChanged(resetCurrentLevel);
+onCurrentLevelChanged(handleCurrentLevelChanged);
 
 onGemsCollectedOnCurrentLevelUpdated(handleGemsCollectedOnCurrentLevelUpdated);
 

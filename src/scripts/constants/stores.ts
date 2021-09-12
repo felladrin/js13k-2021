@@ -20,3 +20,5 @@ export const [setGemsCollectedOnCurrentLevel, onGemsCollectedOnCurrentLevelUpdat
 export const [setGemAnimations, , getGemAnimations] = createStore<SpriteSheet["animations"]>();
 
 export const [setCurrentLevel, onCurrentLevelChanged, getCurrentLevel] = createStore(0);
+
+export const [setEscapeTime, , getEscapeTime] = createStore(0);
