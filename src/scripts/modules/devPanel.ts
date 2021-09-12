@@ -108,10 +108,16 @@ canvas.addEventListener("click", () => {
       catSprite.y = y;
       break;
     case OnClickAction.DeleteAll:
-      catSprite.x = x;
-      catSprite.y = y;
       platformsPool.clear();
       gemsPool.clear();
+      catSprite.x = x;
+      catSprite.y = y;
+      platformsPool.get({
+        x,
+        y,
+        image: getPlatformImage(),
+        anchor: { x: 0.5, y: 0.4 },
+      } as Partial<Sprite>) as Sprite;
       break;
   }
 
