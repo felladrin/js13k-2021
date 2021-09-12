@@ -79,5 +79,8 @@ export default defineConfig((configEnv) => ({
       },
     },
   },
+  server: {
+    host: "0.0.0.0",
+  },
   logLevel: configEnv.command === "serve" ? "info" : "warn",
 }));
