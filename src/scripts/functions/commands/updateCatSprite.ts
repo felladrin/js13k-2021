@@ -14,6 +14,7 @@ import { getCatCollisionObject } from "../getters/getCatCollisionObject";
 import { playSound } from "./playSound";
 import { resetCurrentLevel } from "./resetCurrentLevel";
 import { isOutOfLasersBounds } from "../getters/isOutOfLasersBounds";
+import { isCollidingWithLaser } from "../getters/isCollidingWithLaser";
 
 export function updateCatSprite() {
   const requestedJump = jumpKeys.some(keyPressed) || upKeyButton.pressed;
@@ -61,7 +62,7 @@ export function updateCatSprite() {
 
   setCatMoving(catSprite.dx !== 0 || catSprite.dy !== 0);
 
-  if (isOutOfLasersBounds(catSprite)) {
+  if (isCollidingWithLaser(getCatCollisionObject()) || isOutOfLasersBounds(catSprite)) {
     resetCurrentLevel();
   }
 }
