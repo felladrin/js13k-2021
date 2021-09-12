@@ -1,8 +1,8 @@
 import { SpriteSheet } from "kontra";
-import { upKeyButton, leftKeyButton, rightKeyButton } from "../../constants/instances";
+import { leftKeySprite, rightKeySprite, upKeySprite } from "../../constants/instances";
 
 export function handleKeysSpriteSheetImageLoaded(image: HTMLImageElement) {
-  const keyButtonAnimations = SpriteSheet({
+  const keySpriteAnimations = SpriteSheet({
     image,
     frameWidth: 32,
     frameHeight: 32,
@@ -28,7 +28,7 @@ export function handleKeysSpriteSheetImageLoaded(image: HTMLImageElement) {
     },
   }).animations;
 
-  upKeyButton.animations = keyButtonAnimations;
-  leftKeyButton.animations = keyButtonAnimations;
-  rightKeyButton.animations = keyButtonAnimations;
+  upKeySprite.animations = keySpriteAnimations;
+  leftKeySprite.animations = keySpriteAnimations;
+  rightKeySprite.animations = keySpriteAnimations;
 }

@@ -29,29 +29,47 @@ export const entryPortalSprite = Sprite({
   anchor: { x: 0.5, y: 0.5 },
 });
 
-const commonKeyButtonProperties = {
+const commonKeySpriteProperties = {
   width: 32,
   height: 32,
   anchor: { x: 0.5, y: 0.5 },
-  onDown: propagateGameButtonClicked,
 };
 
-export const leftKeyButton = Button({
-  ...commonKeyButtonProperties,
+export const leftKeySprite = Sprite({
+  ...commonKeySpriteProperties,
   x: 25,
   y: canvas.height - 25,
 });
 
-export const upKeyButton = Button({
-  ...commonKeyButtonProperties,
+export const upKeySprite = Sprite({
+  ...commonKeySpriteProperties,
   x: canvas.width / 2,
   y: canvas.height - 25,
 });
 
-export const rightKeyButton = Button({
-  ...commonKeyButtonProperties,
+export const rightKeySprite = Sprite({
+  ...commonKeySpriteProperties,
   x: canvas.width - 25,
   y: canvas.height - 25,
+});
+
+const commonKeyButtonProperties = {
+  y: canvas.height - 50,
+  width: (1 / 3) * canvas.width,
+  height: 50,
+  onDown: propagateGameButtonClicked,
+};
+
+export const leftKeyButton = Button(commonKeyButtonProperties);
+
+export const upKeyButton = Button({
+  ...commonKeyButtonProperties,
+  x: (1 / 3) * canvas.width,
+});
+
+export const rightKeyButton = Button({
+  ...commonKeyButtonProperties,
+  x: (2 / 3) * canvas.width,
 });
 
 export const gameLoop = GameLoop({
@@ -112,6 +130,9 @@ export const objectsToAlwaysUpdateAndRender = [
   topRightDroneSprite,
   bottomLeftDroneSprite,
   bottomRightDroneSprite,
+  upKeySprite,
+  leftKeySprite,
+  rightKeySprite,
   upKeyButton,
   leftKeyButton,
   rightKeyButton,
