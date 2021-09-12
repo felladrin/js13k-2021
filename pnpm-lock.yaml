@@ -11,7 +11,7 @@ specifiers:
   colorette: ^1.4.0
   create-pubsub: ^1.3.1
   cross-exec-file: ^2.0.0
-  dpdm: ^3.7.1
+  dpdm: ^3.8.0
   ect-bin: ^1.4.1
   jscpd: ^3.3.26
   kontra: ^7.3.1
@@ -23,8 +23,8 @@ specifiers:
   ts-node: ^10.2.1
   ts-prune: ^0.10.0
   tweakpane: ^3.0.5
-  typescript: ^4.4.2
-  vite: ^2.5.4
+  typescript: ^4.4.3
+  vite: ^2.5.6
   vite-plugin-html: ^2.1.0
   vite-plugin-singlefile: ^0.5.1
   zipstats: ^1.1.0
@@ -41,20 +41,20 @@ devDependencies:
   arkit: 1.6.4
   bestzip: 2.2.0
   cross-exec-file: 2.0.0
-  dpdm: 3.7.1
+  dpdm: 3.8.0
   ect-bin: 1.4.1
   jscpd: 3.3.26
   midi-file-parser: 1.0.0
   npm-check-updates: 11.8.5
   roadroller: 2.0.0
   rollup-plugin-kontra: 1.0.1
-  ts-node: 10.2.1_typescript@4.4.2
+  ts-node: 10.2.1_typescript@4.4.3
   ts-prune: 0.10.0
   tweakpane: 3.0.5
-  typescript: 4.4.2
-  vite: 2.5.4
-  vite-plugin-html: 2.1.0_vite@2.5.4
-  vite-plugin-singlefile: 0.5.1_vite@2.5.4
+  typescript: 4.4.3
+  vite: 2.5.6
+  vite-plugin-html: 2.1.0_vite@2.5.6
+  vite-plugin-singlefile: 0.5.1_vite@2.5.6
   zipstats: 1.1.0
 
 packages:
@@ -1602,8 +1602,8 @@ packages:
       pify: 3.0.0
     dev: true
 
-  /dpdm/3.7.1:
-    resolution: {integrity: sha512-jgJwgo43C/AyzT37JlQUjPLS0jye42ODOSe/nEBcfahFetkjkWclz5LGyr1Nq9rUNn3F+CtqbvJrZfgSIwA2rg==}
+  /dpdm/3.8.0:
+    resolution: {integrity: sha512-irzNgThrdJEf61l5F3w8yMLjjZfw4c2LL//xZGZ3q7E6YhVBCiEApduRNtSw1Og6UCVub5GzwwZn3WT0tO8hSA==}
     hasBin: true
     dependencies:
       '@types/fs-extra': 9.0.12
@@ -1614,7 +1614,7 @@ packages:
       glob: 7.1.7
       ora: 5.4.1
       tslib: 2.3.1
-      typescript: 4.4.2
+      typescript: 4.4.3
       yargs: 17.1.1
     dev: true
 
@@ -5120,7 +5120,7 @@ packages:
       code-block-writer: 10.1.1
     dev: true
 
-  /ts-node/10.2.1_typescript@4.4.2:
+  /ts-node/10.2.1_typescript@4.4.3:
     resolution: {integrity: sha512-hCnyOyuGmD5wHleOQX6NIjJtYVIO8bPP8F2acWkB4W06wdlkgyvJtubO/I9NkI88hCFECbsEgoLc0VNkYmcSfw==}
     engines: {node: '>=12.0.0'}
     hasBin: true
@@ -5146,7 +5146,7 @@ packages:
       create-require: 1.1.1
       diff: 4.0.2
       make-error: 1.3.6
-      typescript: 4.4.2
+      typescript: 4.4.3
       yn: 3.1.1
     dev: true
 
@@ -5206,8 +5206,8 @@ packages:
     hasBin: true
     dev: true
 
-  /typescript/4.4.2:
-    resolution: {integrity: sha512-gzP+t5W4hdy4c+68bfcv0t400HVJMMd2+H9B7gae1nQlBzCqvrXX+6GL/b3GAgyTH966pzrZ70/fRjwAtZksSQ==}
+  /typescript/4.4.3:
+    resolution: {integrity: sha512-4xfscpisVgqqDfPaJo5vkd+Qd/ItkoagnHpufr+i2QCHBsNYp+G7UAoyFl8aPtx879u38wPV65rZ8qbGZijalA==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: true
@@ -5353,7 +5353,7 @@ packages:
       extsprintf: 1.3.0
     dev: true
 
-  /vite-plugin-html/2.1.0_vite@2.5.4:
+  /vite-plugin-html/2.1.0_vite@2.5.6:
     resolution: {integrity: sha512-xdyHA/LdtmQtVTpPVqmrJaO/iuwx0k/r2M0BFnfYBloLCvp9FeCW/fR3yucQePRzE19bU72QldBE6EB1toZACw==}
     peerDependencies:
       vite: '>=2.0.0'
@@ -5364,10 +5364,10 @@ packages:
       ejs: 3.1.6
       fs-extra: 10.0.0
       html-minifier-terser: 5.1.1
-      vite: 2.5.4
+      vite: 2.5.6
     dev: true
 
-  /vite-plugin-singlefile/0.5.1_vite@2.5.4:
+  /vite-plugin-singlefile/0.5.1_vite@2.5.6:
     resolution: {integrity: sha512-yA9lWd6bSet0Br4/s34YPNnVBlDl2MbxlHDRrLrBCncD7q+HO5GGsw29Ymp+ydZ3eb4UU2GECgX2MJZW+qnoeQ==}
     peerDependencies:
       vite: ^2.1.2
@@ -5376,11 +5376,11 @@ packages:
       esbuild: 0.9.7
       rollup: 2.56.3
       rollup-plugin-esbuild: 3.0.4_esbuild@0.9.7+rollup@2.56.3
-      vite: 2.5.4
+      vite: 2.5.6
     dev: true
 
-  /vite/2.5.4:
-    resolution: {integrity: sha512-EAdbX8A6MJaqC6UuicZtoxY9+BdaBdcGVaROXvsu+vnlGyzZzm63QQgANJryIB0DvenveHAoCriN+dAnoS+TIQ==}
+  /vite/2.5.6:
+    resolution: {integrity: sha512-P++qzXuOPhTql8iDamsatlJfD7/yGi8NCNwzyqkB2p0jrNJC567WEdXiKn3hQ+ZV8amQmB2dTH6svo3Z2tJ6MQ==}
     engines: {node: '>=12.2.0'}
     hasBin: true
     dependencies:
