@@ -13,7 +13,8 @@ enum OnClickAction {
   DelPlatform = "Del Platform",
   AddGem = "Add Gem",
   DelGem = "Del Gem",
-  TeleportCat = "Teleport Cat",
+  MoveCat = "Move Cat",
+  DeleteAll = "Delete All",
 }
 
 const kontraFields = {
@@ -45,7 +46,8 @@ devPanel.addInput(kontraFields, "onClickAction", {
     [OnClickAction.DelPlatform]: OnClickAction.DelPlatform,
     [OnClickAction.AddGem]: OnClickAction.AddGem,
     [OnClickAction.DelGem]: OnClickAction.DelGem,
-    [OnClickAction.TeleportCat]: OnClickAction.TeleportCat,
+    [OnClickAction.MoveCat]: OnClickAction.MoveCat,
+    [OnClickAction.DeleteAll]: OnClickAction.DeleteAll,
   },
 });
 
@@ -83,9 +85,15 @@ canvas.addEventListener("click", () => {
 
       if (foundGem) foundGem.ttl = 0;
       break;
-    case OnClickAction.TeleportCat:
+    case OnClickAction.MoveCat:
       catSprite.x = x;
       catSprite.y = y;
+      break;
+    case OnClickAction.DeleteAll:
+      catSprite.x = x;
+      catSprite.y = y;
+      platformsPool.clear();
+      gemsPool.clear();
       break;
   }
 
