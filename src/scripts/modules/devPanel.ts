@@ -1,7 +1,8 @@
 import { Pane } from "tweakpane";
 import { initPointer, getPointer, Sprite, collides } from "kontra";
 import { canvas, catSprite, gemsPool, platformsPool } from "../constants/instances";
-import { getGemAnimations, getPlatformImage } from "../constants/stores";
+import { getGemAnimations, getPlatformImage, onCurrentLevelChanged, setCurrentLevel } from "../constants/stores";
+import { platformsPositionsPerLevel } from "../constants/config";
 
 initPointer();
 
@@ -18,6 +19,7 @@ enum OnClickAction {
 }
 
 const kontraFields = {
+  level: 0,
   lastClick: { x: 0, y: 0 },
   get platformPositions() {
     return JSON.stringify(
@@ -32,11 +34,27 @@ const kontraFields = {
   onClickAction: OnClickAction.DoNothing,
 };
 
+const levelField = devPanel.addInput(kontraFields, "level", {
+  label: "Level",
+  step: 1,
+  min: 0,
+  max: platformsPositionsPerLevel.length - 1,
+});
+
+levelField.on("change", ({ value }) => {
+  setCurrentLevel(value);
+});
+
+onCurrentLevelChanged((level) => {
+  kontraFields.level = level;
+  levelField.refresh();
+});
+
 const lastClickField = devPanel.addInput(kontraFields, "lastClick", { disabled: true, label: "Last Click" });
 
-devPanel.addMonitor(kontraFields, "platformPositions", { label: "Pla. Pos." });
+devPanel.addMonitor(kontraFields, "platformPositions", { label: "Platforms" });
 
-devPanel.addMonitor(kontraFields, "gemsPositions", { label: "Gems Pos." });
+devPanel.addMonitor(kontraFields, "gemsPositions", { label: "Gems" });
 
 devPanel.addInput(kontraFields, "onClickAction", {
   label: "On Click",
