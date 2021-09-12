@@ -20,10 +20,14 @@ export function updateCatSprite() {
   const requestedJump = jumpKeys.some(keyPressed) || upKeyButton.pressed;
   const isMovingLeft = moveLeftKeys.some(keyPressed) || leftKeyButton.pressed;
   const isMovingRight = moveRightKeys.some(keyPressed) || rightKeyButton.pressed;
-  const isMovingDown = catSprite.dy > 0;
+  const isMovingDown = catSprite.dy >= 0;
   const isMovingUp = catSprite.dy < 0;
 
   let platformWhichCatIsOn = getPlatformWhichCatIsOn();
+
+  if (isMovingLeft || isMovingRight) {
+    platformWhichCatIsOn = null;
+  }
 
   for (const platform of platformsPool.getAliveObjects() as Sprite[]) {
     if (isMovingDown && collides(getCatCollisionObject(), platform)) {
@@ -44,10 +48,6 @@ export function updateCatSprite() {
   if (requestedJump && platformWhichCatIsOn) {
     catSprite.dy = -catJumpSpeed;
     playSound(jumpSound);
-    platformWhichCatIsOn = null;
-  }
-
-  if (isMovingLeft || isMovingRight) {
     platformWhichCatIsOn = null;
   }
 
