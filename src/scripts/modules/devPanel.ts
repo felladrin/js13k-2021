@@ -5,9 +5,7 @@ import { getGemAnimations, getPlatformImage } from "../constants/stores";
 
 initPointer();
 
-const pane = new Pane({ title: "Dev Panel" });
-
-const kontraFolder = pane.addFolder({ title: "Kontra" });
+const devPanel = new Pane({ title: "Dev Panel" });
 
 enum OnClickAction {
   DoNothing = "Do Nothing",
@@ -19,19 +17,27 @@ enum OnClickAction {
 }
 
 const kontraFields = {
-  pointer: { x: 0, y: 0 },
-  platformPositions: getPlatformPositionsAsString(),
-  gemsPositions: getGemsPositionsAsString(),
+  lastClick: { x: 0, y: 0 },
+  get platformPositions() {
+    return JSON.stringify(
+      (platformsPool.getAliveObjects() as Sprite[]).map((platform) => [Math.round(platform.x), Math.round(platform.y)])
+    );
+  },
+  get gemsPositions() {
+    return JSON.stringify(
+      (gemsPool.getAliveObjects() as Sprite[]).map((gem) => [Math.round(gem.x), Math.round(gem.y)])
+    );
+  },
   onClickAction: OnClickAction.DoNothing,
 };
 
-const pointerField = kontraFolder.addInput(kontraFields, "pointer", { disabled: true, label: "Pointer" });
+const lastClickField = devPanel.addInput(kontraFields, "lastClick", { disabled: true, label: "Last Click" });
 
-kontraFolder.addMonitor(kontraFields, "platformPositions", { label: "Pla. Pos." });
+devPanel.addMonitor(kontraFields, "platformPositions", { label: "Pla. Pos." });
 
-kontraFolder.addMonitor(kontraFields, "gemsPositions", { label: "Gems Pos." });
+devPanel.addMonitor(kontraFields, "gemsPositions", { label: "Gems Pos." });
 
-kontraFolder.addInput(kontraFields, "onClickAction", {
+devPanel.addInput(kontraFields, "onClickAction", {
   label: "On Click",
   options: {
     [OnClickAction.DoNothing]: OnClickAction.DoNothing,
@@ -83,27 +89,7 @@ canvas.addEventListener("click", () => {
       break;
   }
 
-  kontraFields.platformPositions = getPlatformPositionsAsString();
+  kontraFields.lastClick = { x, y };
 
-  kontraFields.gemsPositions = getGemsPositionsAsString();
-
-  kontraFields.pointer = { x, y };
-
-  pointerField.refresh();
+  lastClickField.refresh();
 });
-
-setInterval(() => {
-  kontraFields.platformPositions = getPlatformPositionsAsString();
-
-  kontraFields.gemsPositions = getGemsPositionsAsString();
-}, 1000);
-
-function getPlatformPositionsAsString() {
-  return JSON.stringify(
-    (platformsPool.getAliveObjects() as Sprite[]).map((platform) => [Math.round(platform.x), Math.round(platform.y)])
-  );
-}
-
-function getGemsPositionsAsString() {
-  return JSON.stringify((gemsPool.getAliveObjects() as Sprite[]).map((gem) => [Math.round(gem.x), Math.round(gem.y)]));
-}
