@@ -95,9 +95,7 @@ export const platformsPositionsPerLevel: [x: number, y: number][][] = [
   ],
   [
     [231, 99],
-    [274, 120],
     [229, 145],
-    [272, 174],
     [235, 200],
     [154, 203],
     [122, 180],
