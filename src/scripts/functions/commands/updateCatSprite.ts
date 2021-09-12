@@ -7,7 +7,7 @@ import {
   moveLeftKeys,
   moveRightKeys,
 } from "../../constants/config";
-import { jumpSound } from "../../constants/sounds";
+import { catInContactWithLaser, jumpSound } from "../../constants/sounds";
 import { catSprite, leftKeyButton, platformsPool, rightKeyButton, upKeyButton } from "../../constants/instances";
 import { getPlatformWhichCatIsOn, setCatMoving, setPlatformWhichCatIsOn } from "../../constants/stores";
 import { getCatCollisionObject } from "../getters/getCatCollisionObject";
@@ -63,6 +63,7 @@ export function updateCatSprite() {
   setCatMoving(catSprite.dx !== 0 || catSprite.dy !== 0);
 
   if (isCollidingWithLaser(getCatCollisionObject()) || isOutOfLasersBounds(catSprite)) {
+    playSound(catInContactWithLaser);
     resetCurrentLevel();
   }
 }
