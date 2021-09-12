@@ -1,4 +1,4 @@
-# Untitled Space Game
+# Cat Goric: Escape from the Warp Chamber
 
 Game created for the Js13kGames competition from 2021.
 
