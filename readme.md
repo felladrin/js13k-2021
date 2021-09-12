@@ -1,6 +1,6 @@
 # Cat Goric: Escape from the Warp Chamber
 
-Game created for the Js13kGames competition from 2021.
+Game created for the [Js13kGames](https://js13kgames.com/) competition from 2021.
 
 ## NPM Scripts
 
