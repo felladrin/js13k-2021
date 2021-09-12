@@ -7,7 +7,7 @@ import {
   topRightDroneSprite,
 } from "../../constants/instances";
 
-export function resetDronesPositions() {
+export function resetDrones() {
   topLeftDroneSprite.x = 0;
   topLeftDroneSprite.y = 1;
 

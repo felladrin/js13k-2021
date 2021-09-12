@@ -2,7 +2,7 @@ import { setShouldCheckCollisionBetweenCatAndPortal, setGemsCollectedOnCurrentLe
 import { resetGems } from "./resetGems";
 import { resetPlatforms } from "./resetPlatforms";
 import { resetCat } from "./resetCat";
-import { resetDronesPositions } from "./resetDronesPositions";
+import { resetDrones } from "./resetDrones";
 import { displayEntryPortal } from "./displayEntryPortal";
 
 export function resetCurrentLevel() {
@@ -11,6 +11,6 @@ export function resetCurrentLevel() {
   resetPlatforms();
   resetGems();
   resetCat();
-  resetDronesPositions();
+  resetDrones();
   displayEntryPortal();
 }
