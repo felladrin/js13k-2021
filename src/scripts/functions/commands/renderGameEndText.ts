@@ -14,7 +14,7 @@ export function renderGameEndText() {
     .toString()
     .padStart(2, "0");
 
-  renderText("CATEGORIC SCAPE!", 60, 40, 20, keyLime);
+  renderText("CATEGORIC ESCAPE!", 56, 40, 20, keyLime);
   renderText(`TOTAL TIME: ${totalTimeMinutes}:${totalTimeSeconds}`, 60, 85, 20, keyLime);
   renderText(`PLAY AGAIN?`, 110, 198, 15, keyLime);
 }
