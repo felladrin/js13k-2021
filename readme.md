@@ -2,12 +2,22 @@
 
 Game created for the [Js13kGames](https://js13kgames.com/) competition from 2021.
 
-## Running the game locally
+JS13K release: [Game Page in Js13kGames](https://js13kgames.com/entries/cat-goric-escape-from-the-warp-chamber)
 
-| Npm Run | Action                                          |
-| ------- | ----------------------------------------------- |
-| dev     | Start the game in development mode.             |
-| build   | Compile, compress and zip the game for release. |
+Future releases: [Game Page in Itch.io](https://felladrin.itch.io/cat-goric-escape-from-the-warp-chamber)
+
+Post-mortem: [Article on Dev.to](https://dev.to/felladrin/cat-goric-escape-from-the-warp-chamber-post-mortem-57gc) 
+
+## Screenshot
+
+![Screenshot](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/dfe623vasf9qec2fq0bd.png)
+
+## Package Scripts
+
+| Npm Run | Action                                |
+| ------- | ------------------------------------- |
+| dev     | Start the game in development mode.   |
+| build   | Compile and zip the game for release. |
 
 ## Credits
 
@@ -32,5 +42,7 @@ Images converted and optimized to WEBP via [Squoosh](https://squoosh.app/).
 Sprite sheets edited with [Piskel](https://www.piskelapp.com/).
 
 Color palette from [Coolors](https://coolors.co/d9ed92-b5e48c-99d98c-76c893-52b69a-34a0a4-168aad-1a759f-1e6091-184e77).
+
+Dev Panel created with [Tweakpane](https://cocopon.github.io/tweakpane/)
 
 Code written in [Typescript](https://www.typescriptlang.org/), compiled by [Vite](https://vitejs.dev/), compressed by [Roadroller](https://lifthrasiir.github.io/roadroller/) + [BestZip](https://github.com/nfriedly/node-bestzip) + [ECT](https://github.com/CT1994/ect-bin).
