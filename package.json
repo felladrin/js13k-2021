@@ -30,6 +30,7 @@
     "npm-check-updates": "^11.8.5",
     "roadroller": "^2.0.0",
     "rollup-plugin-kontra": "^1.0.1",
+    "tasuku": "^1.0.2",
     "ts-node": "^10.2.1",
     "ts-prune": "^0.10.0",
     "tweakpane": "^3.0.5",
