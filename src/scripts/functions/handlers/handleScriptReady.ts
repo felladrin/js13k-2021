@@ -1,7 +1,7 @@
 import { loadImage } from "kontra";
 import catSpriteSheetUrl from "../../../images/catSpriteSheet.webp";
 import gemSpriteSheetUrl from "../../../images/gemSpriteSheet.webp";
-import platformImageUrl from "../../../images/platform.webp";
+import platformImageUrl from "../../../images/platformSprite.webp";
 import portalSpriteSheetUrl from "../../../images/portalSpriteSheet.webp";
 import keysSpriteSheetUrl from "../../../images/keysSpriteSheet.webp";
 import { canvas, gameLoop } from "../../constants/instances";
