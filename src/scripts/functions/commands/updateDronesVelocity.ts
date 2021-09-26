@@ -5,12 +5,12 @@ import {
   topLeftDroneSprite,
   topRightDroneSprite,
 } from "../../constants/instances";
-import { getCatMoving } from "../../constants/stores";
+import { isCatMoving } from "../../constants/stores";
 
 export function updateDronesVelocity() {
-  const velocity = getCatMoving() ? droneSpeed : 0;
-  topLeftDroneSprite.dy = velocity;
-  topRightDroneSprite.dx = -velocity;
-  bottomLeftDroneSprite.dx = velocity;
-  bottomRightDroneSprite.dy = -velocity;
+  const speed = isCatMoving() ? droneSpeed : 0;
+  topLeftDroneSprite.dy = speed;
+  topRightDroneSprite.dx = -speed;
+  bottomLeftDroneSprite.dx = speed;
+  bottomRightDroneSprite.dy = -speed;
 }

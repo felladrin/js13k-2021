@@ -3,9 +3,9 @@ import { Sprite, SpriteSheet } from "kontra";
 
 export const [emitPlatformImageLoaded, , getPlatformImage] = createStore<HTMLImageElement>();
 
-export const [setCatMoving, , getCatMoving] = createStore(false);
+export const [setCatMoving, , isCatMoving] = createStore(false);
 
-export const [setBackgroundMusicPlaying, , getBackgroundMusicPlaying] = createStore(false);
+export const [setBackgroundMusicPlaying, , isBackgroundMusicPlaying] = createStore(false);
 
 export const [setFunctionToPlaySound, , getFunctionToPlaySound] = createStore<(...sound: any) => void>();
 

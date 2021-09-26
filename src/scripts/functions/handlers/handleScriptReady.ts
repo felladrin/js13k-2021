@@ -1,7 +1,7 @@
 import { loadImage } from "kontra";
 import catSpriteSheetUrl from "../../../images/catSpriteSheet.webp";
 import gemSpriteSheetUrl from "../../../images/gemSpriteSheet.webp";
-import platformImageUrl from "../../../images/platformSprite.webp";
+import platformSpriteUrl from "../../../images/platformSprite.webp";
 import portalSpriteSheetUrl from "../../../images/portalSpriteSheet.webp";
 import keysSpriteSheetUrl from "../../../images/keysSpriteSheet.webp";
 import { canvas, gameLoop } from "../../constants/instances";
@@ -16,7 +16,7 @@ import { fitCanvasInsideItsParent } from "../commands/fitCanvasInsideItsParent";
 import { resetCurrentLevel } from "../commands/resetCurrentLevel";
 
 export async function handleScriptReady() {
-  emitPlatformImageLoaded(await loadImage(platformImageUrl));
+  emitPlatformImageLoaded(await loadImage(platformSpriteUrl));
   emitCatSpriteSheetImageLoaded(await loadImage(catSpriteSheetUrl));
   emitGemSpriteSheetImageLoaded(await loadImage(gemSpriteSheetUrl));
   emitPortalSpriteSheetImageLoaded(await loadImage(portalSpriteSheetUrl));
