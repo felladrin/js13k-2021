@@ -1,9 +1,9 @@
-import { setGemsCollectedOnCurrentLevel } from "../../constants/stores/gemsCollectedOnCurrentLevel";
-import { resetGems } from "./resetGems";
-import { resetPlatforms } from "./resetPlatforms";
+import { setGemsCollectedOnCurrentLevel } from "../../constants/stores";
+import { displayEntryPortal } from "./displayEntryPortal";
 import { resetCat } from "./resetCat";
 import { resetDrones } from "./resetDrones";
-import { displayEntryPortal } from "./displayEntryPortal";
+import { resetGems } from "./resetGems";
+import { resetPlatforms } from "./resetPlatforms";
 
 export function resetCurrentLevel() {
   setGemsCollectedOnCurrentLevel(0);

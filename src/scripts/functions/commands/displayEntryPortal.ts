@@ -1,6 +1,6 @@
 import { platformsPositionsPerLevel } from "../../constants/config";
 import { entryPortalSprite } from "../../constants/instances";
-import { getCurrentLevel } from "../../constants/stores/currentLevel";
+import { getCurrentLevel } from "../../constants/stores";
 
 export function displayEntryPortal() {
   const [initialPlatform] = platformsPositionsPerLevel[getCurrentLevel()];

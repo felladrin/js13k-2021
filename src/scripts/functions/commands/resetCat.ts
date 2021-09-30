@@ -1,7 +1,6 @@
 import { platformsPositionsPerLevel } from "../../constants/config";
 import { catSprite } from "../../constants/instances";
-import { getCurrentLevel } from "../../constants/stores/currentLevel";
-import { setPlatformWhichCatIsOn } from "../../constants/stores/platformWhichCatIsOn";
+import { getCurrentLevel, setPlatformWhichCatIsOn } from "../../constants/stores";
 
 export function resetCat() {
   const [initialPlatform] = platformsPositionsPerLevel[getCurrentLevel()];

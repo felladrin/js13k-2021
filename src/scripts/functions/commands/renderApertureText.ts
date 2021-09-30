@@ -1,7 +1,7 @@
 import { yellowGreenCrayola } from "../../constants/colors";
 import { apertureSize } from "../../constants/config";
 import { canvas, renderText } from "../../constants/instances";
-import { getGemsCollectedOnCurrentLevel } from "../../constants/stores/gemsCollectedOnCurrentLevel";
+import { getGemsCollectedOnCurrentLevel } from "../../constants/stores";
 
 export function renderApertureText() {
   renderText(

@@ -7,15 +7,14 @@ import {
   moveLeftKeys,
   moveRightKeys,
 } from "../../constants/config";
-import { catInContactWithLaser, jumpSound } from "../../constants/sounds";
 import { catSprite, leftKeyButton, platformsPool, rightKeyButton, upKeyButton } from "../../constants/instances";
-import { getPlatformWhichCatIsOn, setPlatformWhichCatIsOn } from "../../constants/stores/platformWhichCatIsOn";
-import { setCatMoving } from "../../constants/stores/catMoving";
+import { catInContactWithLaser, jumpSound } from "../../constants/sounds";
+import { getPlatformWhichCatIsOn, setCatMoving, setPlatformWhichCatIsOn } from "../../constants/stores";
 import { getCatCollisionObject } from "../getters/getCatCollisionObject";
+import { isCollidingWithLaser } from "../getters/isCollidingWithLaser";
+import { isOutOfLasersBounds } from "../getters/isOutOfLasersBounds";
 import { playSound } from "./playSound";
 import { resetCurrentLevel } from "./resetCurrentLevel";
-import { isOutOfLasersBounds } from "../getters/isOutOfLasersBounds";
-import { isCollidingWithLaser } from "../getters/isCollidingWithLaser";
 
 export function updateCatSprite() {
   const requestedJump = jumpKeys.some(keyPressed) || upKeyButton.pressed;

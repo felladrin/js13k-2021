@@ -1,5 +1,5 @@
 import { SpriteSheet } from "kontra";
-import { getGemSpriteSheetImage } from "../../constants/stores/gemSpriteSheetImage";
+import { getGemSpriteSheetImage } from "../../constants/stores";
 
 export function getGemAnimations() {
   const image = getGemSpriteSheetImage();

@@ -1,8 +1,7 @@
 import { Sprite } from "kontra";
 import { platformsPositionsPerLevel } from "../../constants/config";
 import { platformsPool } from "../../constants/instances";
-import { getCurrentLevel } from "../../constants/stores/currentLevel";
-import { getPlatformImage } from "../../constants/stores/platformImage";
+import { getCurrentLevel, getPlatformImage } from "../../constants/stores";
 
 export function resetPlatforms() {
   platformsPool.clear();

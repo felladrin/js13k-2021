@@ -1,4 +1,4 @@
-import { getEscapeTime } from "../../constants/stores/escapeTime";
+import { getEscapeTime } from "../../constants/stores";
 
 export function getFormattedEscapeTime() {
   const totalTimeInSeconds = getEscapeTime();

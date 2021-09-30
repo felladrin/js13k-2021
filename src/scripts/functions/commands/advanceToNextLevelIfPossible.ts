@@ -1,5 +1,5 @@
 import { platformsPositionsPerLevel } from "../../constants/config";
-import { getCurrentLevel, setCurrentLevel } from "../../constants/stores/currentLevel";
+import { getCurrentLevel, setCurrentLevel } from "../../constants/stores";
 
 export function advanceToNextLevelIfPossible() {
   const nextLevel = getCurrentLevel() + 1;

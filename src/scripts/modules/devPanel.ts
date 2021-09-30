@@ -1,12 +1,11 @@
+import { collides, getPointer, initPointer, Sprite } from "kontra";
 import { Pane } from "tweakpane";
-import { initPointer, getPointer, Sprite, collides } from "kontra";
-import { canvas, catSprite, gemsPool, platformsPool } from "../constants/instances";
-import { onCurrentLevelChanged, setCurrentLevel } from "../constants/stores/currentLevel";
-import { getGemAnimations } from "../functions/getters/getGemAnimations";
-import { getPlatformImage } from "../constants/stores/platformImage";
 import { platformsPositionsPerLevel } from "../constants/config";
-import { destroyPlatform } from "../functions/commands/destroyPlatform";
+import { canvas, catSprite, gemsPool, platformsPool } from "../constants/instances";
+import { getPlatformImage, onCurrentLevelChanged, setCurrentLevel } from "../constants/stores";
 import { destroyGem } from "../functions/commands/destroyGem";
+import { destroyPlatform } from "../functions/commands/destroyPlatform";
+import { getGemAnimations } from "../functions/getters/getGemAnimations";
 
 initPointer();
 

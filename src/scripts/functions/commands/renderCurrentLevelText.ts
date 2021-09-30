@@ -1,7 +1,7 @@
+import { to as convertNumberToString } from "base26";
 import { yellowGreenCrayola } from "../../constants/colors";
 import { canvas, renderText } from "../../constants/instances";
-import { getCurrentLevel } from "../../constants/stores/currentLevel";
-import { to as convertNumberToString } from "base26";
+import { getCurrentLevel } from "../../constants/stores";
 
 export function renderCurrentLevelText() {
   const quadrant = convertNumberToString(getCurrentLevel() + 1).toUpperCase();
