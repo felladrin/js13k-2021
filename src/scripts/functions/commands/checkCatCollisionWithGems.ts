@@ -4,11 +4,12 @@ import { gemsPool } from "../../constants/instances";
 import { getGemsCollectedOnCurrentLevel, setGemsCollectedOnCurrentLevel } from "../../constants/stores";
 import { getCatCollisionObject } from "../getters/getCatCollisionObject";
 import { playSound } from "./playSound";
+import { destroyGem } from "./destroyGem";
 
 export function checkCatCollisionWithGems() {
   for (const gem of gemsPool.getAliveObjects() as Sprite[]) {
     if (collides(getCatCollisionObject(), gem)) {
-      gem.ttl = 0;
+      destroyGem(gem);
       playSound(pickupSound);
       setGemsCollectedOnCurrentLevel(getGemsCollectedOnCurrentLevel() + 1);
     }

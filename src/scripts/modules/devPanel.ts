@@ -3,6 +3,8 @@ import { initPointer, getPointer, Sprite, collides } from "kontra";
 import { canvas, catSprite, gemsPool, platformsPool } from "../constants/instances";
 import { getGemAnimations, getPlatformImage, onCurrentLevelChanged, setCurrentLevel } from "../constants/stores";
 import { platformsPositionsPerLevel } from "../constants/config";
+import { destroyPlatform } from "../functions/commands/destroyPlatform";
+import { destroyGem } from "../functions/commands/destroyGem";
 
 initPointer();
 
@@ -86,7 +88,7 @@ canvas.addEventListener("click", () => {
         collides(platform, { world: { x, y, width: 1, height: 1 } })
       );
 
-      if (foundPlatform) foundPlatform.ttl = 0;
+      if (foundPlatform) destroyPlatform(foundPlatform);
       break;
     case OnClickAction.AddGem:
       gemsPool.get({
@@ -101,7 +103,7 @@ canvas.addEventListener("click", () => {
         collides(gem, { world: { x, y, width: 1, height: 1 } })
       );
 
-      if (foundGem) foundGem.ttl = 0;
+      if (foundGem) destroyGem(foundGem);
       break;
     case OnClickAction.MoveCat:
       catSprite.x = x;
