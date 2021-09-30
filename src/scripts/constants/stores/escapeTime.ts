@@ -1,3 +1,3 @@
 import { createPubSub as createStore } from "create-pubsub";
 
-export const [setEscapeTime, , getEscapeTime] = createStore(0);
+export const [setEscapeTime, onEscapeTimeUpdated, getEscapeTime] = createStore(0);
