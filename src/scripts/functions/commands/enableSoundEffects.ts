@@ -1,4 +1,4 @@
-import { getFunctionToPlaySound, setFunctionToPlaySound } from "../../constants/stores";
+import { getFunctionToPlaySound, setFunctionToPlaySound } from "../../constants/stores/functionToPlaySound";
 import { getZzFX } from "../getters/getZzFX";
 import { playSound } from "./playSound";
 

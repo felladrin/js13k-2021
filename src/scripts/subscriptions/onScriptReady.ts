@@ -12,7 +12,7 @@ import {
   onScriptReady,
 } from "../constants/events";
 import { canvas, gameLoop } from "../constants/instances";
-import { emitPlatformImageLoaded } from "../constants/stores";
+import { emitPlatformImageLoaded } from "../constants/stores/platformImage";
 import { fitCanvasInsideItsParent } from "../functions/commands/fitCanvasInsideItsParent";
 import { resetCurrentLevel } from "../functions/commands/resetCurrentLevel";
 

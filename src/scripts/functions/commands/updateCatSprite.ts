@@ -9,7 +9,8 @@ import {
 } from "../../constants/config";
 import { catInContactWithLaser, jumpSound } from "../../constants/sounds";
 import { catSprite, leftKeyButton, platformsPool, rightKeyButton, upKeyButton } from "../../constants/instances";
-import { getPlatformWhichCatIsOn, setCatMoving, setPlatformWhichCatIsOn } from "../../constants/stores";
+import { getPlatformWhichCatIsOn, setPlatformWhichCatIsOn } from "../../constants/stores/platformWhichCatIsOn";
+import { setCatMoving } from "../../constants/stores/catMoving";
 import { getCatCollisionObject } from "../getters/getCatCollisionObject";
 import { playSound } from "./playSound";
 import { resetCurrentLevel } from "./resetCurrentLevel";

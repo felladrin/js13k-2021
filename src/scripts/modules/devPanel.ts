@@ -1,7 +1,9 @@
 import { Pane } from "tweakpane";
 import { initPointer, getPointer, Sprite, collides } from "kontra";
 import { canvas, catSprite, gemsPool, platformsPool } from "../constants/instances";
-import { getGemAnimations, getPlatformImage, onCurrentLevelChanged, setCurrentLevel } from "../constants/stores";
+import { onCurrentLevelChanged, setCurrentLevel } from "../constants/stores/currentLevel";
+import { getGemAnimations } from "../constants/stores/gemAnimations";
+import { getPlatformImage } from "../constants/stores/platformImage";
 import { platformsPositionsPerLevel } from "../constants/config";
 import { destroyPlatform } from "../functions/commands/destroyPlatform";
 import { destroyGem } from "../functions/commands/destroyGem";

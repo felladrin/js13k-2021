@@ -1,5 +1,5 @@
 import backgroundMusicMidi from "../../../music/music.json";
-import { isBackgroundMusicPlaying, setBackgroundMusicPlaying } from "../../constants/stores";
+import { isBackgroundMusicPlaying, setBackgroundMusicPlaying } from "../../constants/stores/backgroundMusicPlaying";
 import { playMidi } from "./playMidi";
 
 export function playBackgroundMusic() {

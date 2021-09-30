@@ -1,6 +1,6 @@
 import { yellowGreenCrayola } from "../../constants/colors";
 import { canvas, renderText } from "../../constants/instances";
-import { getCurrentLevel } from "../../constants/stores";
+import { getCurrentLevel } from "../../constants/stores/currentLevel";
 import { to as convertNumberToString } from "base26";
 
 export function renderCurrentLevelText() {

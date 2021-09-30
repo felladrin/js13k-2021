@@ -1,7 +1,8 @@
 import { Sprite } from "kontra";
 import { gemsPositionsPerLevel } from "../../constants/config";
 import { gemsPool } from "../../constants/instances";
-import { getCurrentLevel, getGemAnimations } from "../../constants/stores";
+import { getCurrentLevel } from "../../constants/stores/currentLevel";
+import { getGemAnimations } from "../../constants/stores/gemAnimations";
 
 export function resetGems() {
   gemsPool.clear();

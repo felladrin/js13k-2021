@@ -1,7 +1,8 @@
 import { keyLime } from "../../constants/colors";
 import { platformsPositionsPerLevel } from "../../constants/config";
 import { renderText } from "../../constants/instances";
-import { getCurrentLevel, getEscapeTime } from "../../constants/stores";
+import { getEscapeTime } from "../../constants/stores/escapeTime";
+import { getCurrentLevel } from "../../constants/stores/currentLevel";
 
 export function renderGameEndText() {
   if (getCurrentLevel() !== platformsPositionsPerLevel.length - 1) return;

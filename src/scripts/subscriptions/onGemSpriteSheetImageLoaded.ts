@@ -1,6 +1,6 @@
 import { SpriteSheet } from "kontra";
 import { onGemSpriteSheetImageLoaded } from "../constants/events";
-import { setGemAnimations } from "../constants/stores";
+import { setGemAnimations } from "../constants/stores/gemAnimations";
 
 onGemSpriteSheetImageLoaded((image) => {
   setGemAnimations(

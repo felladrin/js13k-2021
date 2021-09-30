@@ -1,4 +1,5 @@
-import { onCurrentLevelChanged, setEscapeTime } from "../constants/stores";
+import { setEscapeTime } from "../constants/stores/escapeTime";
+import { onCurrentLevelChanged } from "../constants/stores/currentLevel";
 import { resetCurrentLevel } from "../functions/commands/resetCurrentLevel";
 
 onCurrentLevelChanged((level) => {

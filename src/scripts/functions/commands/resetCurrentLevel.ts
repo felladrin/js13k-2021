@@ -1,4 +1,4 @@
-import { setGemsCollectedOnCurrentLevel } from "../../constants/stores";
+import { setGemsCollectedOnCurrentLevel } from "../../constants/stores/gemsCollectedOnCurrentLevel";
 import { resetGems } from "./resetGems";
 import { resetPlatforms } from "./resetPlatforms";
 import { resetCat } from "./resetCat";
