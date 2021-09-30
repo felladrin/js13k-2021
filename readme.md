@@ -4,7 +4,9 @@ Game created for the [Js13kGames](https://js13kgames.com/) competition from 2021
 
 JS13K release: [Game Page in Js13kGames](https://js13kgames.com/entries/cat-goric-escape-from-the-warp-chamber)
 
-Future releases: [Game Page in Itch.io](https://felladrin.itch.io/cat-goric-escape-from-the-warp-chamber)
+Production release: [Game Page in Itch.io](https://felladrin.itch.io/cat-goric-escape-from-the-warp-chamber)
+
+Development release: [Game on GitHub Pages](https://felladrin.github.io/js13k-2021/index.html)
 
 Post-mortem: [Article on Dev.to](https://dev.to/felladrin/cat-goric-escape-from-the-warp-chamber-post-mortem-57gc)
 
