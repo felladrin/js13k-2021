@@ -7,11 +7,11 @@ import { playSound } from "./playSound";
 import { destroyGem } from "./destroyGem";
 
 export function checkCatCollisionWithGems() {
-  for (const gem of gemsPool.getAliveObjects() as Sprite[]) {
-    if (collides(getCatCollisionObject(), gem)) {
+  (gemsPool.getAliveObjects() as Sprite[])
+    .filter((gem) => collides(getCatCollisionObject(), gem))
+    .forEach((gem) => {
       destroyGem(gem);
       playSound(pickupSound);
       setGemsCollectedOnCurrentLevel(getGemsCollectedOnCurrentLevel() + 1);
-    }
-  }
+    });
 }
