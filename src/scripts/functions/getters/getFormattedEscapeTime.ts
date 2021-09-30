@@ -1,7 +1,6 @@
-import { getEscapeTime, onEscapeTimeUpdated } from "./escapeTime";
-import { createDerivedPubSub } from "../../functions/getters/createDerivedPubSub";
+import { getEscapeTime } from "../../constants/stores/escapeTime";
 
-export const [, , getFormattedEscapeTime] = createDerivedPubSub([onEscapeTimeUpdated], () => {
+export function getFormattedEscapeTime() {
   const totalTimeInSeconds = getEscapeTime();
   const totalTimeMinutes = Math.floor(totalTimeInSeconds / 60)
     .toString()
@@ -10,4 +9,4 @@ export const [, , getFormattedEscapeTime] = createDerivedPubSub([onEscapeTimeUpd
     .toString()
     .padStart(2, "0");
   return `${totalTimeMinutes}:${totalTimeSeconds}`;
-});
+}

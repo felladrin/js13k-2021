@@ -1,8 +1,7 @@
 import { SpriteSheet } from "kontra";
-import { createDerivedPubSub } from "../../functions/getters/createDerivedPubSub";
-import { getGemSpriteSheetImage, onGemSpriteSheetImageLoaded } from "./gemSpriteSheetImage";
+import { getGemSpriteSheetImage } from "../../constants/stores/gemSpriteSheetImage";
 
-export const [, , getGemAnimations] = createDerivedPubSub([onGemSpriteSheetImageLoaded], () => {
+export function getGemAnimations() {
   const image = getGemSpriteSheetImage();
   if (image)
     return SpriteSheet({
@@ -16,4 +15,4 @@ export const [, , getGemAnimations] = createDerivedPubSub([onGemSpriteSheetImage
         },
       },
     }).animations;
-});
+}
