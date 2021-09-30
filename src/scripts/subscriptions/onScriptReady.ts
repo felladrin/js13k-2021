@@ -6,11 +6,11 @@ import portalSpriteSheetUrl from "../../images/portalSpriteSheet.webp";
 import keysSpriteSheetUrl from "../../images/keysSpriteSheet.webp";
 import {
   emitCatSpriteSheetImageLoaded,
-  emitGemSpriteSheetImageLoaded,
   emitKeysSpriteSheetImageLoaded,
   emitPortalSpriteSheetImageLoaded,
   onScriptReady,
 } from "../constants/events";
+import { emitGemSpriteSheetImageLoaded } from "../constants/stores/gemSpriteSheetImage";
 import { canvas, gameLoop } from "../constants/instances";
 import { emitPlatformImageLoaded } from "../constants/stores/platformImage";
 import { fitCanvasInsideItsParent } from "../functions/commands/fitCanvasInsideItsParent";
