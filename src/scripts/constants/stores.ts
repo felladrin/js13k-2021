@@ -1,5 +1,6 @@
 import { createPubSub as createStore } from "create-pubsub";
 import { Sprite, SpriteSheet } from "kontra";
+import { createDerivedPubSub } from "../functions/getters/createDerivedPubSub";
 
 export const [emitPlatformImageLoaded, , getPlatformImage] = createStore<HTMLImageElement>();
 
@@ -11,11 +12,13 @@ export const [setFunctionToPlaySound, , getFunctionToPlaySound] = createStore<(.
 
 export const [setPlatformWhichCatIsOn, , getPlatformWhichCatIsOn] = createStore<Sprite | null>(null);
 
-export const [setShouldCheckCollisionBetweenCatAndPortal, , shouldCheckCollisionBetweenCatAndPortal] =
-  createStore(false);
-
 export const [setGemsCollectedOnCurrentLevel, onGemsCollectedOnCurrentLevelUpdated, getGemsCollectedOnCurrentLevel] =
   createStore(0);
+
+export const [, , shouldCheckCollisionBetweenCatAndPortal] = createDerivedPubSub(
+  [onGemsCollectedOnCurrentLevelUpdated],
+  () => getGemsCollectedOnCurrentLevel() >= 3
+);
 
 export const [setGemAnimations, , getGemAnimations] = createStore<SpriteSheet["animations"]>();
 
