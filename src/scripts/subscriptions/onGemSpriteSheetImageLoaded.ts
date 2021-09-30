@@ -1,7 +1,8 @@
 import { SpriteSheet } from "kontra";
-import { setGemAnimations } from "../../constants/stores";
+import { onGemSpriteSheetImageLoaded } from "../constants/events";
+import { setGemAnimations } from "../constants/stores";
 
-export function handleGemSpriteSheetImageLoaded(image: HTMLImageElement) {
+onGemSpriteSheetImageLoaded((image) => {
   setGemAnimations(
     SpriteSheet({
       image,
@@ -15,4 +16,4 @@ export function handleGemSpriteSheetImageLoaded(image: HTMLImageElement) {
       },
     }).animations
   );
-}
+});

@@ -1,7 +1,8 @@
 import { SpriteSheet } from "kontra";
-import { entryPortalSprite, portalSprite } from "../../constants/instances";
+import { onPortalSpriteSheetImageLoaded } from "../constants/events";
+import { portalSprite, entryPortalSprite } from "../constants/instances";
 
-export function handlePortalSpriteSheetImageLoaded(image: HTMLImageElement) {
+onPortalSpriteSheetImageLoaded((image) => {
   portalSprite.animations = entryPortalSprite.animations = SpriteSheet({
     image,
     frameWidth: 64,
@@ -30,4 +31,4 @@ export function handlePortalSpriteSheetImageLoaded(image: HTMLImageElement) {
       },
     },
   }).animations;
-}
+});

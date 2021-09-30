@@ -1,7 +1,8 @@
 import { SpriteSheet } from "kontra";
-import { catSprite } from "../../constants/instances";
+import { onCatSpriteSheetImageLoaded } from "../constants/events";
+import { catSprite } from "../constants/instances";
 
-export function handleCatSpriteSheetImageLoaded(image: HTMLImageElement) {
+onCatSpriteSheetImageLoaded((image) => {
   catSprite.animations = SpriteSheet({
     image,
     frameWidth: 18,
@@ -23,4 +24,4 @@ export function handleCatSpriteSheetImageLoaded(image: HTMLImageElement) {
       },
     },
   }).animations;
-}
+});

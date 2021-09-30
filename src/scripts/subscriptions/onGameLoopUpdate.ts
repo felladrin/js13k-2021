@@ -1,0 +1,34 @@
+import { onGameLoopUpdate } from "../constants/events";
+import { objectsToAlwaysUpdateAndRender } from "../constants/instances";
+import { checkCatCollisionWithGems } from "../functions/commands/checkCatCollisionWithGems";
+import { checkCatCollisionWithPortal } from "../functions/commands/checkCatCollisionWithPortal";
+import { checkGemsCollisionWithLasers } from "../functions/commands/checkGemsCollisionWithLasers";
+import { checkPlatformsCollisionWithLasers } from "../functions/commands/checkPlatformsCollisionWithLasers";
+import { processPortalAnimation } from "../functions/commands/processPortalAnimation";
+import { updateCatSprite } from "../functions/commands/updateCatSprite";
+import { updateDronesFollowersPosition } from "../functions/commands/updateDronesFollowersPosition";
+import { updateDronesVelocity } from "../functions/commands/updateDronesVelocity";
+import { updateEscapeTime } from "../functions/commands/updateEscapeTime";
+import { updateKeyButtonsAnimation } from "../functions/commands/updateKeyButtonsAnimation";
+import { updateLaserFromBottomLeftDrone } from "../functions/commands/updateLaserFromBottomLeftDrone";
+import { updateLaserFromBottomRightDrone } from "../functions/commands/updateLaserFromBottomRightDrone";
+import { updateLaserFromTopLeftDrone } from "../functions/commands/updateLaserFromTopLeftDrone";
+import { updateLaserFromTopRightDrone } from "../functions/commands/updateLaserFromTopRightDrone";
+
+onGameLoopUpdate((deltaTime) => {
+  updateEscapeTime(deltaTime);
+  objectsToAlwaysUpdateAndRender.forEach((object) => object.update());
+  processPortalAnimation();
+  updateCatSprite();
+  checkCatCollisionWithGems();
+  checkCatCollisionWithPortal();
+  checkPlatformsCollisionWithLasers();
+  checkGemsCollisionWithLasers();
+  updateDronesFollowersPosition();
+  updateLaserFromTopLeftDrone();
+  updateLaserFromBottomLeftDrone();
+  updateLaserFromBottomRightDrone();
+  updateLaserFromTopRightDrone();
+  updateDronesVelocity();
+  updateKeyButtonsAnimation();
+});
