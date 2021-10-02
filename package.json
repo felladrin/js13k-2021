@@ -7,9 +7,7 @@
     "build": "tsc && vite build && ts-node .npm/scripts/zip.ts",
     "serve": "vite preview",
     "midi-parser": "ts-node .npm/scripts/parseMidi.ts",
-    "code-analyzer": "jscpd src && dpdm --tree false --warning false src/scripts/main.ts && ts-prune",
-    "arkit": "arkit src/scripts -o arkit.png",
-    "dependencies-updater": "ncu -u"
+    "code-analyzer": "jscpd src && dpdm --tree false --warning false src/scripts/main.ts && ts-prune"
   },
   "dependencies": {
     "base26": "^0.1.0",
@@ -19,7 +17,6 @@
   },
   "devDependencies": {
     "@tweakpane/core": "^1.0.6",
-    "arkit": "^1.6.4",
     "bestzip": "^2.2.0",
     "colorette": "^2.0.12",
     "cross-exec-file": "^2.0.0",
@@ -27,7 +24,6 @@
     "ect-bin": "^1.4.1",
     "jscpd": "^3.3.26",
     "midi-file-parser": "^1.0.0",
-    "npm-check-updates": "^11.8.5",
     "roadroller": "^2.1.0",
     "rollup-plugin-kontra": "^1.0.1",
     "tasuku": "^1.0.2",
