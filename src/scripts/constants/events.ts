@@ -1,7 +1,5 @@
 import { createPubSub } from "create-pubsub";
 
-export const [emitScriptReady, onScriptReady] = createPubSub();
-
 export const [propagateGameLoopUpdate, onGameLoopUpdate] = createPubSub<number>();
 
 export const [propagateGameButtonClicked, onGameButtonClicked] = createPubSub();

@@ -8,14 +8,13 @@ import {
   emitCatSpriteSheetImageLoaded,
   emitKeysSpriteSheetImageLoaded,
   emitPortalSpriteSheetImageLoaded,
-  onScriptReady,
 } from "../constants/events";
 import { canvas, gameLoop } from "../constants/instances";
 import { emitGemSpriteSheetImageLoaded, emitPlatformImageLoaded } from "../constants/stores";
 import { fitCanvasInsideItsParent } from "../functions/commands/fitCanvasInsideItsParent";
 import { resetCurrentLevel } from "../functions/commands/resetCurrentLevel";
 
-onScriptReady(async () => {
+window.addEventListener("DOMContentLoaded", async () => {
   emitPlatformImageLoaded(await loadImage(platformSpriteUrl));
   emitCatSpriteSheetImageLoaded(await loadImage(catSpriteSheetUrl));
   emitGemSpriteSheetImageLoaded(await loadImage(gemSpriteSheetUrl));
