@@ -72,57 +72,70 @@ devPanel.addInput(kontraFields, "onClickAction", {
   },
 });
 
+const actions = {
+  [OnClickAction.DoNothing]: () => {},
+  [OnClickAction.AddPlatform]: () => {
+    const { x, y } = getPointer();
+
+    platformsPool.get({
+      x,
+      y,
+      image: getPlatformImage(),
+      anchor: { x: 0.5, y: 0.4 },
+    } as Partial<Sprite>);
+  },
+  [OnClickAction.DelPlatform]: () => {
+    const { x, y } = getPointer();
+
+    const foundPlatform = (platformsPool.getAliveObjects() as Sprite[]).find((platform) =>
+      collides(platform, { world: { x, y, width: 1, height: 1 } })
+    );
+
+    if (foundPlatform) destroyPlatform(foundPlatform);
+  },
+  [OnClickAction.AddGem]: () => {
+    const { x, y } = getPointer();
+
+    gemsPool.get({
+      x,
+      y,
+      animations: getGemAnimations(),
+      anchor: { x: 0.5, y: 0.5 },
+    } as Partial<Sprite>);
+  },
+  [OnClickAction.DelGem]: () => {
+    const { x, y } = getPointer();
+
+    const foundGem = (gemsPool.getAliveObjects() as Sprite[]).find((gem) =>
+      collides(gem, { world: { x, y, width: 1, height: 1 } })
+    );
+
+    if (foundGem) destroyGem(foundGem);
+  },
+  [OnClickAction.MoveCat]: () => {
+    const { x, y } = getPointer();
+    catSprite.x = x;
+    catSprite.y = y;
+  },
+  [OnClickAction.DeleteAll]: () => {
+    const { x, y } = getPointer();
+    platformsPool.clear();
+    gemsPool.clear();
+    catSprite.x = x;
+    catSprite.y = y;
+    platformsPool.get({
+      x,
+      y,
+      image: getPlatformImage(),
+      anchor: { x: 0.5, y: 0.4 },
+    } as Partial<Sprite>);
+  },
+}
+
 canvas.addEventListener("click", () => {
   const { x, y } = getPointer();
 
-  switch (kontraFields.onClickAction) {
-    case OnClickAction.AddPlatform:
-      platformsPool.get({
-        x,
-        y,
-        image: getPlatformImage(),
-        anchor: { x: 0.5, y: 0.4 },
-      } as Partial<Sprite>) as Sprite;
-      break;
-    case OnClickAction.DelPlatform:
-      const foundPlatform = (platformsPool.getAliveObjects() as Sprite[]).find((platform) =>
-        collides(platform, { world: { x, y, width: 1, height: 1 } })
-      );
-
-      if (foundPlatform) destroyPlatform(foundPlatform);
-      break;
-    case OnClickAction.AddGem:
-      gemsPool.get({
-        x,
-        y,
-        animations: getGemAnimations(),
-        anchor: { x: 0.5, y: 0.5 },
-      } as Partial<Sprite>) as Sprite;
-      break;
-    case OnClickAction.DelGem:
-      const foundGem = (gemsPool.getAliveObjects() as Sprite[]).find((gem) =>
-        collides(gem, { world: { x, y, width: 1, height: 1 } })
-      );
-
-      if (foundGem) destroyGem(foundGem);
-      break;
-    case OnClickAction.MoveCat:
-      catSprite.x = x;
-      catSprite.y = y;
-      break;
-    case OnClickAction.DeleteAll:
-      platformsPool.clear();
-      gemsPool.clear();
-      catSprite.x = x;
-      catSprite.y = y;
-      platformsPool.get({
-        x,
-        y,
-        image: getPlatformImage(),
-        anchor: { x: 0.5, y: 0.4 },
-      } as Partial<Sprite>) as Sprite;
-      break;
-  }
+  actions[kontraFields.onClickAction]();
 
   kontraFields.lastClick = { x, y };
 
