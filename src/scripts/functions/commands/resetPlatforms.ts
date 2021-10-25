@@ -12,6 +12,6 @@ export function resetPlatforms() {
       y,
       image: getPlatformImage(),
       anchor: { x: 0.5, y: 0.4 },
-    } as Partial<Sprite>) as Sprite;
+    } as Partial<Sprite>);
   });
 }

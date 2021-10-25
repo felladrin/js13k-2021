@@ -13,6 +13,6 @@ export function resetGems() {
       y,
       animations: getGemAnimations(),
       anchor: { x: 0.5, y: 0.5 },
-    } as Partial<Sprite>) as Sprite;
+    } as Partial<Sprite>);
   });
 }
