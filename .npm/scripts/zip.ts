@@ -1,11 +1,15 @@
+// @ts-ignore
 import zip from "bestzip";
 import { greenBright, redBright } from "colorette";
+// @ts-ignore
 import crossExecFile from "cross-exec-file";
+// @ts-ignore
 import efficientCompressionTool from "ect-bin";
 import { existsSync, statSync, unlinkSync } from "fs";
 import { EOL } from "os";
 import { resolve } from "path";
 import task from "tasuku";
+// @ts-ignore
 import zipstats from "zipstats";
 
 const distFolderPath = resolve(__dirname, "..", "..", "dist");

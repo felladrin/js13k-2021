@@ -1,3 +1,4 @@
+// @ts-ignore
 import midiFileParser from "midi-file-parser";
 import { readFileSync, writeFileSync } from "fs";
 import { resolve } from "path";
