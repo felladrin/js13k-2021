@@ -1,3 +1,7 @@
 tasks:
-  - init: npx -yes pnpm install
-    command: npm install -g pnpm
+  - init: npm ci
+
+ports:
+  - port: 3000
+    onOpen: open-preview
+    name: Vite Dev Server

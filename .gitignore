@@ -3,7 +3,6 @@ node_modules
 dist
 dist.zip
 *.local
-.pnpm-debug.log
 todo.txt
 .idea
 .vscode

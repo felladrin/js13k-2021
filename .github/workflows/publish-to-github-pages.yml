@@ -12,8 +12,8 @@ jobs:
         env:
           HUSKY_SKIP_INSTALL: 1
         run: |
-          npx pnpm install
-          npx vite build
+          npm ci
+          npm run build
       - name: Publish to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
