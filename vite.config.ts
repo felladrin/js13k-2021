@@ -1,5 +1,5 @@
 import { defineConfig } from "vite";
-import { minifyHtml } from "vite-plugin-html";
+import { createHtmlPlugin } from "vite-plugin-html";
 import { viteSingleFile } from "vite-plugin-singlefile";
 import kontra from "rollup-plugin-kontra";
 import { Packer, InputType, InputAction } from "roadroller";
@@ -69,7 +69,7 @@ export default defineConfig((configEnv) => ({
       },
     },
     viteSingleFile(),
-    minifyHtml(),
+    createHtmlPlugin(),
   ],
   build: {
     target: "esnext",

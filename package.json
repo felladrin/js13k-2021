@@ -32,8 +32,8 @@
     "tweakpane": "^3.0.7",
     "typescript": "^4.5.5",
     "vite": "~2.5.10",
-    "vite-plugin-html": "^2.1.2",
-    "vite-plugin-singlefile": "^0.5.1",
+    "vite-plugin-html": "^3.0.3",
+    "vite-plugin-singlefile": "^0.6.3",
     "zipstats": "^1.1.0"
   },
   "resolutions": {
